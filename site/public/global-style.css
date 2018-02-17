@@ -1,0 +1,79 @@
+body {
+  font-family:      Trebuchet MS, Helvetica, Arial, sans-serif;
+  margin:           0;
+  padding:          0;
+}
+
+.home-head {
+  padding:          1em;
+  background-color: #127bd1;
+  color:            #ffffff;
+  height:           4em;
+}
+
+.home-head a {
+  outline:          none;
+  text-decoration:  none;
+  font-size:        2em;
+  padding:          0.25em;
+  float:            left;
+}
+
+.home-head a:link {
+  color:            #FFFFFF;
+}
+
+.home-head a:visited{
+  color:            #FFFFFF;
+}
+
+.home-head a:focus {
+  background:       #ED842E;
+  border-radius:    0.25em;
+}
+
+.home-head a:hover {
+  background:       #ED842E;
+  border-radius:    0.25em;
+}
+
+.home-head a:active {
+  background:       #FFFFFF;
+  color:            #ED842E;
+  border-radius:    0.25em;
+}
+
+.home-head button{
+  background-color: #ED842E;
+  text-align:       center;
+  border:           none;
+  padding:          0.5em;
+  font-size:        1.5em;
+  border-radius:    0.5em;
+  color:            #FFFFFF;
+  float:            right;
+}
+
+.vertical-line{
+  border-left:      0.25em solid #ED842E;
+  height:           100%;
+}
+
+.home-head .vertical-line{
+  float:            left;
+  margin-left:      1em;
+  margin-top:       -1em;
+  height:           6em;
+}
+
+.title-header{
+  text-align:       center;
+  font-weight:      normal;
+  font-size:        5em;
+}
+
+.subheader{
+  text-align:       center;
+  font-weight:      lighter;
+  font-size:        2em;
+}
