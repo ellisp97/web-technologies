@@ -1,12 +1,12 @@
 body {
-  font-family:      Trebuchet MS, Helvetica, Arial, sans-serif;
+  font-family:      "Trebuchet MS", Helvetica, Arial, sans-serif;
   margin:           0;
   padding:          0;
 }
 
 .home-head {
   padding:          1em;
-  background-color: #127bd1;
+  background-color: #1e90ff;
   color:            #ffffff;
   height:           4em;
 }
@@ -28,23 +28,23 @@ body {
 }
 
 .home-head a:focus {
-  background:       #ED842E;
+  background:       #ff7f50;
   border-radius:    0.25em;
 }
 
 .home-head a:hover {
-  background:       #ED842E;
+  background:       #ff7f50;
   border-radius:    0.25em;
 }
 
 .home-head a:active {
   background:       #FFFFFF;
-  color:            #ED842E;
+  color:            #ff7f50;
   border-radius:    0.25em;
 }
 
-.home-head button{
-  background-color: #ED842E;
+.home-head button {
+  background-color: #ff7f50;
   text-align:       center;
   border:           none;
   padding:          0.5em;
@@ -54,26 +54,82 @@ body {
   float:            right;
 }
 
-.vertical-line{
-  border-left:      0.25em solid #ED842E;
+.vertical-line {
+  border-left:      0.25em solid #ff7f50;
   height:           100%;
 }
 
-.home-head .vertical-line{
+.home-head .vertical-line {
   float:            left;
   margin-left:      1em;
   margin-top:       -1em;
   height:           6em;
 }
 
-.title-header{
+.title-header {
   text-align:       center;
   font-weight:      normal;
   font-size:        5em;
 }
 
-.subheader{
+.subheader {
   text-align:       center;
   font-weight:      lighter;
   font-size:        2em;
+}
+
+.carousel-container {
+  font-size:        3em;
+  width:            15em;
+  position:         relative;
+  margin:           1em;
+  border:           1px solid #ccc;
+  overflow:         hidden;
+}
+
+.carousel-content {
+  margin:           0;
+  padding:          0;
+}
+
+.carousel-content li {
+  font-size:        1em;
+  margin:           0;
+  padding:          0;
+  width:            100%;
+  list-style:       none;
+  text-align:       center;
+}
+
+.active {
+  height:           130px;
+}
+
+.active li {
+  position:         absolute;
+  top:              200px;
+}
+
+.active li.current {
+  top:              50px;
+}
+
+.active .buttons {
+  padding:          5px 0;
+  background:       #1e90ff;
+  text-align:       center;
+  z-index:          10;
+  position:         relative;
+}
+.carousel-container button {
+  border:           none;
+  display:          none;
+}
+.active button {
+  display:          inline-block;
+  background-color: #ff7f50
+}
+.offscreen {
+  position:         absolute;
+  left:             -20000px;
 }
