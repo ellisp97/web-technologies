@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Login Page</title>
+  <link href="login.css" rel="stylesheet" type="text/css" />
+  <script src="login.js" type="module"></script>
+
+</head>
+<body>
+
+  <div class="intro-form">
+    <button onclick="document.getElementById('id01').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
+    <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#ff7f50">FAQ</button>
+    <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#eccc68">About Us</button>
+    <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#ffa502">Our Ethics</button>
+  </div>
+
+
+  <div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'"
+    class="close" title="Close Modal">&times;</span>
+
+    <form class="modal-content animate">
+      <div class="container">
+        <img src="img/ping.jpg" alt="loginpic">
+
+        <div class="form-input">
+          <input type="text" name="username" placeholder="get your pingerz here">
+          <input type="password" name="password" placeholder="5 for 20">
+        </div>
+        <div class="loginbutt">
+          <button type="submit">Login</button>
+          <button type="button"
+          onclick="document.getElementById('id01').style.display='none'"
+          class="cancelbutt">Cancel</button>
+          <span class="pass">Forgot <a href="#">password?</a></span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div id="id02" class="modal">
+    <span onclick="document.getElementById('id02').style.display='none'"
+    class="close" title="Close Modal">&times;</span>
+    <form class="modal-content animate">
+    </form>
+  </div>
+
+</body>
+</html>
