@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>LoginApp</title>
+    <link rel ="stylesheet" href="/css/style.css"/>
+  </head>
+  <body onload ="random_col()">
+    <script>
+      function random_col() { //function name
+        var color = ['#bdc3c7','#9b59b6','#2c3e50','#7f8c8d','#f3a683','#f8a5c2']; //Set your colors here
+        var randcolor = Math.floor(Math.random() * color.length);
+        document.body.style.backgroundColor = color[randcolor]; // Setting the random color on your div element.
+      }
+    </script>
+    <div class="intro-form">
+      <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
+      <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register</button>
+      <button onclick="document.getElementById('id03'btn btn-default).style.display='block'" style="background-color:#eccc68">About Us</button>
+      <button onclick="document.getElementById('id04').style.display='block'" style="background-color:#ffa502">Our Ethics</button>
+    </div>
+
+    <div id="login" class="modal">
+      <span onclick="document.getElementById('login').style.display='none'"
+      class="close" title="Close Modal">&times;</span>
+
+      <form class="modal-content animate">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-lg-12">
+              {{{body}}}
+            </div>
+          </div>
+
+          <footer class="footer">
+            <p>&copy; 2015 LoginApp, Inc.</p>
+          </footer>
+        </div>
+      </form>
+    </div>
+
+    <div id="register" class="modal">
+      <span onclick="document.getElementById('register').style.display='none'"
+      class="close" title="Close Modal">&times;</span>
+
+      <form class="modal-content animate">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-lg-12">
+              {{{body}}}
+            </div>
+          </div>
+
+          <footer class="footer">
+            <p>&copy; 2015 LoginApp, Inc.</p>
+          </footer>
+        </div>
+      </form>
+    </div>
+
+    <div id="close" class="modal">
+      <span onclick="document.getElementById('close').style.display='none'"
+      class="close" title="Close Modal">&times;</span>
+      <form class="modal-content animate">
+      </form>
+    </div>
+  </body>
+</html>

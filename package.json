@@ -1,0 +1,37 @@
+{
+  "name": "web-technologies",
+  "version": "1.0.0",
+  "description": "Authentication System",
+  "main": "app.js",
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
+    "express": "*",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "nodemon": "^1.17.1",
+    "passport": "^0.4.0",
+    "passport-http": "*",
+    "passport-local": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shanik-d/web-technologies.git"
+  },
+  "author": "Ellis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shanik-d/web-technologies/issues"
+  },
+  "homepage": "https://github.com/shanik-d/web-technologies#readme"
+}

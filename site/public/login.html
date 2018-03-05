@@ -4,18 +4,14 @@
   <meta charset="UTF-8"/>
   <title>Login Page</title>
   <link href="login.css" rel="stylesheet" type="text/css" />
-  <script src="login.js" type="module"></script>
-
 </head>
-<body>
-
+<body onload ="random_col()">
   <div class="intro-form">
     <button onclick="document.getElementById('id01').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
     <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#ff7f50">FAQ</button>
     <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#eccc68">About Us</button>
     <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#ffa502">Our Ethics</button>
   </div>
-
 
   <div id="id01" class="modal">
     <span onclick="document.getElementById('id01').style.display='none'"
@@ -45,6 +41,5 @@
     <form class="modal-content animate">
     </form>
   </div>
-
 </body>
 </html>
