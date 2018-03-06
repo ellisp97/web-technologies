@@ -124,3 +124,22 @@ input {
     from {transform: scale(0)}
     to {transform: scale(1)}
 }
+
+
+
+.register-form {
+  margin-top: 50px;
+  margin: 10px 10px;
+  padding: 2px 0;
+}
+
+.register-form input{
+  padding: 10px 0;
+  text-align: center;
+}
+
+
+
+.submitbutt {
+  margin-top: 50px;
+}
