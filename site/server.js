@@ -25,7 +25,98 @@ var http = require("http");
 var fs = require("fs");
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var types, banned;
-start();
+
+
+
+
+
+//-----------------------------------------me------------------------------------------------------
+
+
+var fs = require('fs');
+var path    = require("path");
+var data = fs.readFileSync('products.json');
+var products = JSON.parse(data);
+console.log(products);
+
+
+console.log('server is starting');
+var express = require('express');
+var app = express();
+var server = app.listen(3000,listening);
+
+function listening(){
+    console.log('listening ....');
+}
+
+app.use(express.static('public'));
+
+app.get('/add/:product/:price?', addProduct);
+
+function addProduct(request,response){
+    var data = request.params;
+    var product = data.product;
+    var price = Number(data.price);
+
+
+    if(!price) {
+        var reply = {
+            msg : "Price is Needed"
+        }
+        response.send(reply);
+
+    } else {
+        products[product] = price;
+        var data = JSON.stringify(products, null, 2);
+        fs.writeFile('products.json', data, finished);
+
+        function finished(err) {
+            console.log('all good');
+        }
+
+        reply = {
+            product: product,
+            price: price,
+            msg: "thanks for the product"
+        }
+        response.send(reply);
+    }
+
+}
+
+app.get('/all',sendAll);
+
+function sendAll(request,response){
+    response.send(products);
+}
+
+app.get('/search/:product/', searchProduct);
+
+function searchProduct(request,response){
+    var product = request.params.product;
+    var reply;
+    if(products[product]){
+        reply= {
+            status: "found",
+            product: product,
+            price: products[product]
+        }
+    } else {
+        reply = {
+            status: "not found",
+            product:product
+        }
+    }
+    response.send(reply);
+}
+
+app.get('/login',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/login.html'));
+  });
+
+//----------------------------------------------------------------------------------------------
+
+//start();
 
 // Start the http service. Accept only requests from localhost, for security.
 function start() {

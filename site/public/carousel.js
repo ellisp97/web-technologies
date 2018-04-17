@@ -1,5 +1,27 @@
 "use strict";
 addEventListener('load', carousel);
+
+function setup(){
+  loadJSON('/all',gotData);
+  console.log('running');
+
+}
+
+function gotData(data){
+  console.log(data);
+  var keys = Object.keys(data);
+  console.log(keys);
+  for(var i=0; i<keys.length; i++){
+    var product = keys[i];
+    var price = data[product];
+    var x = random(width);
+    var y = random(height);
+    fill(255);
+    textSize(64);
+    text(product,x,y);
+  }
+}
+
 /*
 The below function makes the carousel work
 */
@@ -47,3 +69,4 @@ function carousel() {
   });
   navigate(0); //show the first element
 };
+
