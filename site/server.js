@@ -1,33 +1,3 @@
-// Run a node.js web server for local development of a static web site.
-// Start with "node server.js" and put pages in a "public" sub-folder.
-// Visit the site at the address printed on the console.
-
-// The server is configured to be platform independent.  URLs are made lower
-// case, so the server is case insensitive even on Linux, and paths containing
-// upper case letters are banned so that the file system is treated as case
-// sensitive even on Windows.  All .html files are delivered as
-// application/xhtml+xml for instant feedback on XHTML errors.  To improve the
-// server, either add content negotiation (so old browsers can be tested) or
-// switch to text/html and do validity checking another way (e.g. with vnu.jar).
-
-// Choose a port, e.g. change the port to the default 80, if there are no
-// privilege issues and port number 80 isn't already in use. Choose verbose to
-// list banned files (with upper case letters) on startup.
-
-var port = 8080;
-var verbose = true;
-
-// Load the library modules, and define the global constants.
-// See http://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
-// Start the server:
-
-var http = require("http");
-var fs = require("fs");
-var OK = 200, NotFound = 404, BadType = 415, Error = 500;
-var types, banned;
-
-
-
 
 
 //-----------------------------------------me------------------------------------------------------
@@ -37,19 +7,268 @@ var fs = require('fs');
 var path    = require("path");
 var data = fs.readFileSync('products.json');
 var products = JSON.parse(data);
+
+
+//-----------sample sqlite 3 creation-------------------
+
+//------------DELETING-DATA----------------
+/*let db = new sqlite3.Database('./db/sample.db', (err) => {
+    if (err) {
+        console.error(err.message);
+    }
+});
+
+let id = 1;
+
+db.run(`DELETE FROM langs WHERE rowid=?`, id, function(err){
+    if(err){
+        return console.error(err.message);
+    }
+    console.log(`Row(s) deleted ${this.changes}`);
+});*/
+//------------------------------------------
+             
+
+//---------UPDATING-DATA----------------
+/*let tabdata = ['Ansi C', 'C'];
+let sql  = `UPDATE langs
+                SET name = ?
+                WHERE name = ?`;
+
+db.run(sql,tabdata,function(err){
+    if(err){
+        return console.error(err.message);
+    }
+    console.log(`Row(s) updated: ${this.changes}`);
+});*/
+//------------------------------------------
+
+//---------INSERTING-ROWS----------------
+/*let languages = ['C', 'C++', 'C#', 'Haskell', 'Python'];
+let placeholders = languages.map((language) => '(?)').join(',');
+let sql = 'INSERT INTO langs(name) VALUES' +placeholders;
+
+console.log(sql);
+
+db.run(sql,languages, function(err){
+    if(err){
+        return console.log(err.message);
+    }
+    console.log(`Rows inserted ${this.changes}`);
+});*/
+//------------------------------------------
+
+//---------LOGGING-DATA-FROM-TABLE----------------
+/*let sql = `SELECT FirstName firstName,
+                  LastName lastName,
+                  Email email
+            FROM customers
+            WHERE Country = ?
+            ORDER BY FirstName`;
+db.each(sql,['USA'], (err,row) =>{
+    if(err){
+        throw err;
+    }
+    console.log(`${row.firstName} ${row.lastName} - ${row.email}`);
+});*/
+//------------------------------------------
+
+
+//---------LOGGING-DATA-FROM-ONE-ROW----------------
+/*db.get(sql, [playlistId], (err,row)=>{
+    if (err){
+        return console.error(err.message);
+    }
+    return row
+        ? console.log(row.id, row.name)
+        : console.log(`No playlist found with the id ${playlistId}`);
+});*/
+//------------------------------------------
+
+
+//-----------------------------------------------
+
 console.log(products);
 
-
-console.log('server is starting');
 var express = require('express');
+let util = require('util');
+var bodyParser = require('body-parser');
+var path = require('path');
+var expressValidator=require('express-validator');
+
 var app = express();
-var server = app.listen(3000,listening);
 
-function listening(){
-    console.log('listening ....');
+const sqlite3 = require('sqlite3').verbose();
+let db = new sqlite3.Database('./db/users.db',sqlite3.OPEN_READONLY);
+//db.run('CREATE TABLE userData(name TEXT,username TEXT, email TEXT, password TEXT)');// --- INITIAL TABLE HAS BEEN MADE
+
+
+db.serialize(function() {
+    db.each(`SELECT Name as name,
+                    Username as username,
+                    Email as email
+                FROM userData`, (err, row) => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log(row.id + "\t" + row.name + "\t" + row.username + "\t" + row.email);
+    });
+ });
+
+
+//--reloading page--
+var logger = function(req,res,next){
+    console.log('Logging....');
+    next();
 }
+app.use(logger);
+//------------------
 
-app.use(express.static('public'));
+//--view-engine
+app.set('view engine', 'ejs');
+app.set('views',path.join(__dirname, 'views'));
+
+//--body-parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+//--set static path
+app.use(express.static(path.join(__dirname, 'public')));
+
+//--global-vars -- e.g. errors
+app.use(function(req,res,next){
+    res.locals.errors = null;
+    next();
+});
+
+//--verification--ctavan -express-validator -------
+app.use(expressValidator({
+    errorFormatter: function(param,msg,value) {
+        var namespace = param.split('.')
+        , root = namespace.shift()
+        , formParam = root;
+
+        while(namespace.length) {
+            formParam += '[' + namespace.shift() + ']';
+        }
+        return {
+            param : formParam,
+            msg : msg,
+            value: value
+        };
+    }
+}));
+//----------------------------------
+
+/*var users = [
+    {
+        first_name: 'Bob',
+        last_name:  'Joe',
+        email:      'bobj@gmail.com',
+    },
+    {
+        first_name: 'tooe',
+        last_name:  'uig',
+        email:      'to29bj@gmail.com', 
+    }
+]*/
+
+app.get('/hi',function(req,res){
+    res.render('index',{
+        //title: 'Customers'.data,
+        //users: users
+    });
+});
+
+const { body,validationResult } = require('express-validator/check');
+
+app.post('/users/add', function(req,res,next){
+
+    body('name','Name is Required').notEmpty;
+    body('username','Username is Required').notEmpty;
+    body('email','email is Required').notEmpty;
+    body('password','password is Required').notEmpty;
+    body('password2','password is Required').notEmpty;
+
+    // deals with error handling here , ideal if correct error message could be printed
+    //https://github.com/ctavan/express-validator#validation-result-api
+
+    // EDIT I HAVE NO IDEA WHY THISISNT WORKING VALIDATION ISNT WORTH THIS 
+    // IM GOING TO ACCEPT EVERYTHING FOR NOW
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        console.log('ERROR');
+        res.render('index', {
+            //title: 'Customers',
+            //users:  users,
+            errors: errors
+        });
+        response.json({
+            result: "failed",
+            message: 'Validation Errors: ${util.inspect(validationResult.array())}'
+        });
+    } else {
+        var newUser = {
+            name: req.body.name,
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            password2: req.body.password2
+        }
+        console.log('SUCCESS');
+        console.log(newUser);
+        res.render('index', {
+            //title: 'Customers',
+            //users:  users,
+        });
+        console.log(req.body.username);
+        db.run(`INSERT INTO userData(name,username,email,password) VALUES(?,?,?,?)`, [req.body.name],[req.body.username],[req.body.email],[req.body.password], function(err) {
+            if (err) {
+              return console.log(err.message);
+            }
+            // get the last insert id
+            console.log(`A row has been inserted with rowid ${this.lastID}`);
+            db.close();
+        });
+    }
+});
+
+app.listen(3000,function(){
+    console.log('Server Started on Port 3000 ....');
+});
+
+app.get('/',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/index.html'));
+});
+
+app.get('/login',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/login.html'));
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/add/:product/:price?', addProduct);
 
@@ -110,137 +329,7 @@ function searchProduct(request,response){
     response.send(reply);
 }
 
-app.get('/login',function(req,res){
-    res.sendFile(path.join(__dirname+'/public/login.html'));
-  });
 
 //----------------------------------------------------------------------------------------------
 
 //start();
-
-// Start the http service. Accept only requests from localhost, for security.
-function start() {
-    if (! checkSite()) return;
-    types = defineTypes();
-    banned = [];
-    banUpperCase("./public/", "");
-    var service = http.createServer(handle);
-    service.listen(port, "localhost");
-    var address = "http://localhost";
-    if (port != 80) address = address + ":" + port;
-    console.log("Server running at", address);
-}
-
-// Check that the site folder and index page exist.
-function checkSite() {
-    var path = "./public";
-    var ok = fs.existsSync(path);
-    if (ok) path = "./public/index.html";
-    if (ok) ok = fs.existsSync(path);
-    if (! ok) console.log("Can't find", path);
-    return ok;
-}
-
-// Serve a request by delivering a file.
-function handle(request, response) {
-    var url = request.url.toLowerCase();
-    if (url.endsWith("/")) url = url + "index.html";
-    if (isBanned(url)) return fail(response, NotFound, "URL has been banned");
-    var type = findType(url);
-    if (type == null) return fail(response, BadType, "File type unsupported");
-    var file = "./public" + url;
-    fs.readFile(file, ready);
-    function ready(err, content) { deliver(response, type, err, content); }
-}
-
-// Forbid any resources which shouldn't be delivered to the browser.
-function isBanned(url) {
-    for (var i=0; i<banned.length; i++) {
-        var b = banned[i];
-        if (url.startsWith(b)) return true;
-    }
-    return false;
-}
-
-// Find the content type to respond with, or undefined.
-function findType(url) {
-    var dot = url.lastIndexOf(".");
-    var extension = url.substring(dot + 1);
-    return types[extension];
-}
-
-// Deliver the file that has been read in to the browser.
-function deliver(response, type, err, content) {
-    if (err) return fail(response, NotFound, "File not found");
-    var typeHeader = { "Content-Type": type };
-    response.writeHead(OK, typeHeader);
-    response.write(content);
-    response.end();
-}
-
-// Give a minimal failure response to the browser
-function fail(response, code, text) {
-    var textTypeHeader = { "Content-Type": "text/plain" };
-    response.writeHead(code, textTypeHeader);
-    response.write(text, "utf8");
-    response.end();
-}
-
-// Check a folder for files/subfolders with non-lowercase names.  Add them to
-// the banned list so they don't get delivered, making the site case sensitive,
-// so that it can be moved from Windows to Linux, for example. Synchronous I/O
-// is used because this function is only called during startup.  This avoids
-// expensive file system operations during normal execution.  A file with a
-// non-lowercase name added while the server is running will get delivered, but
-// it will be detected and banned when the server is next restarted.
-function banUpperCase(root, folder) {
-    var folderBit = 1 << 14;
-    var names = fs.readdirSync(root + folder);
-    for (var i=0; i<names.length; i++) {
-        var name = names[i];
-        var file = folder + "/" + name;
-        if (name != name.toLowerCase()) {
-            if (verbose) console.log("Banned:", file);
-            banned.push(file.toLowerCase());
-        }
-        var mode = fs.statSync(root + file).mode;
-        if ((mode & folderBit) == 0) continue;
-        banUpperCase(root, file);
-    }
-}
-
-// The most common standard file extensions are supported, and html is
-// delivered as "application/xhtml+xml".  Some common non-standard file
-// extensions are explicitly excluded.  This table is defined using a function
-// rather than just a global variable, because otherwise the table would have
-// to appear before calling start().  NOTE: add entries as needed or, for a more
-// complete list, install the mime module and adapt the list it provides.
-function defineTypes() {
-    var types = {
-        html : "application/xhtml+xml",
-        css  : "text/css",
-        js   : "application/javascript",
-        mjs  : "application/javascript", // for ES6 modules
-        png  : "image/png",
-        gif  : "image/gif",    // for images copied unchanged
-        jpeg : "image/jpeg",   // for images copied unchanged
-        jpg  : "image/jpeg",   // for images copied unchanged
-        svg  : "image/svg+xml",
-        json : "application/json",
-        pdf  : "application/pdf",
-        txt  : "text/plain",
-        ttf  : "application/x-font-ttf",
-        woff : "application/font-woff",
-        aac  : "audio/aac",
-        mp3  : "audio/mpeg",
-        mp4  : "video/mp4",
-        webm : "video/webm",
-        ico  : "image/x-icon", // just for favicon.ico
-        xhtml: undefined,      // non-standard, use .html
-        htm  : undefined,      // non-standard, use .html
-        rar  : undefined,      // non-standard, platform dependent, use .zip
-        doc  : undefined,      // non-standard, platform dependent, use .pdf
-        docx : undefined,      // non-standard, platform dependent, use .pdf
-    }
-    return types;
-}

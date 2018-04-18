@@ -18,23 +18,22 @@
   <div id="login" class="modal">
     <span onclick="document.getElementById('login').style.display='none'"
     class="close" title="Close Modal">×</span>
-    <form class="modal-content animate">
-      <div class="container">
-        <img src="img/ping.jpg" alt="loginpic"/>
-
-        <div class="form-input">
-          <input type="text" name="username" placeholder="get your pingerz here" id = "product"/>
-          <input type="price" name="password" placeholder="5 for 20" id = "price"/>
+    <form method = "POST" action="/login">
+      <div class="modal-content animate">
+        <div class="container">
+          <img src="img/ping.jpg" alt="loginpic"/>
+          <div class="form-input">
+            <input type="text" name="username" placeholder="get your pingerz here" id = "product"/>
+            <input type="price" name="password" placeholder="5 for 20" id = "price"/>
+          </div>
+          <div class="loginbutt">
+            <button type="submit">Login</button>
+            <button type="button"
+            onclick="document.getElementById('login').style.display='none'"
+            class="cancelbutt">Cancel</button>
+            <span class="pass">Forgot <a href="#">password?</a></span>
+          </div>
         </div>
-
-        <div class="loginbutt">
-          <button type="submit">Login</button>
-          <button type="button"
-          onclick="document.getElementById('login').style.display='none'"
-          class="cancelbutt">Cancel</button>
-          <span class="pass">Forgot <a href="#">password?</a></span>
-        </div>
-
       </div>
     </form>
   </div>
