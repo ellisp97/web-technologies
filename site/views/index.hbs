@@ -1,50 +1,53 @@
-<h1> {{title}}</h1>
-<p>Welcome to {{title}}</p>
-
-{{# if success }}
-    <section class="success">
-        <h2>Successful Validation!</h2>
-    </section>
-{{ else }}
-    {{# if errors }}
-        <section class="errors">
-            <ul>
-                {{# each errors }}
-                    <li>{{ this.msg }}</li>
-                {{/each}}
-            </ul>
-        </section>
-    {{/if}}
-
+<div class="header">
+    <h1> {{title}}</h1>
+    <p>Welcome to {{title}}</p>
+    <a href="/login">Secret Stuff Here</a>
+</div>
     <div class="intro-form">
         <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
         <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register</button>
-        <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#eccc68">About Us</button>
-        <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#ffa502">Our Ethics</button>
+        <button style="background-color:#eccc68">About Us</button>
+        <button style="background-color:#ffa502">Our Ethics</a></button>
     </div>
 
-    <!--div id="login" class="modal">
+    <form action="/login" method="post">
+        <div id="login" class="modal">
         <span onclick="document.getElementById('login').style.display='none'"
         class="close" title="Close Modal">×</span>
-        <form action="/sumbit" method="post">
             <div class="modal-content animate">
-            <div class="container">
-                <img src="img/ping.jpg" alt="loginpic"/>
-                <div class="form-input">
-                <input type="text" name="username" placeholder="get your pingerz here" id = "product"/>
-                <input type="price" name="password" placeholder="5 for 20" id = "price"/>
-                </div>
-                <div class="loginbutt">
-                <button type="submit">Login</button>
-                <button type="button"
-                onclick="document.getElementById('login').style.display='none'"
-                class="cancelbutt">Cancel</button>
-                <span class="pass">Forgot <a href="#">password?</a></span>
+                <div class="container">
+                    <img src="images/ping.jpg" alt="loginpic"/>
+                    <div class="form-input">
+                        <input type="text" id = "username" name="username" placeholder="get your pingerz here" id = "product"/>
+                        <input type="price" id = "password" name="password" placeholder="5 for 20" id = "price"/>
+                    </div>
+                    <div class="loginbutt">
+                    <button type="submit">Login</button>
+                    <button type="button"
+                    onclick="document.getElementById('login').style.display='none'"
+                    class="cancelbutt">Cancel</button>
+                    <span class="pass">Forgot <a href="#">password?</a></span>
+                    {{# if success }}
+                        <section class="success">
+                            <h2>Successful Validation!</h2>
+                        </section>
+                    {{ else }}
+                        {{# if errors }}
+                            <!--section class="errors">
+                                <ul>
+                                    {{# each errors }}
+                                        <li>{{ this.msg }}</li>
+                                    {{/each}}
+                                </ul>
+                            </section-->
+                        {{/if}}
+                    {{/if}}                
+                    </div>
                 </div>
             </div>
-            </div>
-        </form>
-    </div-->
+        </div>
+    </form>
+
     <form action="/sumbit" method="post">
         <div id="register" class="modal">
         <span onclick="document.getElementById('register').style.display='none'"
@@ -66,11 +69,26 @@
                 <button type="button"
                 onclick="document.getElementById('login').style.display='none'"
                 class="cancelbutt">Cancel</button>
+
+                {{# if success }}
+                    <section class="success">
+                        <h2>Successful Validation!</h2>
+                    </section>
+                {{ else }}
+                    {{# if errors }}
+                        <section class="errors">
+                            <ul>
+                                {{# each errors }}
+                                    <li>{{ this.msg }}</li>
+                                {{/each}}
+                            </ul>
+                        </section>
+                    {{/if}}
+                {{/if}}
                 </div>
             </div>
         </div>
     </form>
-{{/if}}
 
 
 <!-- example handelbars -->

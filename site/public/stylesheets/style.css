@@ -218,8 +218,6 @@ input {
 }
 
 .errors {
-  left: 500px;
-  position: absolute;
   background: #e79892;
   padding: 5px;
   margin-bottom: 10px;
@@ -237,4 +235,12 @@ input {
 .success {
   background: #80cca0;
   padding: 5px;
+}
+
+.header {
+  left:500px;
+  position: absolute;
+}
+.header input{
+  font-size: 50pt;
 }
