@@ -1,0 +1,88 @@
+<h1> {{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+{{# if success }}
+    <section class="success">
+        <h2>Successful Validation!</h2>
+    </section>
+{{ else }}
+    {{# if errors }}
+        <section class="errors">
+            <ul>
+                {{# each errors }}
+                    <li>{{ this.msg }}</li>
+                {{/each}}
+            </ul>
+        </section>
+    {{/if}}
+
+    <div class="intro-form">
+        <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
+        <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register</button>
+        <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#eccc68">About Us</button>
+        <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#ffa502">Our Ethics</button>
+    </div>
+
+    <!--div id="login" class="modal">
+        <span onclick="document.getElementById('login').style.display='none'"
+        class="close" title="Close Modal">×</span>
+        <form action="/sumbit" method="post">
+            <div class="modal-content animate">
+            <div class="container">
+                <img src="img/ping.jpg" alt="loginpic"/>
+                <div class="form-input">
+                <input type="text" name="username" placeholder="get your pingerz here" id = "product"/>
+                <input type="price" name="password" placeholder="5 for 20" id = "price"/>
+                </div>
+                <div class="loginbutt">
+                <button type="submit">Login</button>
+                <button type="button"
+                onclick="document.getElementById('login').style.display='none'"
+                class="cancelbutt">Cancel</button>
+                <span class="pass">Forgot <a href="#">password?</a></span>
+                </div>
+            </div>
+            </div>
+        </form>
+    </div-->
+    <form action="/sumbit" method="post">
+        <div id="register" class="modal">
+        <span onclick="document.getElementById('register').style.display='none'"
+        class="close" title="Close Modal">×</span>
+            <div class="modal-content animate">
+                <div class="container">
+                <div class="register-form">
+                    <input type="text" id="name" name="name" placeholder="put name here"/>
+                    <input type="text" id="username" name="username" placeholder="enter username"/>
+                    <input type="email" id="email" name="email" placeholder="email here"/>
+                    <input type="password" id="password" name="password" placeholder="password here"/>
+                    <input type="password" id="password2" name="password2" placeholder="confirm it ini"/>
+                </div>
+
+                <div class="submitbutt">
+                    <button type="submit">Submit</button>
+                </div>
+
+                <button type="button"
+                onclick="document.getElementById('login').style.display='none'"
+                class="cancelbutt">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{{/if}}
+
+
+<!-- example handelbars -->
+<!--<h1> {{ title }}</h1>
+<p>Welcome to {{ title }}</p>
+
+{{# if condition }}
+    condition met
+{{ else }}
+    condition not met
+{{/if}}
+
+{{# each someArray as |val key|}}
+    {{key}}:{{ val }}
+{{/each}}->

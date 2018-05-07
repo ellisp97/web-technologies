@@ -1,19 +1,20 @@
 {
   "name": "site",
-  "version": "1.0.0",
-  "description": "product app",
-  "main": "server.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node ./bin/www"
   },
   "dependencies": {
-    "body-parser": "*",
-    "ejs": "^2.5.8",
-    "express": "*",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
     "express-validator": "^5.1.2",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
     "sqlite3": "^4.0.0"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
