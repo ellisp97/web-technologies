@@ -1,5 +1,100 @@
 <div class="header">
     <h1> {{title}}</h1>
+    <p>.</p>
+    <p>.</p>
+    <p>Welcome to {{title}}</p>
+    <p>YOU'RE A LOGGED IN USER!</p>
+    <p>CONGRATULATIONS!</p>
+</div>
+
+
+<div class="header">
+    <h1> {{title}}</h1>
     <p>Welcome to {{title}}</p>
 </div>
-<p>You're logged in!</p>
+    <div class="intro-form">
+        <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
+        <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register</button>
+        <button style="background-color:#eccc68">About Us</button>
+        <button style="background-color:#ffa502">Our Ethics</a></button>
+    </div>
+
+    <form action="/login" method="post">
+        <div id="login" class="modal">
+        <span onclick="document.getElementById('login').style.display='none'"
+        class="close" title="Close Modal">×</span>
+            <div class="modal-content animate">
+                <div class="container">
+                    <img src="images/ping.jpg" alt="loginpic"/>
+                    <div class="form-input">
+                        <input type="text" id = "username" name="username" placeholder="get your pingerz here" id = "product"/>
+                        <input type="price" id = "password" name="password" placeholder="5 for 20" id = "price"/>
+                    </div>
+                    <div class="loginbutt">
+                    <button type="submit">Login</button>
+                    <button type="button"
+                    onclick="document.getElementById('login').style.display='none'"
+                    class="cancelbutt">Cancel</button>
+                    <span class="pass">Forgot <a href="#">password?</a></span>
+                    {{# if success }}
+                        <section class="success">
+                            <h2>Successful Validation!</h2>
+                        </section>
+                    {{ else }}
+                        {{# if errors }}
+                            <!--section class="errors">
+                                <ul>
+                                    {{# each errors }}
+                                        <li>{{ this.msg }}</li>
+                                    {{/each}}
+                                </ul>
+                            </section-->
+                        {{/if}}
+                    {{/if}}                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form action="/sumbit" method="post">
+        <div id="register" class="modal">
+        <span onclick="document.getElementById('register').style.display='none'"
+        class="close" title="Close Modal">×</span>
+            <div class="modal-content animate">
+                <div class="container">
+                <div class="register-form">
+                    <input type="text" id="name" name="name" placeholder="put name here"/>
+                    <input type="text" id="username" name="username" placeholder="enter username"/>
+                    <input type="email" id="email" name="email" placeholder="email here"/>
+                    <input type="password" id="password" name="password" placeholder="password here"/>
+                    <input type="password" id="password2" name="password2" placeholder="confirm it ini"/>
+                </div>
+
+                <div class="submitbutt">
+                    <button type="submit">Submit</button>
+                </div>
+
+                <button type="button"
+                onclick="document.getElementById('login').style.display='none'"
+                class="cancelbutt">Cancel</button>
+
+                {{# if success }}
+                    <section class="success">
+                        <h2>Successful Validation!</h2>
+                    </section>
+                {{ else }}
+                    {{# if errors }}
+                        <section class="errors">
+                            <ul>
+                                {{# each errors }}
+                                    <li>{{ this.msg }}</li>
+                                {{/each}}
+                            </ul>
+                        </section>
+                    {{/if}}
+                {{/if}}
+                </div>
+            </div>
+        </div>
+    </form>

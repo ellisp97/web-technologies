@@ -5,18 +5,22 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var hbs = require('express-handlebars');
+const sqlite3 = require('sqlite3').verbose();
 var expressValidator = require('express-validator');
-//hash setup
 
+var request = require('request');
+var promise = require('promise');
 
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 
-var passport = require('passport');
+var passport = require('passport');//hash setup
 var LocalStrategy = require('passport-local');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+var bcrypt = require('bcrypt');
 
 var app = express();
 
@@ -45,15 +49,82 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+let db = new sqlite3.Database('./db/users.db');
+
 
 passport.use(new LocalStrategy(
   function(username,password,done) {
     console.log(username);
     console.log(password);
 
-    return done(null,'hgfuy');
-  }
-));
+    db.all(`SELECT password FROM userData WHERE username =?`, [username], function(err,results,fields){
+      if(err){reject(err);}
+
+      //if (results.length() == 0){
+      //  done(null,false);
+      //}
+
+      console.log(results[0]);
+      const hash = results[0].password;
+      console.log(password);
+
+      bcrypt.compare(password, hash, function(err, response){
+        console.log("the repsonse isssssssssssssssss n ns  s s   : ");
+        console.log(response);
+        if(!response){
+          return done(null,false);
+        }
+        return done(null, {user_id: 43});
+      });
+    })
+    
+    /*console.log(checkUser(username));
+    if (checkUser(username)){
+      done(null, 'sedg');
+    } else{
+      done(null, false);
+    }*/
+
+}));
+
+
+db.getAsync = function (sql) {
+  var that = this;
+  return new Promise(function (resolve, reject) {
+      that.get(sql, function (err, row) {
+          if (err)
+              reject(err);
+          else
+              resolve(row);
+      });
+  });
+};
+
+function checkUser(username) {
+  var val = -1;
+  var getStmt = `SELECT password FROM userData WHERE username="${username}"`;
+  console.log(getStmt);
+  return db.getAsync(getStmt).then((row) => {
+      if (!row) {
+        console.log("USER NOT FOUND");
+        //var insertSql = `INSERT INTO Voters (Name, Count) VALUES ("${voter}", 1)`;
+        //val = -1;
+        //return db.runAsync(insertSql);
+      }
+      else {
+        val = 1;
+        console.log(row);
+        console.log("USER FOUND");
+      }
+  }).then(() => {
+      console.log(val);
+      return val;
+  });
+}
+
+
+module.exports = app;
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -71,5 +142,3 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-module.exports = app;
