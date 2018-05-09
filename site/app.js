@@ -22,7 +22,10 @@ var usersRouter = require('./routes/users');
 
 var bcrypt = require('bcrypt');
 
+
 var app = express();
+
+
 
 // view engine setup
 app.engine('hbs', hbs({extname:'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts'}));
@@ -35,6 +38,8 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 //secret key r stringandom
 app.use(session({
   store: new SQLiteStore,
@@ -130,7 +135,6 @@ function checkUser(username) {
 }
 
 
-module.exports = app;
 
 
 // catch 404 and forward to error handler
@@ -149,3 +153,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+module.exports = app;

@@ -127,5 +127,24 @@ router.post('/test/submit', function(req,res,next){
   res.redirect('/test/' + id);
 ;})*/
 
+/* ASYNCHRONOUS REAL TIME USERNAME CHECKER
+async function getSimilarUser(username) {
+	let response = await fetch(`https://happy-css.com/api/users?limit=1&name=${username}`)
+	return response.json()
+}
+
+async function isUserValid(target) {
+	let username = target.value
+	let users = await getSimilarUser(username)
+	if (users.length) {
+		let existingUsername = users[0].name
+		if (existingUsername == username) {
+			target.setCustomValidity(`The user "${username}" already exists`)
+			return false
+		}
+	}
+	target.setCustomValidity('')
+	return true
+}*/
 
 module.exports = router;
