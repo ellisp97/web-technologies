@@ -63,13 +63,18 @@ passport.use(new LocalStrategy(
       //if (results.length() == 0){
       //  done(null,false);
       //}
-
+      var hash;
       console.log(results[0]);
-      const hash = results[0].password;
+      //if password vvalue doesnt exists catch the error
+      try {
+        hash = results[0].password;
+      } catch(err) {
+        console.log("o no");
+      }
       console.log(password);
 
+      //compare the password to the encryopted passwprd
       bcrypt.compare(password, hash, function(err, response){
-        console.log("the repsonse isssssssssssssssss n ns  s s   : ");
         console.log(response);
         if(!response){
           return done(null,false);
