@@ -15,7 +15,6 @@ body{
 }
 
 
-
 button {
     background-color: #4CAF50;
     color: white;
@@ -164,59 +163,6 @@ input {
   margin-top: 0px;
 }
 
-
-.carousel-container {
-  font-size:        3em;
-  width:            15em;
-  position:         relative;
-  margin:           1em;
-  border:           1px solid #ccc;
-  overflow:         hidden;
-}
-
-.carousel-content {
-  margin:           0;
-  padding:          0;
-}
-
-.carousel-content li {
-  font-size:        1em;
-  margin:           0;
-  padding:          0;
-  width:            100%;
-  list-style:       none;
-  text-align:       center;
-}
-
-.active {
-  height:           130px;
-}
-
-.active li {
-  position:         absolute;
-  top:              200px;
-}
-
-.active li.current {
-  top:              50px;
-}
-
-.active .buttons {
-  padding:          5px 0;
-  background:       #1e90ff;
-  text-align:       center;
-  z-index:          10;
-  position:         relative;
-}
-.carousel-container button {
-  border:           none;
-  display:          none;
-}
-.active button {
-  display:          inline-block;
-  background-color: #ff7f50;
-}
-
 .errors {
   background: #e79892;
   padding: 5px;
@@ -238,9 +184,22 @@ input {
 }
 
 .header {
-  left:500px;
   position: absolute;
+  left:500px;
+  top:50px;
 }
 .header input{
   font-size: 50pt;
+}
+
+.logcontainer {
+  height: 250px;
+  width: 300px;
+  position: absolute;
+  top: 50px;
+  left: 1050px;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  background-color: #000;
 }

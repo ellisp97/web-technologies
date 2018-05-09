@@ -3,13 +3,6 @@
     <p>Welcome to {{title}}</p>
     <a href="/login">Secret Stuff Here</a>
 </div>
-    <div class="intro-form">
-        <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
-        <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register</button>
-        <button style="background-color:#eccc68">About Us</button>
-        <button style="background-color:#ffa502">Our Ethics</a></button>
-    </div>
-
     <form action="/login" method="post">
         <div id="login" class="modal">
         <span onclick="document.getElementById('login').style.display='none'"
@@ -18,8 +11,8 @@
                 <div class="container">
                     <img src="images/ping.jpg" alt="loginpic"/>
                     <div class="form-input">
-                        <input type="text" id = "username" name="username" placeholder="get your pingerz here"/>
-                        <input type="price" id = "password" name="password" placeholder="5 for 20"/>
+                        <input type="text" id = "username" name="username" placeholder="username"/>
+                        <input type="price" id = "password" name="password" placeholder="password"/>
                     </div>
                     <div class="loginbutt">
                     <button type="submit">Login</button>

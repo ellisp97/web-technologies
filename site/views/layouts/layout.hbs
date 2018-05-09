@@ -7,6 +7,16 @@
         <script src="/javascripts/loadcolor.js" ></script>
     </head>
     <body onload="random_col()">
+         <div class="intro-form">
+            {{#if isAuthenticated}}
+                <button style="background-color:#eccc68">About Us</button>
+                <button style="background-color:#ffa502">Our Ethics</button>
+                <button onclick="location.href='/logout'" style="background-color:#ff6b81" type="button" >Logout</button-->
+            {{else}}
+                <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
+                <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register</button>
+            {{/if}}
+        </div>
         {{{ body }}}
     </body>
 </html>

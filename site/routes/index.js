@@ -29,7 +29,7 @@ db.serialize(function() {
 router.get('/', function(req, res, next) {
   console.log(req.user);
   console.log(req.isAuthenticated());
-  res.render('index', { title: 'Form Validation'});
+  res.render('index', { title: 'Form Valiadtion'});
 });
 
 /* GET Logged In page ? */
@@ -38,6 +38,19 @@ router.get('/login', authenticationMiddleware(),
   res.render('loggedin', { title: 'LOGGED IN'});
 });
 
+
+router.get('/logout', function(req,res) {
+  req.logout();
+  req.session.destroy();
+  res.redirect('/');
+});
+
+
+router.post('/logout', function(req,res) {
+  req.logout();
+  req.session.destroy();
+  res.redirect('/');
+});
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/login',

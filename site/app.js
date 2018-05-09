@@ -46,6 +46,11 @@ app.use(session({
 //passport authentication
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function(req,res,next){
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+});
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -57,19 +62,16 @@ passport.use(new LocalStrategy(
     console.log(username);
     console.log(password);
 
-    db.all(`SELECT password FROM userData WHERE username =?`, [username], function(err,results,fields){
+    db.all(`SELECT user_id, password FROM userData WHERE username =?`, [username], function(err,results,fields){
       if(err){reject(err);}
 
-      //if (results.length() == 0){
-      //  done(null,false);
-      //}
       var hash;
       console.log(results[0]);
       //if password vvalue doesnt exists catch the error
       try {
         hash = results[0].password;
       } catch(err) {
-        console.log("o no");
+        //console.log("o no");
       }
       console.log(password);
 
@@ -79,7 +81,7 @@ passport.use(new LocalStrategy(
         if(!response){
           return done(null,false);
         }
-        return done(null, {user_id: 43});
+        return done(null, {user_id: results[0].user_id});
       });
     })
     
