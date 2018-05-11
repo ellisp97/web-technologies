@@ -1,5 +1,4 @@
 "use strict";
-addEventListener('load', carousel);
 
 function setup(){
   loadJSON('/all',gotData);
@@ -69,4 +68,3 @@ function carousel() {
   });
   navigate(0); //show the first element
 };
-

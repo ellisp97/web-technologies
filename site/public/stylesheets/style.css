@@ -193,3 +193,61 @@ input {
 .header input{
   font-size: 50pt;
 }
+.carousel-container {
+  font-size:        3em;
+  width:            15em;
+  position:         relative;
+  margin:           1em;
+  border:           1px solid #ccc;
+  overflow:         hidden;
+}
+
+.carousel-content {
+  margin:           0;
+  padding:          0;
+}
+
+.carousel-element {
+  font-size:        1em;
+  margin:           0;
+  padding:          0;
+  width:            100%;
+  list-style:       none;
+  text-align:       center;
+}
+
+.active {
+  height:           130px;
+}
+
+.active .carousel-element {
+  position:         absolute;
+  top:              200px;
+  display: none;
+}
+
+.active .carousel-element.current {
+  top:              50px;
+  display:block;
+}
+
+.active .buttons {
+  padding:          2px 0;
+  background:       #1e90ff;
+  text-align:       center;
+  z-index:          10;
+  position:         relative;
+}
+.carousel-container button {
+  border:           none;
+  display:          none;
+}
+.active button {
+  width: 2em;
+  display:          inline;
+  background-color: #ff7f50
+}
+.offscreen {
+  position:         absolute;
+  left:             -20000px;
+}
