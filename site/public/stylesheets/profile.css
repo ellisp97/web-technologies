@@ -1,0 +1,11 @@
+#regcontainer {
+    height: 850px;
+    width: 1000px;
+    position: absolute;
+    left: 500px;
+    top: 200px;
+    color: thistle;
+    padding: 10px 0;
+    text-align: center;
+    background-color: #000;
+}

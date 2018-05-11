@@ -3,12 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title>Price Tracker</title>
+        <link rel="stylesheet" href ="/stylesheets/profile.css">
         <link rel="stylesheet" href ="/stylesheets/style.css">
+        <link rel="stylesheet" href ="/stylesheets/loggedin.css">
         <script src="/javascripts/loadcolor.js" ></script>
     </head>
     <body onload="random_col()">
          <div class="intro-form">
             {{#if isAuthenticated}}
+                <button onclick="location.href='/profile'" style="background-color:#ff6b81" type="button" >Profile</button-->
                 <button style="background-color:#eccc68">About Us</button>
                 <button style="background-color:#ffa502">Our Ethics</button>
                 <button onclick="location.href='/logout'" style="background-color:#ff6b81" type="button" >Logout</button-->

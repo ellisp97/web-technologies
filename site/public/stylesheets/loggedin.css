@@ -1,0 +1,13 @@
+
+.logcontainer {
+    height: 250px;
+    width: 300px;
+    position: absolute;
+    top: 50px;
+    left: 1050px;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    background-color: #000;
+  }
+  
