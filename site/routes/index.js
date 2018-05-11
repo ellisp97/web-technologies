@@ -52,18 +52,26 @@ router.post('/logout', function(req,res) {
   res.redirect('/');
 });
 
-router.get('/profile', authenticationMiddleware(),
-  function(req, res, next) {
-  res.render('profile', { title: 'YOUR PROFILE'});
-});
-
-
-
-
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/login',
   failureRedirect: '/'
 }));
+
+
+router.get('/profile', authenticationMiddleware(),
+  function(req, res, next) {
+  var userid = req.user.user_id;
+  db.all(`SELECT username, email FROM userData WHERE user_id =?`, [userid], function(err,results,fields){
+    if(err){reject(err);}
+    console.log(results[0]);
+    console.log(results[0].username);
+
+    var username = results[0].username;
+    var email = results[0].email;
+    res.render('profile', { title: 'YOUR PROFILE', userid: userid, username: username, email:email});
+
+  });
+});
 
 
 router.post('/sumbit', function(req,res,next){
