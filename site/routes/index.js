@@ -10,6 +10,7 @@ let db = new sqlite3.Database('./db/users.db');
 
 //initialise table
 //db.run('CREATE TABLE userData(user_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,username TEXT, email TEXT, password TEXT)');// --- INITIAL TABLE HAS BEEN MADE
+//db.run('CREATE TABLE productData(product_id INTEGER PRIMARY KEY AUTOINCREMENT, prod_name TEXT, prod_price PRICE, prod_desc TEXT');// --- INITIAL PRODUCT TABLE HAS BEEN MADE
 
 //output names to server
 db.serialize(function() {

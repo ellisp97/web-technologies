@@ -1,13 +1,12 @@
-
-.logcontainer {
-    height: 250px;
-    width: 300px;
+#logcontainer {
+    height: 850px;
+    width: 1000px;
     position: absolute;
-    top: 50px;
-    left: 1050px;
-    color: white;
+    left: 500px;
+    top: 250px;
+    color: thistle;
     padding: 10px 0;
+    border: 5px solid #ff0099;
     text-align: center;
     background-color: #000;
-  }
-  
+}

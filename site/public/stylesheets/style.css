@@ -197,7 +197,11 @@ input {
   font-size:        3em;
   width:            auto;
   max-width:        80%;
-  position:         relative;
+  min-width: 40%;
+  left:             550px;
+  top: 175px;
+  position:         absolute;
+  
   margin:           1em;
   border:           1px solid #ccc;
   overflow:       hidden;

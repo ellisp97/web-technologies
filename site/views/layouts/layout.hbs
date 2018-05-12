@@ -8,13 +8,14 @@
         <link rel="stylesheet" href ="/stylesheets/loggedin.css">
         <script src="/javascripts/loadcolor.js" ></script>
         <script src="/javascripts/carousel.js" ></script>
+    
     </head>
     <body onload="random_col()">
          <div class="intro-form">
             {{#if isAuthenticated}}
-                <button onclick="location.href='/profile'" style="background-color:#ff6b81" type="button" >Profile</button-->
-                <button style="background-color:#eccc68">About Us</button>
-                <button style="background-color:#ffa502">Our Ethics</button>
+                <button onclick="location.href='/profile'" style="background-color:#f25" type="button" >Profile</button-->
+                <button onclick="location.href='/login'" style="background-color:#eccc68" type="button">Home</button>
+                <button onclick="document.getElementById('sell').style.display='block'" style="background-color:#ffa502" >Sell</button>
                 <button onclick="location.href='/logout'" style="background-color:#ff6b81" type="button" >Logout</button-->
             {{else}}
                 <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
