@@ -53,3 +53,4 @@ var myChart = new Chart(ctx, {
         responsive: false
     }
 });
+

@@ -201,10 +201,11 @@ input {
   left:             550px;
   top: 175px;
   position:         absolute;
-  
+
   margin:           1em;
   border:           1px solid #ccc;
   overflow:       hidden;
+  z-index: 0;
 }
 
 .carousel-content {
