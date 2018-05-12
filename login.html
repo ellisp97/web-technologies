@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Login Page</title>
+  
+  <link href="/css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="/js/login.js"></script>
+  <script src="carousel.js" ></script>
+
+</head>
+<body onload="random_col()">
+  <div class="intro-form">
+    <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form</button>
+    <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register</button>
+    <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#eccc68">About Us</button>
+    <button onclick="document.getElementById('id02').style.display='block'" style="background-color:#ffa502">Our Ethics</button>
+  </div>
+
+  <!--div class="main-form">
+    <div class="main-input">
+        <div class="carousel-container active">
+            <div class="buttons">
+              <button class="prev">
+                ◀ <span class="offscreen">Previous</span>
+              </button>
+              <button class="next">
+                <span class="offscreen">Next</span> ▶
+              </button>
+            </div>
+            <ol class="carousel-content">
+              <li>1st Element</li>
+              <li class="current">2nd Element</li>
+              <li>3rd Element</li>
+              <li>4th Element</li>
+            </ol>
+          </div>
+    </div>
+  </div!-->
+
+  <div id="login" class="modal">
+    <span onclick="document.getElementById('login').style.display='none'"
+    class="close" title="Close Modal">×</span>
+    <form method = "POST" action="/login">
+      <div class="modal-content animate">
+        <div class="container">
+          <img src="img/ping.jpg" alt="loginpic"/>
+          <div class="form-input">
+            <input type="text" name="username" placeholder="get your pingerz here" id = "product"/>
+            <input type="price" name="password" placeholder="5 for 20" id = "price"/>
+          </div>
+          <div class="loginbutt">
+            <button type="submit">Login</button>
+            <button type="button"
+            onclick="document.getElementById('login').style.display='none'"
+            class="cancelbutt">Cancel</button>
+            <span class="pass">Forgot <a href="#">password?</a></span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="register" class="modal">
+    <span onclick="document.getElementById('register').style.display='none'"
+    class="close" title="Close Modal">×</span>
+    <form class="modal-content animate">
+
+      <div class="container">
+        <div class="register-form">
+          <input type="text" name="name" placeholder="put name here"/>
+          <input type="text" name="username" placeholder="enter username"/>
+          <input type="email" name="email" placeholder="email here"/>
+          <input type="password" name="password" placeholder="password here"/>
+          <input type="password" name="password2" placeholder="confirm it ini"/>
+        </div>
+
+        <div class="submitbutt">
+          <button type="submit">Submit</button>
+        </div>
+        <button type="button"
+        onclick="document.getElementById('login').style.display='none'"
+        class="cancelbutt">Cancel</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
