@@ -5,7 +5,7 @@ var fs = require('fs'),
     express = require('express'),
     router = express.Router(),
     passport = require('passport'),
-    url = 'https://www.amazon.co.uk/AKORD-Metal-Binder-Clip-Clamp/dp/B0082JFX1M';
+    url = 'http://www.asos.com/new-balance/new-balance-501-trainers-in-blue/prd/8691396';
 
 const sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('./db/prices.db');
@@ -24,7 +24,7 @@ request(url, function(error, response, html) {
 
   if (!error && response.statusCode == 200) {
     var $ = cheerio.load(html);
-    $('span#priceblock_ourprice').each(function(i, element) {
+    $('span.current-price').each(function(i, element) {
       var el = $(this);
       var price_text = el.text();
       //TODO: add error checking for the database and currency type
@@ -48,7 +48,7 @@ request(url, function(error, response, html) {
       // });
     });
 
-    $('span#productTitle').each(function(i, element) {
+    $('h1').each(function(i, element) {
       var el = $(this);
       title_text = el.text();
     });
