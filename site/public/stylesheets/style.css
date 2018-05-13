@@ -14,7 +14,6 @@ body{
   border: 3px solid #f1f1f1;
 }
 
-
 button {
     background-color: #4CAF50;
     color: white;
@@ -56,29 +55,6 @@ input {
   margin-top: 70px;
   font-size: 20px;
 }
-
-
-.intro-form {
-  height: auto;
-  width: 410px;
-  /* background-color: black; */
-}
-
-.intro-form button{
-  position: relative;
-  left: -200px;
-  height: 350px;
-  width: 400px;
-  transition: 0.3s;
-  font-size: 30px;
-  margin: 0 10px;
-}
-
-.intro-form button:hover{
-  left: -10px;
-}
-
-
 
 .main-form{
   top: -1200px;
@@ -202,4 +178,48 @@ input {
 }
 
 
+.main-menu>ul {
+  margin:0px 0;
+}
 
+.intro-form {
+  height: auto;
+  width: 400px;
+  /* background-color: black; */
+}
+
+.intro-form button{
+  position: relative;
+  left: -200px;
+  height: 350px;
+  width: 400px;
+  transition: 0.3s;
+  font-size: 30px;
+  margin: 0 10px;
+}
+.intro-form button::input{
+  overflow: hidden;
+}
+
+.intro-form button:hover{
+  left: -100px;
+  color: white;
+  opacity: 0.9;
+}
+
+.btn1 {
+  background-color:#f25;
+  color: #f25;
+}
+.btn2 {
+  background-color:#eccc68;
+  color: #eccc68;
+}
+.btn3 {
+  background-color:#ffa502;
+  color:#ffa502
+}
+.btn4 {
+  background-color:#ff6b81;
+  color:#ff6b81;
+}

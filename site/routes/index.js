@@ -30,7 +30,11 @@ db.serialize(function() {
 router.get('/', function(req, res, next) {
   console.log(req.user);
   console.log(req.isAuthenticated());
-  res.render('index', { title: 'Home Screen'});
+  if(req.isAuthenticated()){
+    res.render('loggedin', {title: 'Youre logged in'});
+  }else{
+    res.render('index', { title: 'Home Screen'});
+  }
 });
 
 /* GET Logged In page ? */
@@ -63,13 +67,15 @@ router.post('/login', passport.authenticate('local', {
 router.get('/profile', authenticationMiddleware(),
   function(req, res, next) {
   var userid = req.user.user_id;
+  var username;
+  var email;
+  // console.log(req.user.user_id);
+  // console.log(userid);
   db.all(`SELECT username, email FROM userData WHERE user_id =?`, [userid], function(err,results,fields){
     if(err){reject(err);}
-    console.log(results[0]);
-    console.log(results[0].username);
 
-    var username = results[0].username;
-    var email = results[0].email;
+    username = results[0].username;
+    email = results[0].email;
     res.render('profile', { title: 'YOUR PROFILE', userid: userid, username: username, email:email});
 
   });
@@ -104,9 +110,9 @@ router.post('/sumbit', function(req,res,next){
         } else {
           const user_id = `${this.lastID}`;
           req.login(user_id, function(err){
-            console.log(user_id);
-            res.redirect('/');
-          });
+             console.log(user_id);
+             res.redirect('/login');
+           });
         }
       });
     });

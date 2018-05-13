@@ -8,23 +8,30 @@
         <link rel="stylesheet" href ="/stylesheets/loggedin.css">
         <script src="/javascripts/loadcolor.js" ></script>
         <script src="/javascripts/carousel.js" ></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+
         {{!-- just default style for now buttons will be created and inserted into form --}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     </head>
     <body onload="random_col()">
          <div class="intro-form">
             {{#if isAuthenticated}}
-                <button class ="btn" onclick="location.href='/profile'" style="background-color:#f25" type="button" >Profile <i class="fa fa-bars"></i></button-->
-                <button onclick="location.href='/login'" style="background-color:#eccc68" type="button">Home <i class="fa fa-home"></i></button>
-                <button onclick="document.getElementById('sell').style.display='block'" style="background-color:#ffa502" >Sell <i class="fa fa-folder"></i></button>
-                <button onclick="location.href='/logout'" style="background-color:#ff6b81" type="button" >Logout <i class="fa fa-close"></i></button-->
+                <nav class="main-menu">
+                    <ul>
+                        <button class ="btn1" onclick="location.href='/profile'" type="button" ><span class="text">Profile</span> <i class="fas fa-user"></i></button>
+                        <button class ="btn2" onclick="location.href='/login'" type="button">Home <i class="fas fa-sign-in"></i></button>
+                        <button class ="btn3" onclick="document.getElementById('sell').style.display='block'" >Sell <i class="fas fa-shopping-nag"></i></button>
+                        <button class ="btn4" onclick="location.href='/logout'" type="button" >Logout <i class="fas fa-sign-out"></i></button>
+                    </ul>
+                </nav>
             {{else}}
-                <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form<i class="fa fa-home"></i></button>
-                <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register <i class="fa fa-trash"></i></button>
+                <nav class="main-menu">
+                    <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form <i class="fas fa-sign-in"></i></button>
+                    <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register <i class="fas fa-sign-in"></i></button>
+                </nav>
             {{/if}}
         </div>
-        
+
         {{{ body }}}
     </body>
 </html>
