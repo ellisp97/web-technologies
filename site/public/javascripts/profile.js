@@ -1,21 +1,28 @@
 var ctx = document.getElementById("myChart");
+
+Chart.defaults.global.defaultFontFamily = 'Lato';
+Chart.defaults.global.defaultFontColor = 'black';
+Chart.defaults.global.defaultFontSize = 18;
+
+
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'pie',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        // get product genres
+        labels: ["Books", "Games", "Electronics", "Stationary", "Hygeine"],
         datasets: [{
-            label: 'Product Sales',
-            lineTension: 1,
+            label: 'Purchase History',
+            // lineTension: 1,
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.4)',
-                'rgba(54, 162, 235, 0.4)',
-                'rgba(255, 206, 86, 0.4)',
-                'rgba(75, 192, 192, 0.4)',
-                'rgba(153, 102, 255, 0.4)',
-                'rgba(255, 159, 64, 0.4)'
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(153, 102, 255, 0.7)',
+                'rgba(255, 159, 64, 0.7)'
             ],
-            borderColor: [
+            /*borderColor: [
                 'rgba(255,99,132,1)',
                 'rgba(54, 162, 235, 1)',
                 'rgba(255, 206, 86, 1)',
@@ -23,34 +30,44 @@ var myChart = new Chart(ctx, {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 2,
-            
+            borderWidth: 2,*/
         }]
     },
     options: {
+        cutoutPercentage: 50,
+        animation: {
+            animateScale: true
+        },
         legend: {
+            position: 'right',
             labels: {
-                 fontColor: 'black'
                 }
              },
         title: {
             display: true,
-            fontColor: 'black'
+            text: 'Buying Details'
         }   ,
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true,
-                    fontColor: 'black'
-                },
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: 'black'
-                },
-            }]
+            // yAxes: [{
+                // ticks: {
+                    // beginAtZero:true,
+                    // fontColor: 'black'
+                // },
+            // }],
+            // xAxes: [{
+                // ticks: {
+                // },
+            // }]
         },
         responsive: false
     }
 });
 
+function dispFunction() {
+    var x = document.getElementById("myChart");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}

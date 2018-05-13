@@ -30,7 +30,7 @@ db.serialize(function() {
 router.get('/', function(req, res, next) {
   console.log(req.user);
   console.log(req.isAuthenticated());
-  res.render('index', { title: 'Form Valiadtion'});
+  res.render('index', { title: 'Home Screen'});
 });
 
 /* GET Logged In page ? */
@@ -57,6 +57,7 @@ router.post('/login', passport.authenticate('local', {
   successRedirect: '/login',
   failureRedirect: '/'
 }));
+
 
 
 router.get('/profile', authenticationMiddleware(),

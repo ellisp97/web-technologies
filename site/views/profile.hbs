@@ -14,10 +14,18 @@
     <p><button>Contact</button></p>
 </div>
 
-<canvas id="myChart" width="550" height="400"></canvas>
+<div class="displayChart">
+    <canvas id="myChart" width="550" height="400"></canvas>
+</div>
 {{!-- node modules coudlnt load --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="/javascripts/profile.js" ></script>
+
+<div class="graphbuttons">
+    <button onclick="dispFunction()">Pie Chart</button>
+    <button onclick="dispFunction()">Bar Chart</button>
+    <button onclick="dispFunction()">Line Chart</button>
+</div>
 
 <div class="dropdown">
   <button class="dropbtn">Dropdown</button>

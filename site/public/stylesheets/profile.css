@@ -63,13 +63,16 @@ button:hover, a:hover {
     opacity: 0.7;
 }
 
+#displayChart {
+    display: none;
+}
+
 #myChart {
     position: absolute;
-    top:400px;
+    top:550px;
     left: 450px;
     color: black;
     border: 5px solid thistle;
-
 }
 
 .dropbtn {
@@ -112,4 +115,28 @@ button:hover, a:hover {
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+
+.graphbuttons {
+    position: absolute;
+    left:480px;
+    top:400px;
+
+}
+
+.graphbuttons button {
+    padding: 10px 24px;
+    cursor: pointer;
+    width: 170px;
+    float: left;
+}
+
+.graphbuttons:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.graphbuttons button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
 }
