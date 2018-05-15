@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="outerspin.svg"
+   inkscape:version="0.92.3 (3ce5693, 2018-03-11)">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-85.714286"
+     inkscape:cy="560"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1853"
+     inkscape:window-height="1025"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#0080f8;fill-opacity:1;stroke-width:0.26458332"
+       d="M 104.32128,81.553679 A 65.011901,63.877976 0 0 0 39.309753,145.43143 65.011901,63.877976 0 0 0 104.32128,209.3097 65.011901,63.877976 0 0 0 169.33333,145.43143 65.011901,63.877976 0 0 0 104.32128,81.553679 Z m 0,11.717108 a 50.648806,51.782737 0 0 1 50.64911,51.782893 50.648806,51.782737 0 0 1 -50.64911,51.78288 50.648806,51.782737 0 0 1 -50.648577,-51.78288 50.648806,51.782737 0 0 1 50.648577,-51.782893 z"
+       id="path10-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       inkscape:export-filename="/home/ellisp97/outerspin.png" />
+    <path
+       style="fill:#008000;stroke-width:0.26458332"
+       d="m 98.273661,-140.69632 a 65.0119,63.877975 0 0 0 -11.58172,1.07539 l -7.25485,14.38207 a 50.648806,51.782736 0 0 1 18.83657,-3.74034 50.648806,51.782736 0 0 1 21.707719,5.06739 l -7.35304,-15.12621 a 65.0119,63.877975 0 0 0 -14.354679,-1.6583 z m -38.27828,29.63644 -18.03198,2.47633 a 65.0119,63.877975 0 0 0 -7.99227,22.82393 l 13.96349,13.76454 a 50.648806,51.782736 0 0 1 -0.30955,-5.20124 50.648806,51.782736 0 0 1 12.37031,-33.86356 z m 76.752419,0.27698 a 50.648806,51.782736 0 0 1 12.17497,33.58658 50.648806,51.782736 0 0 1 -0.63872,7.77679 l 14.63993,-14.01362 a 65.0119,63.877975 0 0 0 -7.94887,-24.57369 z m 6.21822,57.89776 a 50.648806,51.782736 0 0 1 -33.54575,26.13587 l 15.37012,8.19692 a 65.0119,63.877975 0 0 0 21.33616,-15.12156 z m -88.476769,1.5906 -3.30729,18.40353 a 65.0119,63.877975 0 0 0 20.63802,14.33607 l 15.68948,-8.07392 a 50.648806,51.782736 0 0 1 -33.02021,-24.66568 z"
+       id="path10"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#007fff;stroke-width:0.26458332;fill-opacity:1"
+       d="m 104.3218,109.52406 a 37.797615,35.907736 0 0 0 -37.797695,35.90737 37.797615,35.907736 0 0 0 37.797695,35.90789 37.797615,35.907736 0 0 0 37.79717,-35.90789 37.797615,35.907736 0 0 0 -37.79717,-35.90737 z m -5.2e-4,11.71712 a 26.45833,24.568453 0 0 1 26.45833,24.56852 26.45833,24.568453 0 0 1 -26.45833,24.56853 26.45833,24.568453 0 0 1 -26.458332,-24.56853 26.45833,24.568453 0 0 1 26.458332,-24.56852 z"
+       id="path10-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       inkscape:export-filename="/home/ellisp97/outerspin.png" />
+  </g>
+</svg>

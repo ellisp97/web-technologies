@@ -50,14 +50,21 @@
     class="close" title="Close Modal">×</span>
         <div class="modal-content animate">
             <div class="container">
+                <div class="sell-header">
+                    <h1>check a product</h1>
+                </div>
                 <div class="sell-form">
                     <input type="text" id="prod_name" name="prod_name" placeholder="insert product name"/>
                     <input type="price" id="prod_price" name="prod_price" placeholder="enter price in"/>
                     <input type="text" id="prod_link" name="prod_link" placeholder="enter product link"/>
                 </div>
-                <div class="sell-desc">
+                {{!-- <div class="sell-desc">
                     <input type="text" id="prod_desc" name="prod_desc" placeholder="enter product desc"/>
-                </div>
+                </div> --}}
+                <button type="submit">Add</button>
+                <button type="button"
+                onclick="document.getElementById('sell').style.display='none'"
+                class="cancelbutt">Cancel</button>
             </div>
         </div>
     </div>

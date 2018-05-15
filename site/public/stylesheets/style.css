@@ -4,10 +4,11 @@ body{
   height: 100%;
   width: 100%;
   font-family: sans-serif;
+  background-color: thistle;
 }
 .container{
   width: 500px;
-  height: 600px;
+  min-height: 600px;
   text-align: center;
   background-color: rgba(255, 107, 129,1);
   margin: 100px auto;
@@ -26,14 +27,6 @@ button {
 
 button:hover {
   opacity: 0.8;
-}
-
-input {
-    background-color: white;
-    color: black;
-    border: none;
-    cursor: crosshair;
-    width: 100%;
 }
 
 .container img{
@@ -92,7 +85,7 @@ input {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 4; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -101,13 +94,14 @@ input {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
+    box-shadow: 5px 5px 50px 5px thistle;
 }
 
 /* Modal Content/Box */
 .modal-content {
     background-color: rgba(0,0,0,0);
-    margin: 5px auto; /* 15% from the top and centered */
-    width: 80%; /* Could be more or less, depending on screen size */
+    margin: 15px auto; /* 15% from the top and centered */
+    width: 90%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
@@ -222,4 +216,133 @@ input {
 .btn4 {
   background-color:#ff6b81;
   color:#ff6b81;
+}
+
+svg #titletext path{
+  fill: thistle !important;
+  stroke: #000 !important;
+  stroke-dasharray: 640;
+  animation:at 3000ms;
+
+}
+
+#zoom{
+  position: absolute;
+  top: 0px;
+  left:250px;
+}
+
+
+#loading{
+  position: absolute;
+  top: 500px;
+  left: 250px;
+}
+
+#innerspin{
+  background: no-repeat;
+  transform-origin:50% 49%;
+  animation:cw 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+#outerspin{
+  background: no-repeat;
+}
+
+@keyframes at {
+  0%{
+    stroke-dashoffset: 640;
+  }
+  30%{
+    stroke-dashoffset: 320;
+  }
+  100%{
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes cw {
+  from{transform:rotate(0deg);}
+  to{transform: rotate(360deg);}
+}
+@keyframes ccw {
+  from{transform:rotate(0deg);}
+  to{transform: rotate(360deg);}
+}
+
+/* input {
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: crosshair;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 50px;
+} */
+
+
+.input-requirements li.invalid {
+	color: #960f00;
+}
+.input-requirements li.valid {
+	color: #2ecc71;
+}
+
+:root {
+  --fh-border-radius: 3px;
+  --fh-border-width: 2px;
+  --fh-input-bg-color: rgb(250,250,250);
+  --fh-focus-bg-color: var(--fh-input-bg-color);
+  --fh-focus-border-color: #000;
+  --fh-focus-font-color: var(--fh-font-color);
+}
+
+input {
+  background-color: white;
+  box-sizing: border-box;
+  outline: none;
+  cursor: crosshair;
+  width: 100%;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 50px;
+  color: var(--fh-font-color);
+}
+
+
+input[type="text"],
+select {
+  border-color: var(--fh-border-color);
+  background-color: var(--fh-input-bg-color);
+}
+
+
+
+/* Custom ------------------ */
+
+input:not([type="submit"]):valid {
+  border-color: #2ecc71;
+}
+
+input:not([type="submit"]):invalid {
+  border-color: #e74c3c;
+}
+/* Hide and show related .input-requirements when interacting with input */
+
+input:not([type="submit"]) + .input-requirements {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 1s ease-out;  
+}
+
+input:not([type="submit"]):hover + .input-requirements,
+input:not([type="submit"]):focus + .input-requirements,
+input:not([type="submit"]):active + .input-requirements {
+  max-height: 1000px; /* any large number (bigger then the .input-requirements list) */
+  transition: max-height 1s ease-in;
 }

@@ -21,6 +21,12 @@
     background-color: #000;
 }
 
+.sell-header {
+    box-sizing: border-box;
+    position: relative;
+    padding: 50px;
+}
+
 .sell-form {
     margin-top: 50px;
     margin: 10px 10px;
@@ -39,97 +45,92 @@
 }
 
 .sell-desc input {
-
     padding: 40px 0;
     text-align: center;
 }
 
-
 .carousel-container {
-    font-size:        3em;
-    width:            auto;
-    max-width:        80%;
-    min-width: 40%;
-    left:             550px;
-    top: 175px;
-    position:         absolute;
-  
-    margin:           1em;
-    border:           1px solid #ccc;
-    overflow:       hidden;
-    z-index: 0;
-  }
-  
-  .carousel-content {
-    margin:           0;
-    padding:          0;
-  }
-  
-  .carousel-element {
-    font-size:        1em;
-    margin:           0;
-    padding:          1em 0;
-    width:            100%;
-    list-style:       none;
-    text-align:       center;
-  }
-  
-  .active {
-    height:           17em;
-  }
-  
-  .active .carousel-element {
-    position:         absolute;
-    top:              200px;
-    opacity:          0;
-    transform:        scale(0);
-    transition:       1s;
-  }
-  
-  .active .carousel-element.current {
-    top:              1em;
-    display:          block;
-    opacity:          1;
-    transform:        scale(1);
-    transition:       1s;
-  }
-  
-  .active .buttons {
-    padding:          0;
-    background:       #1e90ff;
-    text-align:       center;
-    z-index:          10;
-    position:         relative;
-  }
-  
-  .active .anchor-buttons {
-    padding:          0;
-    background:       #1e90ff;
-    text-align:       center;
-    z-index:          10;
-    position:         absolute;
-    bottom:           0;
-    width:            100%;
-  }
-  
-  .carousel-container button {
-    border:           none;
-    display:          none;
-  }
-  .active button {
-    width:            2em;
-    display:          inline-block;
-    background-color: #ff7f50
-  }
-  .offscreen {
-    position:         absolute;
-    left:             -20000px;
-  }
-  .carousel-content img{
-    width:            auto;
-    height:           auto;
-    max-width:        inherit;
-    max-height:       inherit;
-    padding-bottom:   2em;
-  }
-  
+  font-size:        3em;
+  width:            750px;
+  height:           500px;
+  left:             550px;
+  top:              175px;
+  position:         absolute;
+
+  margin:           1em;
+  border:           1px solid #ccc;
+  overflow:         hidden;
+}
+
+.carousel-content {
+  margin:           0;
+  padding:          0;
+}
+
+.carousel-element {
+  font-size:        1em;
+  margin:           0;
+  padding:          1em 0;
+  width:            100%;
+  list-style:       none;
+  text-align:       center;
+}
+
+.active {
+  height:           17em;
+}
+
+.active .carousel-element {
+  position:         absolute;
+  top:              200px;
+  opacity:          0;
+  transform:        scale(0);
+  transition:       1s;
+}
+
+.active .carousel-element.current {
+  top:              1em;
+  display:          block;
+  opacity:          1;
+  transform:        scale(1);
+  transition:       1s;
+}
+
+.active .buttons {
+  padding:          0;
+  background:       #1e90ff;
+  text-align:       center;
+  z-index:          3;
+  position:         relative;
+}
+
+.active .anchor-buttons {
+  padding:          0;
+  background:       #1e90ff;
+  text-align:       center;
+  z-index:          3;
+  position:         absolute;
+  bottom:           0;
+  width:            100%;
+}
+
+.carousel-container button {
+  border:           none;
+  display:          none;
+}
+.active button {
+  width:            2em;
+  display:          inline-block;
+  background-color: #ff7f50
+}
+.offscreen {
+  position:         absolute;
+  left:             -20000px;
+}
+.carousel-content img{
+  width:            auto;
+  height:           auto;
+  max-width:        inherit;
+  max-height:       inherit;
+  padding-bottom:   2em;
+}
