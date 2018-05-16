@@ -1,0 +1,191 @@
+{{!-- <div class="header">
+    <h1> {{title}}</h1>
+    <h1>Welcome to {{title}}</h1>
+</div> --}}
+    <form action="/login" method="post">
+        <div id="login" class="modal">
+        <span onclick="document.getElementById('login').style.display='none'"
+        class="close" title="Close Modal">×</span>
+            <div class="modal-content animate">
+                <div class="container">
+                    <img src="images/logo.svg" alt="loginpic"/>
+                    <div class="form-input">
+                        <input type="text" id = "username" name="username" placeholder="username"/>
+                        <input type="password" id = "password" name="password" placeholder="password"/>
+                    </div>
+                    <div class="loginbutt">
+                    <button type="submit">Login</button>
+                    <button type="button"
+                    onclick="document.getElementById('login').style.display='none'"
+                    class="cancelbutt">Cancel</button>
+                    <span class="pass">Forgot <a href="#">password?</a></span>
+                    {{# if success }}
+                        <section class="success">
+                            <h2>Successful Validation!</h2>
+                        </section>
+                    {{ else }}
+                        {{# if errors }}
+                            <!--section class="errors">
+                                <ul>
+                                    {{# each errors }}
+                                        <li>{{ this.msg }}</li>
+                                    {{/each}}
+                                </ul>
+                            </section-->
+                        {{/if}}
+                    {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form action="/sumbit" method="post">
+        <div id="register" class="modal">
+        <span onclick="document.getElementById('register').style.display='none'"
+        class="close" title="Close Modal">×</span>
+            <div class="modal-content animate">
+                <div class="container">
+                    <div class="register-form">
+                        <h1>Register User</h1>
+                        <input type="text" id="name" name="name" placeholder="put name here"/>
+                        <label for="username">
+                            <input type="text" id="username" placeholder="Username" minlength="3" required>                    
+                            <ul class="input-requirements">
+                                <li>At least 3 characters long</li>
+                                <li>Must only contain letters and numbers (no special characters)</li>
+                            </ul>
+                        </label>
+                        <input type="email" id="email" name="email" placeholder="email here"/>
+                        <label for="username">
+                            <input type="password" id="password" placeholder="password here" maxlength="100" minlength="8" required>
+
+                            <ul class="input-requirements">
+                                <li>Between 8 and 100 characters </li>
+                                <li>Contain at least 1 number</li>
+                                <li>Contains at least 1 lowercase letter</li>
+                                <li>Contains at least 1 uppercase letter</li>
+                                <li>Contains a special character (!$%@)</li>
+                            </ul>
+                        </label>
+                        <label for="password_repeat">
+                            <input type="password" id="password_repeat" placeholder="confirm password" maxlength="100" minlength="8" required>
+                        </label>                
+                </div>
+                <script src="/javascripts/check.js"></script>
+
+                <div class="submitbutt">
+                    <button type="submit">Submit</button>
+                </div>
+
+                <button type="button"
+                onclick="document.getElementById('login').style.display='none'"
+                class="cancelbutt">Cancel</button>
+
+                {{# if success }}
+                    <section class="success">
+                        <h2>Successful Validation!</h2>
+                    </section>
+                {{ else }}
+                    {{# if errors }}
+                        <section class="errors">
+                            <ul>
+                                {{# each errors }}
+                                    <li>{{ this.msg }}</li>
+                                {{/each}}
+                            </ul>
+                        </section>
+                    {{/if}}
+                {{/if}}
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    
+    <svg id="zoom" height="1000" width="1000" viewBox='0 0 1000 1000' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+        <g id="titletext" transform="translate(50,300) scale(0.5)" >
+            <g
+            aria-label="shoppingTrack"
+            style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
+            id="flowRoot4082">
+            <path
+                d="m 82.944,-73.92 v -0.768 q 0,-5.376 4.032,-5.376 3.84,0 3.84,5.376 v 13.248 q 0,5.184 -3.84,5.184 -3.456,0 -4.032,-4.416 -0.768,-6.528 -7.68,-10.368 -6.912,-3.84 -17.856,-3.84 -10.752,0 -17.856,4.224 -7.104,4.032 -7.104,10.176 0,10.944 25.152,13.248 7.296,0.768 12.672,1.92 5.568,1.152 11.904,3.84 6.336,2.496 9.792,7.488 3.456,4.8 3.456,11.712 0,10.944 -10.752,18.24 -10.56,7.104 -26.88,7.104 -18.432,0 -30.144,-10.368 v 2.112 Q 27.648,0 23.808,0 19.776,0 19.776,-5.184 V -21.12 q 0,-5.184 4.032,-5.184 3.84,0 3.84,4.224 v 1.344 q 0,6.528 8.64,11.328 8.64,4.608 20.928,4.608 12.672,0 21.12,-4.992 8.448,-4.992 8.448,-12.672 0,-13.824 -29.952,-17.28 -6.72,-0.768 -11.52,-1.728 -4.8,-0.96 -10.368,-3.072 -5.376,-2.304 -8.256,-6.336 -2.88,-4.224 -2.88,-10.176 0,-9.408 9.216,-15.552 9.408,-6.144 23.616,-6.144 16.32,0 26.304,8.832 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5005" />
+            <path
+                d="m 146.805,-115.968 v 49.344 q 7.296,-8.832 14.016,-12.48 6.72,-3.648 15.552,-3.648 13.44,0 21.888,7.68 8.64,7.488 8.64,19.2 v 48 h 8.64 q 5.376,0 5.376,3.84 0,4.032 -5.376,4.032 h -25.152 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 8.64 v -47.424 q 0,-7.104 -5.568,-13.248 -5.376,-6.336 -18.048,-6.336 -8.448,0 -13.824,3.456 -5.376,3.456 -14.784,14.592 v 48.96 h 8.64 q 5.376,0 5.376,3.84 0,4.032 -5.376,4.032 h -25.344 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 8.832 v -100.224 h -10.368 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5007" />
+            <path
+                d="m 287.85,-82.752 q 18.432,0 31.104,12.672 12.672,12.48 12.672,30.72 0,17.664 -12.864,30.144 -12.864,12.288 -30.912,12.288 -18.24,0 -31.104,-12.48 -12.672,-12.48 -12.672,-30.528 0,-17.664 12.672,-30.144 12.864,-12.672 31.104,-12.672 z m 0,7.872 q -14.976,0 -25.536,10.176 -10.368,10.176 -10.368,24.768 0,14.592 10.368,24.96 10.56,10.176 25.536,10.176 14.784,0 25.344,-10.176 10.56,-10.176 10.56,-24.384 0,-15.168 -10.368,-25.344 Q 303.018,-74.88 287.85,-74.88 Z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5009" />
+            <path
+                d="m 407.199,-74.88 q -14.208,0 -24.192,10.176 -9.984,10.176 -9.984,24.768 0,14.592 9.984,24.96 9.984,10.176 24.192,10.176 14.016,0 24,-10.176 10.176,-10.176 10.176,-24.384 0,-14.976 -9.984,-25.152 -9.792,-10.368 -24.192,-10.368 z m -34.176,57.984 V 27.84 h 18.816 q 5.184,0 5.184,3.84 0,4.032 -5.184,4.032 h -37.056 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 10.368 V -72.192 h -10.368 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 18.24 v 17.088 q 13.824,-19.776 34.56,-19.776 17.472,0 29.568,12.288 12.096,12.288 12.096,30.144 0,18.048 -12.288,30.72 -12.096,12.672 -29.376,12.672 -20.928,0 -34.56,-19.968 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5011" />
+            <path
+                d="m 522.324,-74.88 q -14.208,0 -24.192,10.176 -9.984,10.176 -9.984,24.768 0,14.592 9.984,24.96 9.984,10.176 24.192,10.176 14.016,0 24,-10.176 10.176,-10.176 10.176,-24.384 0,-14.976 -9.984,-25.152 -9.792,-10.368 -24.192,-10.368 z m -34.176,57.984 V 27.84 h 18.816 q 5.184,0 5.184,3.84 0,4.032 -5.184,4.032 h -37.056 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 10.368 V -72.192 h -10.368 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 18.24 v 17.088 q 13.824,-19.776 34.56,-19.776 17.472,0 29.568,12.288 12.096,12.288 12.096,30.144 0,18.048 -12.288,30.72 -12.096,12.672 -29.376,12.672 -20.928,0 -34.56,-19.968 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5013" />
+            <path
+                d="m 637.065,-80.064 v 72.192 h 30.72 q 5.376,0 5.376,3.84 0,4.032 -5.376,4.032 h -69.312 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 30.72 v -64.32 h -22.656 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 z m -0.384,-39.744 v 19.968 h -11.328 v -19.968 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5015" />
+            <path
+                d="m 751.998,-74.88 q -6.72,0 -12.288,2.688 -5.568,2.688 -8.64,5.952 -3.072,3.264 -8.256,9.792 v 48.576 h 8.64 q 5.184,0 5.184,3.84 0,4.032 -5.184,4.032 h -25.152 q -5.376,0 -5.376,-4.032 0,-3.84 5.376,-3.84 h 8.64 v -64.32 h -6.528 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 14.4 v 13.248 q 8.256,-9.216 14.592,-12.48 6.336,-3.456 15.36,-3.456 12.864,0 21.504,7.488 8.64,7.488 8.64,18.624 v 48.768 h 6.528 q 5.184,0 5.184,3.84 0,4.032 -5.184,4.032 H 768.51 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 6.528 v -47.424 q 0,-6.72 -5.568,-13.056 -5.376,-6.528 -17.472,-6.528 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5017" />
+            <path
+                d="m 890.355,-62.976 v -17.088 h 18.24 q 5.184,0 5.184,3.84 0,4.032 -5.184,4.032 H 898.227 V 5.376 q 0,12.288 -9.216,21.312 -9.216,9.024 -22.464,9.024 h -21.888 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 22.272 q 9.792,0 16.512,-6.912 6.912,-6.912 6.912,-16.704 v -20.928 q -12.672,19.776 -32.832,19.776 -16.32,0 -28.032,-12.672 -11.52,-12.672 -11.52,-30.336 0,-17.664 11.52,-30.144 11.712,-12.672 28.032,-12.672 20.352,0 32.832,19.776 z M 858.099,-74.88 q -13.44,0 -22.848,10.368 -9.408,10.176 -9.408,24.576 0,14.592 9.408,24.96 9.408,10.176 22.848,10.176 13.44,0 22.848,-10.176 9.408,-10.368 9.408,-24.576 0,-14.784 -9.408,-24.96 -9.216,-10.368 -22.848,-10.368 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5019" />
+            <path
+                d="m 982.632,-7.872 h 20.16 q 5.184,0 5.184,3.84 0,4.032 -5.184,4.032 H 954.6 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 20.16 v -92.352 h -32.064 v 14.016 q 0,5.184 -4.032,5.184 -3.84,0 -3.84,-5.184 v -21.888 h 87.552 v 21.888 q 0,5.184 -3.84,5.184 -1.728,0 -2.88,-1.344 -1.152,-1.536 -1.152,-3.84 v -14.016 h -31.872 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5021" />
+            <path
+                d="m 1135.965,-66.048 q -1.152,0 -6.144,-4.032 -4.8,-4.032 -9.6,-4.032 -6.528,0 -13.632,4.608 -6.912,4.608 -22.848,19.2 v 42.432 h 34.368 q 5.184,0 5.184,4.032 0,3.84 -5.184,3.84 h -60.672 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 18.432 v -64.32 h -14.4 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 22.272 v 19.584 q 13.248,-12.096 21.504,-16.704 8.256,-4.8 15.552,-4.8 4.8,0 11.904,3.84 7.296,3.84 7.296,8.064 0,1.728 -1.152,2.88 -1.152,1.152 -2.88,1.152 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5023" />
+            <path
+                d="m 1208.082,-74.88 q -5.376,0 -12.096,1.536 -6.72,1.536 -11.52,3.072 -4.8,1.536 -5.568,1.536 -1.536,0 -2.688,-1.152 -0.96,-1.152 -0.96,-2.688 0,-2.88 3.264,-4.032 17.856,-6.144 30.144,-6.144 13.44,0 22.08,6.72 8.832,6.72 8.832,16.896 v 51.264 h 10.368 q 5.184,0 5.184,3.84 0,4.032 -5.184,4.032 h -18.24 v -12.864 q -17.088,15.936 -36.672,15.936 -13.44,0 -21.696,-6.72 -8.256,-6.912 -8.256,-17.856 0,-12.48 11.136,-20.16 11.328,-7.872 29.376,-7.872 11.328,0 26.112,4.032 v -13.632 q 0,-7.104 -6.528,-11.328 -6.528,-4.416 -17.088,-4.416 z m 23.616,53.376 v -17.28 q -11.52,-2.88 -24.576,-2.88 -15.168,0 -24.768,5.76 -9.408,5.568 -9.408,14.592 0,7.488 5.952,12.096 5.952,4.416 15.936,4.416 10.176,0 18.624,-3.84 8.64,-3.84 18.24,-12.864 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5025" />
+            <path
+                d="m 1369.095,-16.896 q 0,3.072 -5.76,7.68 -5.76,4.608 -16.32,8.448 -10.368,3.84 -21.312,3.84 -18.816,0 -31.104,-11.904 -12.096,-11.904 -12.096,-30.336 0,-19.008 12.48,-31.296 12.48,-12.288 31.68,-12.288 17.856,0 29.952,10.56 v -2.496 q 0,-5.376 4.032,-5.376 3.84,0 3.84,5.376 v 17.472 q 0,5.184 -3.84,5.184 -3.456,0 -4.032,-4.608 -0.576,-7.68 -9.6,-12.864 -8.832,-5.376 -20.928,-5.376 -15.936,0 -25.92,9.984 -9.792,9.792 -9.792,25.536 0,15.168 9.984,24.96 9.984,9.6 25.728,9.6 20.928,0 35.904,-13.824 1.92,-1.92 3.456,-1.92 1.536,0 2.496,1.152 1.152,0.96 1.152,2.496 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5027" />
+            <path
+                d="M 1417.02,-34.56 V 0 h -18.24 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 10.368 v -100.224 h -10.368 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 18.24 v 72 l 33.216,-28.224 h -4.224 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 24.96 q 5.184,0 5.184,3.84 0,4.032 -5.184,4.032 h -9.024 l -30.144,25.152 39.744,39.168 h 8.64 q 5.184,0 5.184,3.84 0,4.032 -5.184,4.032 h -25.152 q -5.184,0 -5.184,-4.032 0,-3.84 5.184,-3.84 h 5.376 l -34.56,-34.176 z"
+                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist';word-spacing:0px;fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-opacity:1"
+                id="path5029" />
+            </g>
+        </g>
+        <g>
+            <path stroke ="" id="motionPath" d="M30 10 C 50 50, 100 100, 700 100" stroke="black" stroke-width="5" fill="none"/>
+        </g>
+        <g id="linemotion" transform="translate(65,100) ">
+            <image id="logo" height="200" width="200"  xlink:href="images/logo.svg" />
+        </g>
+       {{!-- <g transform="translate( 0 12.5 ) translate( 100 100) scale( 1.5 ) translate( -100 -100)"> --}}
+
+        <animateMotion 
+            xlink:href="#logo"
+            dur="2s"
+            begin="0s"
+            fill="freeze"
+            repeatCount="0">
+            <mpath xlink:href="#motionPath" />
+        </animateMotion>
+    </svg>
+
+
+    {{!-- <svg id="loading" height="200" width="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+        <image id="outerspin" x="0" y="0" height="200" width="200"  xlink:href="images/outerRing.svg" />
+        <image id = "innerspin" x="1" y="1" height="200" width="200"  xlink:href="images/logoinner.svg" />
+    </svg> --}}
+

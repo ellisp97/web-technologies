@@ -1,0 +1,37 @@
+
+<div class="card2">
+    <h1>Products Tracked : </h1>
+    <h1>Saving Made : </h1>
+    <h1>Products Purchased : </h1>
+</div>
+
+<div class="card">
+    <h1>Profile</h1>
+    <img src = "frog.jpg" alt = "frog">
+    <p class="username">{{username}} : {{userid}} </p>
+    <p class = "email">{{email}}</p>
+    <p>University of Bristol</p>
+    <p><button>Contact</button></p>
+</div>
+
+<div class="displayChart">
+    <canvas id="myChart" width="550" height="400"></canvas>
+</div>
+{{!-- node modules coudlnt load --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script src="/javascripts/profile.js" ></script>
+
+<div class="graphbuttons">
+    <button onclick="dispFunction()">Pie Chart</button>
+    <button onclick="dispFunction()">Bar Chart</button>
+    <button onclick="dispFunction()">Line Chart</button>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn">Dropdown</button>
+  <div class="dropdown-content">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div>
