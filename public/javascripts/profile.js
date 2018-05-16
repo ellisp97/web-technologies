@@ -1,6 +1,8 @@
+"use strict";
+
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [{
@@ -24,7 +26,7 @@ var myChart = new Chart(ctx, {
                 'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 2,
-            
+
         }]
     },
     options: {

@@ -109,7 +109,7 @@ input {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 5; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -197,14 +197,14 @@ input {
   font-size:        3em;
   width:            auto;
   max-width:        80%;
-  min-width: 40%;
+  min-width:        40%;
   left:             550px;
-  top: 175px;
+  top:              175px;
   position:         absolute;
-  
+
   margin:           1em;
   border:           1px solid #ccc;
-  overflow:       hidden;
+  overflow:         hidden;
 }
 
 .carousel-content {
@@ -245,7 +245,7 @@ input {
   padding:          0;
   background:       #1e90ff;
   text-align:       center;
-  z-index:          10;
+  z-index:          3;
   position:         relative;
 }
 
@@ -253,7 +253,7 @@ input {
   padding:          0;
   background:       #1e90ff;
   text-align:       center;
-  z-index:          10;
+  z-index:          3;
   position:         absolute;
   bottom:           0;
   width:            100%;
