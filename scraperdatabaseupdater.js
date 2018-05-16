@@ -12,7 +12,7 @@ var supported_domains = ["amazon", "asos"];
 var domain_id_precede = ["/dp/", "/prd/"];
 
 const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('./db/prices.db');
+let db = new sqlite3.Database('./db/users.db');
 //initialise table
 // db.run('CREATE TABLE productData(prod_id text, prod_name text, prod_link text, prod_domain text, prod_currency text, prod_price_history text, prod_price_current real, date_added real, date_updated real)');
 // --- INITIAL PRODUCT TABLE HAS BEEN MADE
@@ -79,7 +79,7 @@ async function get_changed_ids_prices() {
       //wait until the request has fetched the live price
       live_price = await check_price(row.prod_link, row.prod_id, row.prod_domain);
       if(live_price != row.prod_price_current) {
-        ids_and_data_to_update.push({id:row.prod_id, price:live_price, history:row.prod_price_history});
+        ids_and_data_to_update.push({id:row.prod_id, price:live_price, history:row.prod_price_history, dates:row.date_update_history});
         //if it is not the same as the current, store it
       }
     };
@@ -91,22 +91,19 @@ async function get_changed_ids_prices() {
 //the function just updates the database by searching it using the ids passed
 async function update_prices(ids_data) {
   var update_query = `UPDATE productData
-                      SET prod_price_current = ?, prod_price_history = ?, date_updated = ?
+                      SET prod_price_current = ?, prod_price_history = ?, date_update_history = ?
                       WHERE prod_id = ?`;
   //again we must use the for..of
   for(let prod_data of ids_data) {
     let id = prod_data.id;
     let price = prod_data.price;
     let history = prod_data.history;
+    let date_history = prod_data.dates;
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     history = history + "," + String(price);
-    let current_time = Date.now();
-    //polyfill for date.now;
-    // if (!Date.now) {
-    //   Date.now = function now() {
-    //     return new Date().getTime();
-    //   };
-    // }
-    let data = [price, history, current_time, id];
+    date_history = date_history + "," + date;
+    let data = [price, history, date_history, id];
     console.log(`price updated, data used is ${data}`);
     await db.runAsync(update_query, data);
     //wait until the db has finished updating
@@ -128,7 +125,7 @@ function check_price(url_param, id, domain){
       }
     };
   }
-  var price_num;
+  var price_num, price_int;
 
   return new Promise(function(resolve, reject) {
     request(options, function(error, response, body) {
@@ -163,7 +160,8 @@ function check_price(url_param, id, domain){
             price_num = Number(price);
           });
         }
-        resolve(price_num);
+        price_int = Number(Math.round(price_num*100));
+        resolve(price_int);
         //resolve the promise with the live price
       }
     });
@@ -178,6 +176,7 @@ async function main() {
     //wait for it to complete
     await update_prices(id_data);
     //update the database, wait for it to complete
+    db.close();
   }
   catch (e) {
     console.log("error");

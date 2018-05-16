@@ -1,0 +1,8 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE productData(prod_id text, prod_name text, prod_link text, prod_domain integer, prod_currency text, prod_price_history text, prod_price_current integer, date_added text, date_update_history text);
+INSERT INTO productData VALUES('8828973','Pull&Bear Hoodie In Black','http://www.asos.com/pullbear/pullbear-hoodie-in-black/prd/8828973?clr=black&SearchQuery=&cid=5668&gridcolumn=4&gridrow=6&gridsize=4&pge=1&pgesize=72&totalstyles=1379',1,'£ pence','1745,1799',1799,'2018-5-15','2018-5-15,2018-5-16');
+INSERT INTO productData VALUES('8691396','New Balance 501 Trainers In Blue','http://www.asos.com/new-balance/new-balance-501-trainers-in-blue/prd/8691396',1,'£ pence','5200',5200,'2018-5-15','2018-5-15');
+INSERT INTO productData VALUES('B0082JFX1M','AKORD 15 mm Metal Binder Clip Clamp - Assorted Colours (Pack of 60)','https://www.amazon.co.uk/AKORD-Metal-Binder-Clip-Clamp/dp/B0082JFX1M/ref=sr_1_5?s=officeproduct&ie=UTF8&qid=1526309936&sr=1-5&keywords=binder+clips',0,'£ pence','334',334,'2018-5-15','2018-5-15');
+INSERT INTO productData VALUES('B00THEAN3E','Maxwell & Williams 420 ml Porcelain William Morris Strawberry Thief Coupe Mug, Blue','https://www.amazon.co.uk/Maxwell-Williams-Porcelain-William-Strawberry/dp/B00THEAN3E/ref=sr_1_3?ie=UTF8&qid=1526403589&sr=8-3&keywords=mug',0,'£ pence','495',495,'2018-5-15','2018-5-15');
+COMMIT;
