@@ -72,9 +72,9 @@ var usernameValidityChecks = [{
 ]
 var passwordValidityChecks = [{
 		isInvalid: function(input) {
-			return input.value.length < 8 | input.value.length > 100;
+			return input.value.length < 8 | input.value.length > 12;
 		},
-		invalidityMsg: 'This input needs to be between 8 and 100 characters',
+		invalidityMsg: 'This input needs to be between 8 and 12 characters',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(1)')
 	},{
 		isInvalid: function(input) {

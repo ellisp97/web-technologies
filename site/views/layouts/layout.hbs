@@ -14,21 +14,25 @@
     
     </head>
      <body >{{!--onload="random_col()" --}}
-         <div class="intro-form">
+        <div class="intro-form">
             {{#if isAuthenticated}}
-                <nav class="main-menu">
-                    <ul>
-                        <button class ="btn1" onclick="location.href='/profile'" type="button" ><span class="text">Profile</span> <i class="fas fa-user"></i></button>
-                        <button class ="btn2" onclick="location.href='/login'" type="button">Home <i class="fas fa-sign-in"></i></button>
-                        <button class ="btn3" onclick="document.getElementById('sell').style.display='block'" >Sell <i class="fas fa-shopping-nag"></i></button>
-                        <button class ="btn4" onclick="location.href='/logout'" type="button" >Logout <i class="fas fa-sign-out"></i></button>
-                    </ul>
-                </nav>
+                <ul class="main-menu">
+                    <li><a href="/profile"><i class="fa fa-user"></i>Profile</a></li>
+                    <li><a href="/login"> <i class="fas fa-home"></i>Home</a></li>
+                    <li><a onclick="document.getElementById('sell').style.display='block'"> <i class="fa fa-shopping-bag"></i>Sell</a></li>
+                    <li><a href="/logout"> <i class="fa fa-sign-out"></i>Logout</a></li>
+
+                    {{!-- <button class ="btn1" onclick="location.href='/profile'" type="button" ><span class="text">Profile</span> <i class="fas fa-user"></i></button>
+                    <button class ="btn2" onclick="location.href='/login'" type="button">Home <i class="fas fa-sign-in"></i></button>
+                    <button class ="btn3" onclick="document.getElementById('sell').style.display='block'" >Sell <i class="fas fa-shopping-nag"></i></button>
+                    <button class ="btn4" onclick="location.href='/logout'" type="button" >Logout <i class="fas fa-sign-out"></i></button> --}}
+                </ul>
             {{else}}
-                <nav class="main-menu">
-                    <button onclick="document.getElementById('login').style.display='block'" style="background-color:#ff6b81" >Login Form <i class="fas fa-sign-in"></i></button>
-                    <button onclick="document.getElementById('register').style.display='block'" style="background-color:#ff7f50">Register <i class="fas fa-sign-in"></i></button>
-                </nav>
+                <ul class="main-menu">
+                    <li><a onclick="document.getElementById('login').style.display='block'"> <i class="fa fa-user"></i>Login</a></li>
+                    <li><a onclick="document.getElementById('register').style.display='block'"> <i class="fa fa-user"></i>Register</a></li>
+                </ul>
+            
             {{/if}}
         </div>
 
