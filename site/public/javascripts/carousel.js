@@ -85,5 +85,5 @@ function carousel() {
   butt4.addEventListener('click', function(ev) { //listen for a click event on the next button
     navigate(-(counter) + 3); //navigate to the fourth element in the carousel
   });
-  navigate(0); //show the first element
+  navigate(Math.floor(Math.random() * amount)); //show the first element
 };
