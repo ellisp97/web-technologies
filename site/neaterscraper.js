@@ -9,8 +9,8 @@ var fs = require('fs'),
 
 // var url = "http://www.asos.com/pullbear/pullbear-hoodie-in-black/prd/8828973?clr=black&SearchQuery=&cid=5668&gridcolumn=4&gridrow=6&gridsize=4&pge=1&pgesize=72&totalstyles=1379";
 // var url = "http://www.asos.com/new-balance/new-balance-501-trainers-in-blue/prd/8691396";
-// var url = "https://www.amazon.co.uk/AKORD-Metal-Binder-Clip-Clamp/dp/B0082JFX1M/ref=sr_1_5?s=officeproduct&ie=UTF8&qid=1526309936&sr=1-5&keywords=binder+clips";
-var url = "https://www.amazon.co.uk/Maxwell-Williams-Porcelain-William-Strawberry/dp/B00THEAN3E/ref=sr_1_3?ie=UTF8&qid=1526403589&sr=8-3&keywords=mug";
+// var url = "https://www.amazon.co.uk/Maxwell-Williams-Porcelain-William-Strawberry/dp/B00THEAN3E/ref=sr_1_3?ie=UTF8&qid=1526403589&sr=8-3&keywords=mug";
+var url = "https://www.amazon.co.uk/AKORD-Metal-Binder-Clip-Clamp/dp/B0082JFX1M/ref=sr_1_5?s=officeproduct&ie=UTF8&qid=1526309936&sr=1-5&keywords=binder+clips";
 
 var domains_and_id_precede = [{domain:"amazon", id_precede:"/dp/"},
                               {domain:"asos",   id_precede:"/prd/"}];
