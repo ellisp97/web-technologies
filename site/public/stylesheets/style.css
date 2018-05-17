@@ -83,7 +83,7 @@ button:hover {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 4; /* Sit on top */
+    z-index: 10; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -219,6 +219,7 @@ svg #titletext path{
   left:550px;
 }
 #loading{
+  transform: translate(350px,-200px);
   position: absolute;
   top: 500px;
   left: 250px;
@@ -255,7 +256,6 @@ svg #titletext path{
   from{transform:rotate(0deg);}
   to{transform: rotate(360deg);}
 }
-
 
 :root {
 

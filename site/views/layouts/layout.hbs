@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Price Tracker</title>
+                <link rel="stylesheet" href ="/stylesheets/404.css">
+
         <link rel="stylesheet" href ="/stylesheets/profile.css">
         <link rel="stylesheet" href ="/stylesheets/style.css">
         <link rel="stylesheet" href ="/stylesheets/loggedin.css">
@@ -35,6 +37,100 @@
             
             {{/if}}
         </div>
+
+
+        <form action="/login" method="post">
+            <div id="login" class="modal">
+                <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">×</span>
+                <div class="modal-content animate">
+                    <div class="container">
+                        <img src="images/logo.svg" alt="loginpic" />
+                        <div class="form-input">
+                            <input type="text" id="username" name="username" placeholder="username" />
+                            <input type="password" id="password" name="password" placeholder="password" />
+                        </div>
+                        <div class="loginbutt">
+                            <button type="submit">Login</button>
+                            <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
+                            <span class="pass">Forgot
+                                <a href="#">password?</a>
+                            </span>
+                            {{# if success }}
+                            <section class="success">
+                                <h2>Successful Validation!</h2>
+                            </section>
+                            {{ else }} {{# if errors }}
+                            
+                            <!--section class="errors">
+                                        <ul>
+                                            {{# each errors }}
+                                                <li>{{ this.msg }}</li>
+                                            {{/each}}
+                                        </ul>
+                                    </section-->
+                            {{/if}} {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form action="/sumbit" method="post">
+            <div id="register" class="modal">
+                <span onclick="document.getElementById('register').style.display='none'" class="close" title="Close Modal">×</span>
+                <div class="modal-content animate">
+                    <div class="container">
+                        <div class="register-form">
+                            <h1>Register User</h1>
+                            <input type="text" id="name" name="name" placeholder="put name here" />
+                            <label for="username">
+                                <input type="text" id="usernameR" name = "usernameR" placeholder="Username" minlength="3" required>
+                                <ul class="input-requirements">
+                                    <li>At least 3 characters long</li>
+                                    <li>Must only contain letters and numbers (no special characters)</li>
+                                </ul>
+                            </label>
+                            <input type="email" id="email" name="email" placeholder="email here" />
+                            <label for="password">
+                                <input type="password" id="passwordR" name="passwordR" placeholder="password here" maxlength="100" minlength="8" required>
+
+                                <ul class="input-requirements">
+                                    <li>Between 8 and 100 characters </li>
+                                    <li>Contain at least 1 number</li>
+                                    <li>Contains at least 1 lowercase letter</li>
+                                    <li>Contains at least 1 uppercase letter</li>
+                                    <li>Contains a special character (!$%@)</li>
+                                </ul>
+                            </label>
+                            <label for="password_repeat">
+                                <input type="password" id="password_repeat" placeholder="confirm password" maxlength="100" minlength="8" required>
+                            </label>
+                        </div>
+
+                        <div class="submitbutt">
+                            <input type="submit" value="Submit">
+
+                            <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
+
+                            {{# if success }}
+                            <section class="success">
+                                <h2>Successful Validation!</h2>
+                            </section>
+                            {{ else }} {{# if errors }}
+                            <section class="errors">
+                                <ul>
+                                    {{# each errors }}
+                                    <li>{{ this.msg }}</li>
+                                    {{/each}}
+                                </ul>
+                            </section>
+                            {{/if}} {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <script src="/javascripts/check.js"></script>
 
         {{{ body }}}
     </body>
