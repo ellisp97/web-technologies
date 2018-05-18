@@ -1,26 +1,26 @@
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body{
   margin: 0px;
   padding: 0px;
   font-family: sans-serif;
   background-color: thistle;
 }
+
 .container{
-  width: 500px;
-  min-height: 600px;
+  position: relative;
+  top: 50%;
+  width: 40%;
+  min-width: 400px;
+  min-height:500px;
+  height: 65%;
   text-align: center;
   background-color: thistle;
   margin: auto;
   border: 3px solid #f1f1f1;
-}
-
-button {
-    background-color: #468803;
-    color: white;
-    cursor: pointer;
-    padding: 14px;
-    margin: 8px 0;
-    border: none;
-    width: 100%;
 }
 
 button:hover {
@@ -33,51 +33,15 @@ button:hover {
   margin: 10px 0px;
 }
 
-.form-input input{
+input{
   height: 50px;
-  width: 498px;
-  margin-top: 10px;
-  margin-bottom: 40px;
+  width: auto;
   text-align: center;
 }
 
-.loginbutt span.pass {
-  float: right;
-  margin-top: 70px;
+.loginbutt{
+  margin-top: 40px;
   font-size: 20px;
-}
-
-.main-form{
-  top: -1200px;
-  height: 300px;
-  width: 1400px;
-  left: 430px;
-  position: relative;
-  border: black;
-  background-color: black;
-}
-.main-input{
-  height: 80%;
-  position: relative;
-  top: 25px;
-  margin: 20px 20px 20px 15px;
-  padding: 0px 0;
-  background-color: darkgray;
-}
-
-.register-form {
-  margin-top: 50px;
-  margin: 10px 10px;
-  padding: 2px 0;
-}
-
-.register-form input{
-  padding: 10px 0;
-  text-align: center;
-}
-
-.submitbutt {
-  margin-top: 50px;
 }
 
 .modal {
@@ -88,7 +52,6 @@ button:hover {
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
@@ -136,19 +99,6 @@ button:hover {
     to {transform: scale(1)}
 }
 
-.page-header{
-  margin-top: 0px;
-}
-
-.errors {
-  background: #e79892;
-  padding: 5px;
-  margin-bottom: 10px;
-  min-width: 200px;
-  display: inline-block;
-  border: 1px solid #e74c3c;
-}
-
 .errors ul {
   margin: 0;
   padding: 0;
@@ -158,15 +108,6 @@ button:hover {
 .success {
   background: #80cca0;
   padding: 5px;
-}
-
-.header {
-  position: absolute;
-  left:500px;
-  top:50px;
-}
-.header input{
-  font-size: 50pt;
 }
 
 
@@ -202,10 +143,6 @@ ul{
   color: thistle;
 }
 
-
-
-
-
 svg #titletext path{
   fill: thistle !important;
   stroke: #000 !important;
@@ -213,14 +150,20 @@ svg #titletext path{
   animation:at 3000ms;
 }
 
-#zoom{
-  position: absolute;
-  top: 200px;
-  left:550px;
+svg {
+  display: block;
+  margin: auto;
 }
+
+#zoom{
+  position: relative;
+  width: 60%;
+  height: 60%;
+}
+
 #loading{
   transform: translate(350px,-200px);
-  position: absolute;
+  position: relative;
   top: 500px;
   left: 250px;
 }
@@ -257,67 +200,53 @@ svg #titletext path{
   to{transform: rotate(360deg);}
 }
 
-:root {
-
-  /* Borders */
-  --fh-border-radius: 3px;
-  --fh-border-width: 1px;
-  --fh-border-style: solid;
-  --fh-border-color: rgb(200, 200, 200);
-
-  --fh-input-bg-color: rgb(250,250,250);
-  --fh-focus-bg-color: var(--fh-input-bg-color);
-  --fh-focus-border-color: rgb(255, 0, 0);
-
-}
-
 .container input {
+  position: relative;
+  margin: 0;
   box-sizing: border-box;
   outline: none;
-  cursor: crosshair;
+  cursor: pointer;
   width: 100%;
-  margin-bottom: 10px;
-  box-sizing: border-box;
   border-radius: 5px;
   height: 50px;
-  color: var(--fh-font-color);
 }
 
+#login .container input{
+  margin:15px 0px;
+}
+#sell .container input{
+  margin:15px 0px;
+}
 
+.input-requirements {
+  min-width: 200px;
+}
 .input-requirements li.invalid {
-	color: #e74c3c;
+	color: #500800;
 }
 .input-requirements li.valid {
-	color: #2ecc71;
+	color: #00481e;
 }
 
 input[type="text"],
 {
-  width: var(--fh-input-width);
-  max-width: var(--fh-input-max-width);
-  padding: calc( var(--fh-input-height) / 5 );
-  background-color: var(--fh-input-bg-color);
-
-  border-radius: var(--fh-border-radius);
-  border-width: var(--fh-border-width);
-  border-style: var(--fh-border-style);
-  border-color: var(--fh-border-color);
+  background-color: rgb(250,250,250);
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: solid;
+  border-color:  rgb(200, 200, 200);
 }
 
-
-input:focus,
-textarea:focus {
-  background-color: var(--fh-focus-bg-color);
-  border-color: var(--fh-focus-border-color);
+input:focus .register-form,
+textarea:focus .register-form {
+  background-color:rgb(250,250,250);
+  border-color:  rgb(255, 0, 0);
 }
-
 
 input:not([type="submit"]):valid {
   border-color: #2ecc71;
 }
 
-
-/* Hide and show related .input-requirements when interacting with input */
 
 input:not([type="submit"]) + .input-requirements {
   overflow: hidden;
@@ -328,17 +257,30 @@ input:not([type="submit"]) + .input-requirements {
 input:not([type="submit"]):hover + .input-requirements,
 input:not([type="submit"]):focus + .input-requirements,
 input:not([type="submit"]):active + .input-requirements {
-  max-height: 900px; /*height to ease down onto */
+  max-height: 1100px; /*height to ease down onto */
   transition: max-height 1s ease-in;
 }
 
-
-
-
-
-
-
-
-
-
-
+button {
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+  height: 60px;
+  margin: 10px 0px;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  background: #219d218a;
+  border: 0;
+  border-bottom: 2px solid #219d218a;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px #219d218a;
+  box-shadow: inset 0 -2px #219d218a;
+}
+.button:active {
+  top: 1px;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

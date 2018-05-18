@@ -1,5 +1,6 @@
 "use strict";
 addEventListener('load', carousel);
+//unloadScrollBars();
 // function setup(){
 //   loadJSON('/all',gotData);
 //   console.log('running');
@@ -87,3 +88,8 @@ function carousel() {
   });
   navigate(Math.floor(Math.random() * amount)); //show the first element
 };
+
+function unloadScrollBars() {
+  document.documentElement.style.overflow = 'hidden';  // firefox, chrome
+  document.body.scroll = "no"; // ie only
+}

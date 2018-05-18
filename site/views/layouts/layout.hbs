@@ -11,9 +11,8 @@
         <script src="/javascripts/loadcolor.js" ></script>
         <script src="/javascripts/carousel.js" ></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
-
-        {{!-- just default style for now buttons will be created and inserted into form --}}
-    
+    {{!-- ressizing window --}}        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     </head>
      <body >{{!--onload="random_col()" --}}
         <div class="intro-form">
@@ -23,11 +22,6 @@
                     <li><a href="/login"> <i class="fas fa-home"></i>Home</a></li>
                     <li><a onclick="document.getElementById('sell').style.display='block'"> <i class="fa fa-shopping-bag"></i>Sell</a></li>
                     <li><a href="/logout"> <i class="fa fa-sign-out"></i>Logout</a></li>
-
-                    {{!-- <button class ="btn1" onclick="location.href='/profile'" type="button" ><span class="text">Profile</span> <i class="fas fa-user"></i></button>
-                    <button class ="btn2" onclick="location.href='/login'" type="button">Home <i class="fas fa-sign-in"></i></button>
-                    <button class ="btn3" onclick="document.getElementById('sell').style.display='block'" >Sell <i class="fas fa-shopping-nag"></i></button>
-                    <button class ="btn4" onclick="location.href='/logout'" type="button" >Logout <i class="fas fa-sign-out"></i></button> --}}
                 </ul>
             {{else}}
                 <ul class="main-menu">
@@ -52,23 +46,6 @@
                         <div class="loginbutt">
                             <button type="submit">Login</button>
                             <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
-                            <span class="pass">Forgot
-                                <a href="#">password?</a>
-                            </span>
-                            {{# if success }}
-                            <section class="success">
-                                <h2>Successful Validation!</h2>
-                            </section>
-                            {{ else }} {{# if errors }}
-                            
-                            <!--section class="errors">
-                                        <ul>
-                                            {{# each errors }}
-                                                <li>{{ this.msg }}</li>
-                                            {{/each}}
-                                        </ul>
-                                    </section-->
-                            {{/if}} {{/if}}
                         </div>
                     </div>
                 </div>
@@ -82,18 +59,29 @@
                     <div class="container">
                         <div class="register-form">
                             <h1>Register User</h1>
-                            <input type="text" id="name" name="name" placeholder="put name here" />
-                            <label for="username">
-                                <input type="text" id="usernameR" name = "usernameR" placeholder="Username" minlength="3" required>
+                            <label for="name">
+                                <input type="text" id="name" name = "name" placeholder="Enter Name" minlength="3" required>
                                 <ul class="input-requirements">
                                     <li>At least 3 characters long</li>
                                     <li>Must only contain letters and numbers (no special characters)</li>
                                 </ul>
                             </label>
-                            <input type="email" id="email" name="email" placeholder="email here" />
+                            <label for="username">
+                                <input type="text" id="usernameR" name = "usernameR" placeholder="Enter Username" minlength="3" required>
+                                <ul class="input-requirements">
+                                    <li>At least 3 characters long</li>
+                                    <li>Must only contain letters and numbers (no special characters)</li>
+                                </ul>
+                            </label>
+                            <label for="email">
+                                <input type="text" id="email" name = "email" placeholder="Enter Email" minlength="3" required>
+                                <ul class="input-requirements">
+                                    <li>At least 3 characters long</li>
+                                    <li>Must be a valid email</li>
+                                </ul>
+                            </label>
                             <label for="password">
-                                <input type="password" id="passwordR" name="passwordR" placeholder="password here" maxlength="100" minlength="8" required>
-
+                                <input type="password" id="passwordR" name="passwordR" placeholder="Enter Password" maxlength="100" minlength="8" required>
                                 <ul class="input-requirements">
                                     <li>Between 8 and 100 characters </li>
                                     <li>Contain at least 1 number</li>
@@ -103,34 +91,47 @@
                                 </ul>
                             </label>
                             <label for="password_repeat">
-                                <input type="password" id="password_repeat" placeholder="confirm password" maxlength="100" minlength="8" required>
+                                <input type="password" id="password_repeat" name="password_repeat" placeholder="Confirm Password" maxlength="100" minlength="8" required>
                             </label>
                         </div>
 
-                        <div class="submitbutt">
-                            <input type="submit" value="Submit">
-
+                        <div class="loginbutt">
+                            <button type="submit" value="Submit">Register</button>
                             <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
-
-                            {{# if success }}
-                            <section class="success">
-                                <h2>Successful Validation!</h2>
-                            </section>
-                            {{ else }} {{# if errors }}
-                            <section class="errors">
-                                <ul>
-                                    {{# each errors }}
-                                    <li>{{ this.msg }}</li>
-                                    {{/each}}
-                                </ul>
-                            </section>
-                            {{/if}} {{/if}}
                         </div>
                     </div>
                 </div>
             </div>
         </form>
         <script src="/javascripts/check.js"></script>
+
+        <form action="/sell" method="post">
+            <div id="sell" class="modal">
+            <span onclick="document.getElementById('sell').style.display='none'"
+            class="close" title="Close Modal">×</span>
+                <div class="modal-content animate">
+                    <div class="container">
+                        <div class="sell-header">
+                            <h1>check a product</h1>
+                        </div>
+                        <div class="sell-form">
+                            {{!-- <input type="text" id="prod_name" name="prod_name" placeholder="insert product name"/>
+                            <input type="price" id="prod_price" name="prod_price" placeholder="enter price in"/> --}}
+                            <input type="text" id="prod_link" name="prod_link" placeholder="enter product link"/>
+                        </div>
+                        {{!-- <div class="sell-desc">
+                            <input type="text" id="prod_desc" name="prod_desc" placeholder="enter product desc"/>
+                        </div> --}}
+                        <button type="submit">Add</button>
+                        <button type="button"
+                        onclick="document.getElementById('sell').style.display='none'"
+                        class="cancelbutt">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+
 
         {{{ body }}}
     </body>

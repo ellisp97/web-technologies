@@ -1,14 +1,21 @@
-{{!-- 
-<div class="header">
-    <h1> {{title}}</h1>
-    <h1>Welcome to {{title}}</h1>
-</div>  --}}
+{{!--Logo SVG animation --}}
+<div id="faillogin" class="modal">
+    <span onclick="document.getElementById('faillogin').style.display='none'" class="close" title="Close Modal">×</span>
+    <div class="modal-content animate">
+        <div class="container">
+            <img src="images/logo.svg" alt="loginpic" />
+            <div class="loginbutt">
+                <button type="button" onclick="document.getElementById('faillogin').style.display='none'" class="cancelbutt">Try Again</button>
+                <h1>You Username or Password was incorrect</h1>
+                <button type="button" onclick="document.getElementById('faillogin').style.display='none',document.getElementById('login').style.display='none'" class="cancelbutt">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-
-
-<svg id="zoom" height="1000" width="1000" viewBox='0 0 1000 1000' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="titletext" transform="translate(50,300) scale(0.5)">
+<svg id="zoom" height="800" width="1400" viewBox='0 0 1400 800' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="titletext" transform="translate(0,300) scale(0.7)">
         <g aria-label="shoppingTrack" style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
             id="flowRoot4082">
             <path d="m 82.944,-73.92 v -0.768 q 0,-5.376 4.032,-5.376 3.84,0 3.84,5.376 v 13.248 q 0,5.184 -3.84,5.184 -3.456,0 -4.032,-4.416 -0.768,-6.528 -7.68,-10.368 -6.912,-3.84 -17.856,-3.84 -10.752,0 -17.856,4.224 -7.104,4.032 -7.104,10.176 0,10.944 25.152,13.248 7.296,0.768 12.672,1.92 5.568,1.152 11.904,3.84 6.336,2.496 9.792,7.488 3.456,4.8 3.456,11.712 0,10.944 -10.752,18.24 -10.56,7.104 -26.88,7.104 -18.432,0 -30.144,-10.368 v 2.112 Q 27.648,0 23.808,0 19.776,0 19.776,-5.184 V -21.12 q 0,-5.184 4.032,-5.184 3.84,0 3.84,4.224 v 1.344 q 0,6.528 8.64,11.328 8.64,4.608 20.928,4.608 12.672,0 21.12,-4.992 8.448,-4.992 8.448,-12.672 0,-13.824 -29.952,-17.28 -6.72,-0.768 -11.52,-1.728 -4.8,-0.96 -10.368,-3.072 -5.376,-2.304 -8.256,-6.336 -2.88,-4.224 -2.88,-10.176 0,-9.408 9.216,-15.552 9.408,-6.144 23.616,-6.144 16.32,0 26.304,8.832 z"
@@ -55,14 +62,11 @@
     <g>
         <path stroke="" id="motionPath" d="M30 10 C 50 50, 100 100, 700 100" stroke="black" stroke-width="5" fill="none" />
     </g>
-    <g id="linemotion" transform="translate(65,100) ">
+    <g id="linemotion" transform="translate(350,100) ">
         <image id="logo" height="200" width="200" xlink:href="images/logo.svg" />
     </g>
-    {{!--
-    <g transform="translate( 0 12.5 ) translate( 100 100) scale( 1.5 ) translate( -100 -100)"> --}}
-
-        <animateMotion xlink:href="#logo" dur="2s" begin="0s" fill="freeze" repeatCount="0">
+        <animateMotion xlink:href="#logo" dur="1.5s" begin="0s" fill="freeze" repeatCount="0">
             <mpath xlink:href="#motionPath" />
         </animateMotion>
 </svg>
-
+<script fail='{{{fail}}}' id='fail-script' src='/javascripts/fail.js'></script>

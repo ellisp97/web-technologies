@@ -5,6 +5,7 @@ var passport = require('passport');
 var cheerio = require('cheerio');
 var request = require('request');
 var util = require('util');
+var fail = false;
 
 
 const saltRounds = 10;
@@ -37,8 +38,10 @@ router.get('/', function(req, res, next) {
   if(req.isAuthenticated()){
     res.redirect('/login');
   }else{
-    res.render('index', { title: 'Home Screen'});
+    console.log("you are in the get /request");
+    res.render('index', { title: 'Home Screen', fail:fail});
   }
+
 });
 
 
@@ -46,20 +49,34 @@ function authenticationMiddleware(){
   return (req,res,next) => {
     console.log(`
       req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-
+    console.log("authenticationmiddleware");
     if (req.isAuthenticated()) return next (
       );
-    
-    res.redirect('/');
+    // console.log("you are not allowed here");
   }
+
 }
+
+/* GET home page. */
+// router.get('/#fail', function(req, res, next) {
+//   console.log(req.user);
+//   console.log(req.isAuthenticated());
+//   if(req.isAuthenticated()){
+//     res.redirect('/login');
+//   }else{
+//     console.log("you are in the fail get /request");
+//     res.render('index', { title: 'Home Screen', fail:true});
+//   }
+// });
+
 
 
 /* GET Logged In page ? */
 router.get('/login', authenticationMiddleware(),
   function(req, res, next) {
+  var userid = req.session.passport.user.user_id;
+
     console.log('hello')
-    var userid = req.session.passport.user;
     console.log(userid);
     db.all(`SELECT username, email FROM userData WHERE user_id =?`, [userid], function(err,results,fields){
       var username = results[0].username;
@@ -84,99 +101,46 @@ router.post('/logout', function(req,res) {
   res.redirect('/');
 });
 
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/login',
-  failureRedirect: '/'
-}));
+// router.post('/login', passport.authenticate('local', {
+//   successRedirect: '/login',
+//   failureRedirect: '/#fail'
+// }));
 
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if(err) {
+      console.error(err);
+      return next(err);
+    }
+    if(!user){
+      //DO SOMETHING COOL
+      console.log("here")
+      fail = true;
+      return res.redirect('/');
+    }
+    req.logIn(user, function(err) {
+      fail = false;
+      if(err){
+        console.error(err);
+        return next(err);
+      }
+      return res.redirect('/login');
+    });
+  })(req, res, next);
+});
 
 
 router.get('/profile', authenticationMiddleware(),
   function(req, res, next) {
-  var userid = req.session.passport.user;
+  var userid = req.session.passport.user.user_id;
 
-  console.log('this is user id');
-  console.log(req.user.user_id);
-  console.log(userid);
-
-  var get_user_data = function(userid, cb) {
-    var query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
-    db.get(query, [userid], function(err, row) {
-      if(err){
-        console.error(err);
-        cb("error", null);
-      } else{
-        var user_data = {userid:userid, username:row.username, email:row.email, watched_ids:row.watched_product_ids};
-        cb(null, user_data);
-      }
-    });
-  };
-
-  var get_pd_array = function(id, cb){
-    var query = `SELECT prod_name, prod_price_history, date_update_history FROM productData where prod_id =?`;
-    db.get(query, [id], function(err, row) {
-      console.log(row);
-      if(err){
-        console.error(err);
-        cb("error", null);
-      }else{
-        cb(null, row);
-      }
-    });
-  };
-
-
-
-  var get_product_data_async = async function(prod_ids, cb){
-    var product_data_array = [];
-    var watched_id_string = prod_ids;
-    var watched_ids = watched_id_string.split(",");
-    for (id of watched_ids){
-      var pd_row = await get_pd_array_async(id);
-      product_data_array.push(pd_row);
-    };
-    console.log(product_data_array);
-    return product_data_array;
-  };
-
-  const get_user_data_async = util.promisify(get_user_data);
-  const get_pd_array_async = util.promisify(get_pd_array);
-
-  (async() => {
-    let user_data, product_data_array;
-    try {
-      user_data = await get_user_data_async(userid);
-      product_data_array = await get_product_data_async(user_data.watched_ids);
-    }
-    catch (err) {
-      return console.error(err);
-    }
-    // return res.send(product_data_array);
-    return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email});
-  })();
-
-  // db.get(`SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`, [userid], function(err,result) {
-  //   if(err){
-  //     console.error(err);
-  //   }
-  //
-  //   var username = result.username;
-  //   var email = result.email;
-  //   var watched_id_string = result.watched_product_ids;
-  //   var watched_ids = watched_id_string.split(",");
-  //   console.log(watched_ids);
-  //   var query = `SELECT prod_name, prod_price_history, date_update_history FROM productData where prod_id =?`;
-  //   console.log(query);
-  //   db.get(query, [watched_ids], function(error, rows) {
-  //     if(error){
-  //       console.error(err);
-  //     }
-  //     console.log("rows");
-  //     console.log(rows);
-  //   })
-  //   res.render('profile', { title: 'YOUR PROFILE', userid: userid, username: username, email:email});
-  //
-  // });
+  db.all(`SELECT username, email FROM userData WHERE user_id =?`, [userid], function(err,results,fields){
+    var username = results[0].username;
+    var email = results[0].email;
+    console.log(email);
+    console.log(username);
+    res.render('profile', { title: 'LOGGED IN',userid: userid, username: username, email:email});
+  });
 });
 
 

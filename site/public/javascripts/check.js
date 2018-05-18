@@ -1,15 +1,6 @@
-/* ----------------------------
 
-	CustomValidation prototype
-
-	- Keeps track of the list of invalidity messages for this input
-	- Keeps track of what validity checks need to be performed for this input
-	- Performs the validity checks and sends feedback to the front end
-
----------------------------- */
-
-function CustomValidation(input) {
-	this.invalidities = [];
+function realTimeValidation(input) {
+	this.Invalids = [];
 	this.validityChecks = [];
 
 	//add reference to the input node
@@ -20,12 +11,12 @@ function CustomValidation(input) {
 	this.registerListener();
 }
 
-CustomValidation.prototype = {
+realTimeValidation.prototype = {
 	addInvalidity: function(message) {
-		this.invalidities.push(message);
+		this.Invalids.push(message);
 	},
-	getInvalidities: function() {
-		return this.invalidities.join('. \n');
+	getInvalids: function() {
+		return this.Invalids.join('. \n');
 	},
 	checkValidity: function(input) {
 		for ( var i = 0; i < this.validityChecks.length; i++ ) {
@@ -46,27 +37,27 @@ CustomValidation.prototype = {
 					requirementElement.classList.add('valid');
 				}
 
-			} // end if requirementElement
-		} // end for
+			} 
+		} 
 	},
-	checkInput: function() { // checkInput now encapsulated
+	checkInput: function() {
 
-		this.inputNode.CustomValidation.invalidities = [];
+		this.inputNode.realTimeValidation.Invalids = [];
 		this.checkValidity(this.inputNode);
 
-		if ( this.inputNode.CustomValidation.invalidities.length === 0 && this.inputNode.value !== '' ) {
+		if ( this.inputNode.realTimeValidation.Invalids.length === 0 && this.inputNode.value !== '' ) {
 			this.inputNode.setCustomValidity('');
 		} else {
-			var message = this.inputNode.CustomValidation.getInvalidities();
+			var message = this.inputNode.realTimeValidation.getInvalids();
 			this.inputNode.setCustomValidity(message);
 		}
 	},
-	registerListener: function() { //register the listener here
+	registerListener: function() { 
 
-		var CustomValidation = this;
+		var realTimeValidation = this;
 
 		this.inputNode.addEventListener('keyup', function() {
-			CustomValidation.checkInput();
+			realTimeValidation.checkInput();
 		});
 
 
@@ -76,17 +67,24 @@ CustomValidation.prototype = {
 
 
 
-/* ----------------------------
+var nameValidityChecks = [
+	{
+		isInvalid: function(input) {
+			return input.value.length < 3;
+		},
+		invalidityMessage: 'This input needs to be at least 3 characters',
+		element: document.querySelector('label[for="name"] .input-requirements li:nth-child(1)')
+	},
+	{
+		isInvalid: function(input) {
+			var illegalCharacters = input.value.match(/[^a-zA-Z0-9]/g);
+			return illegalCharacters ? true : false;
+		},
+		invalidityMessage: 'Only letters and numbers are allowed',
+		element: document.querySelector('label[for="name"] .input-requirements li:nth-child(2)')
+	}
+];
 
-	Validity Checks
-
-	The arrays of validity checks for each input
-	Comprised of three things
-		1. isInvalid() - the function to determine if the input fulfills a particular requirement
-		2. invalidityMessage - the error message to display if the field is invalid
-		3. element - The element that states the requirement
-
----------------------------- */
 
 var usernameValidityChecks = [
 	{
@@ -103,6 +101,24 @@ var usernameValidityChecks = [
 		},
 		invalidityMessage: 'Only letters and numbers are allowed',
 		element: document.querySelector('label[for="username"] .input-requirements li:nth-child(2)')
+	}
+];
+
+var emailValidityChecks = [
+	{
+		isInvalid: function(input) {
+			return input.value.length < 3;
+		},
+		invalidityMessage: 'This input needs to be at least 3 characters',
+		element: document.querySelector('label[for="email"] .input-requirements li:nth-child(1)')
+	},
+	{
+		isInvalid: function(input) {
+			var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(email);
+		},
+		invalidityMessage: 'Valid Emailis Required',
+		element: document.querySelector('label[for="email"] .input-requirements li:nth-child(2)')
 	}
 ];
 
@@ -144,41 +160,38 @@ var passwordValidityChecks = [
 	}
 ];
 
-var passwordRepeatValidityChecks = [
+var confirmPasswordValidityChecks = [
 	{
 		isInvalid: function() {
-			return passwordRepeatInput.value != passwordInput.value;
+			return confirmPasswordInput.value != passwordInput.value;
 		},
 		invalidityMessage: 'This password needs to match the first one'
 	}
 ];
 
 
-/* ----------------------------
 
-	Setup CustomValidation
-
-	Setup the CustomValidation prototype for each input
-	Also sets which array of validity checks to use for that input
-
----------------------------- */
-
+var nameInput = document.getElementById('name');
 var usernameInput = document.getElementById('usernameR');
+var emailInput = document.getElementById('email');
 var passwordInput = document.getElementById('passwordR');
-var passwordRepeatInput = document.getElementById('password_repeat');
+var confirmPasswordInput = document.getElementById('password_repeat');
 
-console.log(usernameInput);
-console.log(passwordInput);
-console.log(passwordRepeatInput);
 
-usernameInput.CustomValidation = new CustomValidation(usernameInput);
-usernameInput.CustomValidation.validityChecks = usernameValidityChecks;
+nameInput.realTimeValidation = new realTimeValidation(nameInput);
+nameInput.realTimeValidation.validityChecks = nameValidityChecks;
 
-passwordInput.CustomValidation = new CustomValidation(passwordInput);
-passwordInput.CustomValidation.validityChecks = passwordValidityChecks;
+usernameInput.realTimeValidation = new realTimeValidation(usernameInput);
+usernameInput.realTimeValidation.validityChecks = usernameValidityChecks;
 
-passwordRepeatInput.CustomValidation = new CustomValidation(passwordRepeatInput);
-passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatValidityChecks;
+emailInput.realTimeValidation = new realTimeValidation(emailInput);
+emailInput.realTimeValidation.validityChecks = usernameValidityChecks;
+
+passwordInput.realTimeValidation = new realTimeValidation(passwordInput);
+passwordInput.realTimeValidation.validityChecks = passwordValidityChecks;
+
+confirmPasswordInput.realTimeValidation = new realTimeValidation(confirmPasswordInput);
+confirmPasswordInput.realTimeValidation.validityChecks = confirmPasswordValidityChecks;
 
 
 
@@ -198,7 +211,7 @@ var form = document.getElementById('register');
 function validate() {
 	for (var i = 0; i < inputs.length; i++) {
 		console.log(inputs[i]);
-		inputs[i].CustomValidation.checkInput();
+		inputs[i].realTimeValidation.checkInput();
 	}
 }
 
