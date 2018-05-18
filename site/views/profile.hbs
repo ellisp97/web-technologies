@@ -7,19 +7,15 @@
 
 <div class="card">
     <h1>Profile</h1>
-    <img src = "frog.jpg" alt = "frog">
     <p class="username">{{username}} : {{userid}} </p>
     <p class = "email">{{email}}</p>
     <p>University of Bristol</p>
     <p><button>Contact</button></p>
 </div>
 
-<div class="displayChart">
-    <canvas id="myChart" width="550" height="400"></canvas>
+<div class="displayChart" style="">
+    <canvas id="myChart"></canvas>
 </div>
-{{!-- node modules coudlnt load --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<script src="/javascripts/profile.js" ></script>
 
 <div class="graphbuttons">
     <button onclick="dispFunction()">Pie Chart</button>
@@ -28,10 +24,11 @@
 </div>
 
 <div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
-  <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+  <button class="dropbtn" id="redraw_butt">Select from the dropdown to display other graphs (up to 5 will be shown)</button>
+  <div id="dropdown_container" class="dropdown-content">
   </div>
 </div>
+
+{{!-- node modules coudlnt load --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script id="profile-chart-script" src="/javascripts/profile.js" data-prod_data = '{{{prod_data}}}'></script>

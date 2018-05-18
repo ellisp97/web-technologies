@@ -16,6 +16,47 @@ let db = new sqlite3.Database('./db/users.db');
 //db.run('CREATE TABLE userData(user_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,username TEXT, email TEXT, password TEXT)');// --- INITIAL TABLE HAS BEEN MADE
 //db.run('CREATE TABLE productData(product_id INTEGER PRIMARY KEY AUTOINCREMENT, prod_name TEXT, prod_price PRICE, prod_url TEXT, user_id INTEGER');// --- INITIAL PRODUCT TABLE HAS BEEN MADE
 
+var get_user_data = function(userid, cb) {
+  var query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
+  db.get(query, [userid], function(err, row) {
+    if(err){
+      console.error(err);
+      cb("error", null);
+    } else{
+      var user_data = {userid:userid, username:row.username, email:row.email, watched_ids:row.watched_product_ids};
+      cb(null, user_data);
+    }
+  });
+};
+
+var get_pd_row = function(id, cb){
+  var query = `SELECT * FROM productData where prod_id =?`;
+  db.get(query, [id], function(err, row) {
+    console.log(row);
+    if(err){
+      console.error(err);
+      cb("error", null);
+    }else{
+      cb(null, row);
+    }
+  });
+};
+
+var get_product_data_async = async function(prod_ids, cb){
+  var product_data_array = [];
+  var watched_id_string = prod_ids;
+  var watched_ids = watched_id_string.split(",");
+  for (id of watched_ids){
+    var pd_row = await get_pd_row_async(id);
+    product_data_array.push(pd_row);
+  };
+  console.log(product_data_array);
+  return product_data_array;
+};
+
+const get_user_data_async = util.promisify(get_user_data);
+const get_pd_row_async = util.promisify(get_pd_row);
+
 //output names to server
 db.serialize(function() {
   db.each(`SELECT Name as name,
@@ -74,48 +115,6 @@ router.get('/profile', authenticationMiddleware(), function(req, res, next) {
   console.log(req.user.user_id);
   console.log(userid);
 
-  var get_user_data = function(userid, cb) {
-    var query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
-    db.get(query, [userid], function(err, row) {
-      if(err){
-        console.error(err);
-        cb("error", null);
-      } else{
-        var user_data = {userid:userid, username:row.username, email:row.email, watched_ids:row.watched_product_ids};
-        cb(null, user_data);
-      }
-    });
-  };
-
-  var get_pd_array = function(id, cb){
-    var query = `SELECT prod_name, prod_price_history, date_update_history FROM productData where prod_id =?`;
-    db.get(query, [id], function(err, row) {
-      console.log(row);
-      if(err){
-        console.error(err);
-        cb("error", null);
-      }else{
-        cb(null, row);
-      }
-    });
-  };
-
-
-
-  var get_product_data_async = async function(prod_ids, cb){
-    var product_data_array = [];
-    var watched_id_string = prod_ids;
-    var watched_ids = watched_id_string.split(",");
-    for (id of watched_ids){
-      var pd_row = await get_pd_array_async(id);
-      product_data_array.push(pd_row);
-    };
-    console.log(product_data_array);
-    return product_data_array;
-  };
-
-  const get_user_data_async = util.promisify(get_user_data);
-  const get_pd_array_async = util.promisify(get_pd_array);
 
   (async() => {
     let user_data, product_data_array;
@@ -127,33 +126,13 @@ router.get('/profile', authenticationMiddleware(), function(req, res, next) {
       return console.error(err);
     }
     // return res.send(product_data_array);
-    return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email});
+    // res.cookie('data', JSON.stringify(product_data_array));
+    console.log(product_data_array);
+    console.log("^ pd aray");
+    var pd_array_json = JSON.stringify(product_data_array);
+    return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
   })();
-
-  // db.get(`SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`, [userid], function(err,result) {
-  //   if(err){
-  //     console.error(err);
-  //   }
-  //
-  //   var username = result.username;
-  //   var email = result.email;
-  //   var watched_id_string = result.watched_product_ids;
-  //   var watched_ids = watched_id_string.split(",");
-  //   console.log(watched_ids);
-  //   var query = `SELECT prod_name, prod_price_history, date_update_history FROM productData where prod_id =?`;
-  //   console.log(query);
-  //   db.get(query, [watched_ids], function(error, rows) {
-  //     if(error){
-  //       console.error(err);
-  //     }
-  //     console.log("rows");
-  //     console.log(rows);
-  //   })
-  //   res.render('profile', { title: 'YOUR PROFILE', userid: userid, username: username, email:email});
-  //
-  // });
 });
-
 
 router.post('/sumbit', function(req,res,next){
 

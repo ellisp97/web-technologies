@@ -155,6 +155,7 @@ function check_price(url_param, id, domain){
             var el = $(this);
             var price_text = el.text();
             //separate off the currency
+            console.log(price_text);
             price = price_text.split(price_text[0])[1];
             //save the price as a number
             price_num = Number(price);
