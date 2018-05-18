@@ -91,11 +91,16 @@ function authenticationMiddleware(){
     console.log(`
       req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
     console.log("authenticationmiddleware");
-    if (req.isAuthenticated()) return next (
-      );
+    if (req.isAuthenticated()){
+       return next(); 
+    }else {
+      console.log('bad login thing');
+      return res.redirect('/');
+    }
+
     // console.log("you are not allowed here");
-    res.redirect('/');
   }
+
 }
 
 /* GET home page. */
@@ -160,6 +165,7 @@ router.post('/login', function(req, res, next) {
       return res.redirect('/');
     }
     req.logIn(user, function(err) {
+      console.log("loggin in");
       fail = false;
       if(err){
         console.error(err);
@@ -167,7 +173,6 @@ router.post('/login', function(req, res, next) {
       }
       return res.redirect('/login');
     });
-    return res.redirect('/');
   })(req, res, next);
 });
 
