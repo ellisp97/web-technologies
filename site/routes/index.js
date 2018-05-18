@@ -53,8 +53,8 @@ function authenticationMiddleware(){
     if (req.isAuthenticated()) return next (
       );
     // console.log("you are not allowed here");
+    res.redirect('/');
   }
-
 }
 
 /* GET home page. */
@@ -126,6 +126,7 @@ router.post('/login', function(req, res, next) {
       }
       return res.redirect('/login');
     });
+    return res.redirect('/');
   })(req, res, next);
 });
 
