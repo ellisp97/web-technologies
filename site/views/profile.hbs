@@ -19,9 +19,10 @@
         <canvas id="myChart"></canvas>
     </div>
 </div>
+
 {{!-- node modules coudlnt load --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<script src="/javascripts/profile.js" ></script>
+<script id="profile-chart-script" src="/javascripts/profile.js" data-prod_data = '{{{prod_data}}}'></script>
 {{!--
 <div class="graphbuttons">
     <button onclick="dispFunction()">Pie Chart</button>

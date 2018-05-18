@@ -171,17 +171,29 @@ router.post('/login', function(req, res, next) {
 });
 
 
-router.get('/profile', authenticationMiddleware(),
-  function(req, res, next) {
-  var userid = req.session.passport.user.user_id;
+router.get('/profile', authenticationMiddleware(), function(req, res, next) {
+  console.log(req.session);
+  var userid = req.user.user_id;
+  console.log(req.user.user_id);
+  console.log(userid);
 
-  db.all(`SELECT username, email FROM userData WHERE user_id =?`, [userid], function(err,results,fields){
-    var username = results[0].username;
-    var email = results[0].email;
-    console.log(email);
-    console.log(username);
-    res.render('profile', { title: 'LOGGED IN',userid: userid, username: username, email:email});
-  });
+
+  (async() => {
+    let user_data, product_data_array;
+    try {
+      user_data = await get_user_data_async(userid);
+      product_data_array = await get_product_data_async(user_data.watched_ids);
+    }
+    catch (err) {
+      return console.error(err);
+    }
+    // return res.send(product_data_array);
+    // res.cookie('data', JSON.stringify(product_data_array));
+    console.log(product_data_array);
+    console.log("^ pd aray");
+    var pd_array_json = JSON.stringify(product_data_array);
+    return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
+  })();
 });
 
 
