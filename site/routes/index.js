@@ -5,6 +5,7 @@ var passport = require('passport');
 var cheerio = require('cheerio');
 var request = require('request');
 var util = require('util');
+var fail = false;
 
 
 const saltRounds = 10;
@@ -76,16 +77,55 @@ router.get('/', function(req, res, next) {
   console.log(req.user);
   console.log(req.isAuthenticated());
   if(req.isAuthenticated()){
-    res.render('loggedin', {title: 'Youre logged in'});
+    res.redirect('/login');
   }else{
-    res.render('index', { title: 'Home Screen'});
+    console.log("you are in the get /request");
+    res.render('index', { title: 'Home Screen', fail:fail});
   }
+
 });
+
+
+function authenticationMiddleware(){
+  return (req,res,next) => {
+    console.log(`
+      req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+    console.log("authenticationmiddleware");
+    if (req.isAuthenticated()) return next (
+      );
+    // console.log("you are not allowed here");
+  }
+
+}
+
+/* GET home page. */
+// router.get('/#fail', function(req, res, next) {
+//   console.log(req.user);
+//   console.log(req.isAuthenticated());
+//   if(req.isAuthenticated()){
+//     res.redirect('/login');
+//   }else{
+//     console.log("you are in the fail get /request");
+//     res.render('index', { title: 'Home Screen', fail:true});
+//   }
+// });
+
+
 
 /* GET Logged In page ? */
 router.get('/login', authenticationMiddleware(),
   function(req, res, next) {
-  res.render('loggedin', { title: 'LOGGED IN'});
+  var userid = req.session.passport.user.user_id;
+
+    console.log('hello')
+    console.log(userid);
+    db.all(`SELECT username, email FROM userData WHERE user_id =?`, [userid], function(err,results,fields){
+      var username = results[0].username;
+      var email = results[0].email;
+      console.log(email);
+      console.log(username);
+      res.render('loggedin', { title: 'LOGGED IN',userid: userid, username: username, email:email});
+    });
 });
 
 
@@ -102,75 +142,95 @@ router.post('/logout', function(req,res) {
   res.redirect('/');
 });
 
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/login',
-  failureRedirect: '/'
-}));
+// router.post('/login', passport.authenticate('local', {
+//   successRedirect: '/login',
+//   failureRedirect: '/#fail'
+// }));
 
-
-
-router.get('/profile', authenticationMiddleware(), function(req, res, next) {
-  console.log(req.session);
-  var userid = req.user.user_id;
-  console.log(req.user.user_id);
-  console.log(userid);
-
-
-  (async() => {
-    let user_data, product_data_array;
-    try {
-      user_data = await get_user_data_async(userid);
-      product_data_array = await get_product_data_async(user_data.watched_ids);
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if(err) {
+      console.error(err);
+      return next(err);
     }
-    catch (err) {
-      return console.error(err);
+    if(!user){
+      //DO SOMETHING COOL
+      console.log("here")
+      fail = true;
+      return res.redirect('/');
     }
-    // return res.send(product_data_array);
-    // res.cookie('data', JSON.stringify(product_data_array));
-    console.log(product_data_array);
-    console.log("^ pd aray");
-    var pd_array_json = JSON.stringify(product_data_array);
-    return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
-  })();
+    req.logIn(user, function(err) {
+      fail = false;
+      if(err){
+        console.error(err);
+        return next(err);
+      }
+      return res.redirect('/login');
+    });
+  })(req, res, next);
 });
+
+
+router.get('/profile', authenticationMiddleware(),
+  function(req, res, next) {
+  var userid = req.session.passport.user.user_id;
+
+  db.all(`SELECT username, email FROM userData WHERE user_id =?`, [userid], function(err,results,fields){
+    var username = results[0].username;
+    var email = results[0].email;
+    console.log(email);
+    console.log(username);
+    res.render('profile', { title: 'LOGGED IN',userid: userid, username: username, email:email});
+  });
+});
+
+
 
 router.post('/sumbit', function(req,res,next){
 
-  // req.check('name', 'Name too short').isLength({min:2}); //validation requirements
-  // req.check('username', 'Username must be more than 4 characters').isLength({min:4});
-  // req.check('email', 'Invalid email').isEmail();
-  // req.check('password', 'Password must be more than 4 characters').isLength({min:4}).equals(req.body.password2);
+  req.check('email', 'Invalid email').isEmail();
 
   var name = req.body.name;
-  var username = req.body.username;
+  var username = req.body.usernameR;
   var email = req.body.email;
-  var password = req.body.password;
+  var password = req.body.passwordR;
 
-  var errors = req.validationErrors();
-  if(errors){
-    // req.session.errors = errors;
-    req.session.success = false;
-    console.log('FAIL');
-    res.render('index', { title: 'Form Validation', success: req.session.success});// errors:req.session.errors});
-  } else{
-    //req.session.success =true;
-    console.log('SUCCESS');
-    bcrypt.hash(password, saltRounds, function(err,hash){ //hash password
-      db.run(`INSERT INTO userData (name,username,email,password) VALUES(?,?,?,?)`, [name,username,email,hash], function(err) {
-        if (err) {
-          return console.log(err.message);
-        } else {
-          const user_id = `${this.lastID}`;
-          req.login(user_id, function(err){
-             console.log(user_id);
-             res.redirect('/login');
-           });
+  // db.serialize(()=> {
+    let userExists = "SELECT * FROM userData WHERE username = ?";
+    console.log(username);
+    db.all(userExists,[username], function(err,rows){
+      if (err){throw(err);}
+      console.log(rows);
+      if(!Array.isArray(rows)||!rows.length||rows==undefined){
+        var errors = req.validationErrors();
+        if(errors){
+          // req.session.errors = errors;
+          req.session.success = false;
+          console.log('FAIL');
+          res.render('index', { title: 'Form Validation', success: req.session.success});// errors:req.session.errors});
+        } else{
+          //req.session.success =true;
+          console.log('SUCCESS');
+          bcrypt.hash(password, saltRounds, function(err,hash){ //hash password
+            db.run(`INSERT INTO userData (name,username,email,password) VALUES(?,?,?,?)`, [name,username,email,hash], function(err) {
+              if (err) {
+                return console.log(err.message);
+              } else {
+                const user_id = `${this.lastID}`;
+                req.login(user_id, function(err){
+                   console.log(user_id);
+                   res.redirect('/login');
+                 });
+              }
+            });
+          });
         }
-      });
-    });
-  }
+      } else{
+        console.log('username already exists');
+      }
+    // });
+  });
 });
-
 
 router.post('/sell', function(req,res,next){
 
@@ -188,40 +248,6 @@ router.post('/sell', function(req,res,next){
     var currency = '£';
     var title_text;
 
-    // if (!error && response.statusCode == 200) {
-    //   var $ = cheerio.load(html);
-    //   $('span#priceblock_ourprice').each(function(i, element) {
-    //     var el = $(this);
-    //     var price_text = el.text();
-    //     //TODO: add error checking for the database and currency type
-    //     if(price_text[0] == "£"){
-    //       price = price_text.split("£")[1];
-    //       currency = "£";
-    //     }
-    //     if(price_text[0] == "$"){
-    //       price = price_text.split("$")[1];
-    //       currency = "$";
-    //     }
-    //     if(price_text[0] == "€"){
-    //       price = price_text.split("€")[1];
-    //       currency = "€";
-    //     }
-    //     price_num = Number(price);
-    //     console.log(price_num);
-    //   });
-
-    //   $('span#productTitle').each(function(i, element) {
-    //     var el = $(this);
-    //     title_text = el.text();
-    //   });
-
-    // is this in the database
-    // get id from link
-    // check if its in database
-      //if is output link to user
-      //take to home login page with carousel and graph price history
-      //need sumbit for them to register buying to store in prfile
-    // else
     db.run(`INSERT INTO productData(prod_name,prod_currency, prod_price, prod_url, user_id) VALUES(?,?,?,?,?)`, [title_text,currency,price_num,url,userid], function(err) {
       if (err) {
         return console.log(err.message);
@@ -230,27 +256,6 @@ router.post('/sell', function(req,res,next){
       res.redirect('/login');
     });
 
-  // if(errors){
-  //   req.session.errors = errors;
-  //   req.session.success = false;
-  //   console.log('FAIL');
-  //   res.render('index', { title: 'Form Validation', success: req.session.success, errors:req.session.errors});
-  // } else{
-  //   //req.session.success =true;
-  //   console.log('SUCCESS');
-  //     db.run(`INSERT INTO productData (name,username,email,password) VALUES(?,?,?,?)`, [name,username,email,hash], function(err) {
-  //       if (err) {
-  //         return console.log(err.message);
-  //       } else {
-  //         const user_id = `${this.lastID}`;
-  //         req.login(user_id, function(err){
-  //            console.log(user_id);
-  //            res.redirect('/login');
-  //          });
-  //       }
-  //     });
-  //   });
-  // }
 });
 
 
@@ -261,49 +266,6 @@ passport.serializeUser(function(user_id, done){
 passport.deserializeUser(function(user_id, done){
   done(null, user_id);
 });
-
-
-function authenticationMiddleware(){
-  return (req,res,next) => {
-    console.log(`
-      req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-
-    if (req.isAuthenticated()) return next (
-      );
-
-    res.redirect('/');
-  }
-}
-
-
-/*router.get('/test/:id', function(req,res,next){
-  res.render('test', {output: req.params.id});
-});
-
-router.post('/test/submit', function(req,res,next){
-  var id = req.body.id;
-  res.redirect('/test/' + id);
-;})*/
-
-/* ASYNCHRONOUS REAL TIME USERNAME CHECKER
-async function getSimilarUser(username) {
-	let response = await fetch(`https://happy-css.com/api/users?limit=1&name=${username}`)
-	return response.json()
-}
-
-async function isUserValid(target) {
-	let username = target.value
-	let users = await getSimilarUser(username)
-	if (users.length) {
-		let existingUsername = users[0].name
-		if (existingUsername == username) {
-			target.setCustomValidity(`The user "${username}" already exists`)
-			return false
-		}
-	}
-	target.setCustomValidity('')
-	return true
-}*/
 
 
 module.exports = router;

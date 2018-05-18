@@ -1,55 +1,51 @@
-#regcontainer {
-    height: 250px;
-    width: 800px;
-    position: absolute;
-    left: 450px;
-    top: 400px;
-    color: thistle;
-    padding: 10px 0;
-    border: 5px solid #ff0099;
-    text-align: center;
-    background-color: #000;
+#right-bar {
+    height: 100%;
+    width: 30%;
+    float: right;
+    min-width: 300px;
+    margin-right: 5%;
+}
+
+#left-bar {
+    height: 100%;
+    width: 60%;
+    float: left;
+    min-width: 300px;
 }
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-    max-width: 500px;
-    min-width: 150px;
-    height: 300px;
-    position: absolute;
-    top: 250px;
-    left: 1000px;
+    position: relative;
+    width: 50%;
     margin: auto;
+    margin-bottom: 20%;
     text-align: center;
 }
 
 .card2 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-    /* max-width: 800px; */
-    width: 500px;
-    height: 300px;
-    position: absolute;
-    top:250px;
-    left: 450px;
+    position: relative;
     margin: auto;
     text-align: center;
 }
 
-.username {
-    color: grey;
-    font-size: 18px;
+#displayChart {
+    display: none;
 }
 
-button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
+
+#myChart {
+    position: relative;
     width: 100%;
+    min-width: 500px;
+    max-width: 800px;
+    color: black;
+    border: 5px solid thistle;
+}
+
+
+.username {
+    color: grey;
     font-size: 18px;
 }
 
@@ -85,44 +81,10 @@ button:hover, a:hover {
     cursor: pointer;
 }
 
-.dropdown {
-    position: absolute;
-    left: 1050px;
-    top:  600px;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 100px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-
 .graphbuttons {
-    position: absolute;
+    position: relative;
     left:480px;
     top:400px;
-
 }
 
 .graphbuttons button {

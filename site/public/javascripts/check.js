@@ -1,147 +1,217 @@
-function CustomValidation(input){
-    //arrays for invalid parts user has sumbitted and one for checks to be compared
-    this.invalidities = [];
-    this.validityChecks = [];
 
-    //add reference to the input node
+function realTimeValidation(input) {
+	this.Invalids = [];
+	this.validityChecks = [];
+
+	//add reference to the input node
 	this.inputNode = input;
+	console.log(this.inputNode);
+
+	//trigger method to attach the listener
 	this.registerListener();
 }
 
-CustomValidation.prototype = {
-    addInvalids: function(message){
-        this.invalidities.push(message);
-    },
-    getInvalids: function(){
-        return this.invalids.join('. \n');
-    },
-    checkValidity: function(input) {
-        for(i=0; i<this.validityChecks.length; i++){
-            var isInvalid = this.validityChecks[i].isInvalid(input);
-            if(isInvalid) {
-                this.addInvalidity(this.validityChecks[i].invalidityMsg);
-                this.validityChecks[i].element.classList.add('invalid');
-                this.validityChecks[i].element.classList.remove('valid');
-            } else {
-                this.validityChecks[i].element.classList.remove('invalid');
-                this.validityChecks[i].element.classList.add('valid');                
-            }
-        }
-    },
+realTimeValidation.prototype = {
+	addInvalidity: function(message) {
+		this.Invalids.push(message);
+	},
+	getInvalids: function() {
+		return this.Invalids.join('. \n');
+	},
+	checkValidity: function(input) {
+		for ( var i = 0; i < this.validityChecks.length; i++ ) {
+
+			var isInvalid = this.validityChecks[i].isInvalid(input);
+			if (isInvalid) {
+				this.addInvalidity(this.validityChecks[i].invalidityMessage);
+			}
+
+			var requirementElement = this.validityChecks[i].element;
+
+			if (requirementElement) {
+				if (isInvalid) {
+					requirementElement.classList.add('invalid');
+					requirementElement.classList.remove('valid');
+				} else {
+					requirementElement.classList.remove('invalid');
+					requirementElement.classList.add('valid');
+				}
+
+			} 
+		} 
+	},
 	checkInput: function() {
 
-		this.inputNode.CustomValidation.invalidities = [];
+		this.inputNode.realTimeValidation.Invalids = [];
 		this.checkValidity(this.inputNode);
 
-		if ( this.inputNode.CustomValidation.invalidities.length === 0 && this.inputNode.value !== '' ) {
+		if ( this.inputNode.realTimeValidation.Invalids.length === 0 && this.inputNode.value !== '' ) {
 			this.inputNode.setCustomValidity('');
 		} else {
-			var message = this.inputNode.CustomValidation.getInvalidities();
+			var message = this.inputNode.realTimeValidation.getInvalids();
 			this.inputNode.setCustomValidity(message);
 		}
-    },
-    //listens to register form and finally checks if tform is valid
+	},
 	registerListener: function() { 
 
-		var CustomValidation = this;
+		var realTimeValidation = this;
+
 		this.inputNode.addEventListener('keyup', function() {
-			CustomValidation.checkInput();
+			realTimeValidation.checkInput();
 		});
+
+
 	}
+
 };
 
-// 3 arrays to check for each input 
-// isinvalid determines if requirements are met
-// invalidityMsg displays not met requirements
-// element states the specific reqauirement --------------
-var usernameValidityChecks = [{
-        isInvalid: function(input) {
-            return input.value.length < 3;
-        },
-        invalidityMsg: 'Input needs to be at least 3 characters long',
-        element: document.querySelector('label[for="username"] li:nth-child(1)')
-    },{
-        isInvalid: function(input) {
-            var illegalChars = input.value.match(/[^a-zA-Z0-9]/);
-            return illegalChars ? true : false;
-        },
-        invalidityMsg: 'Only letters and numbers are allowed',
-        element: document.querySelector('label[for="username"] li:nth-child(2)')
-        
-    }
-]
-var passwordValidityChecks = [{
+
+
+var nameValidityChecks = [
+	{
 		isInvalid: function(input) {
-			return input.value.length < 8 | input.value.length > 12;
+			return input.value.length < 3;
 		},
-		invalidityMsg: 'This input needs to be between 8 and 12 characters',
+		invalidityMessage: 'This input needs to be at least 3 characters',
+		element: document.querySelector('label[for="name"] .input-requirements li:nth-child(1)')
+	},
+	{
+		isInvalid: function(input) {
+			var illegalCharacters = input.value.match(/[^a-zA-Z0-9]/g);
+			return illegalCharacters ? true : false;
+		},
+		invalidityMessage: 'Only letters and numbers are allowed',
+		element: document.querySelector('label[for="name"] .input-requirements li:nth-child(2)')
+	}
+];
+
+
+var usernameValidityChecks = [
+	{
+		isInvalid: function(input) {
+			return input.value.length < 3;
+		},
+		invalidityMessage: 'This input needs to be at least 3 characters',
+		element: document.querySelector('label[for="username"] .input-requirements li:nth-child(1)')
+	},
+	{
+		isInvalid: function(input) {
+			var illegalCharacters = input.value.match(/[^a-zA-Z0-9]/g);
+			return illegalCharacters ? true : false;
+		},
+		invalidityMessage: 'Only letters and numbers are allowed',
+		element: document.querySelector('label[for="username"] .input-requirements li:nth-child(2)')
+	}
+];
+
+var emailValidityChecks = [
+	{
+		isInvalid: function(input) {
+			return input.value.length < 3;
+		},
+		invalidityMessage: 'This input needs to be at least 3 characters',
+		element: document.querySelector('label[for="email"] .input-requirements li:nth-child(1)')
+	},
+	{
+		isInvalid: function(input) {
+			var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(email);
+		},
+		invalidityMessage: 'Valid Emailis Required',
+		element: document.querySelector('label[for="email"] .input-requirements li:nth-child(2)')
+	}
+];
+
+var passwordValidityChecks = [
+	{
+		isInvalid: function(input) {
+			return input.value.length < 8 | input.value.length > 100;
+		},
+		invalidityMessage: 'This input needs to be between 8 and 100 characters',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(1)')
-	},{
+	},
+	{
 		isInvalid: function(input) {
 			return !input.value.match(/[0-9]/g);
 		},
-		invalidityMsg: 'At least 1 number is required',
+		invalidityMessage: 'At least 1 number is required',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(2)')
-	},{
+	},
+	{
 		isInvalid: function(input) {
 			return !input.value.match(/[a-z]/g);
 		},
-		invalidityMsg: 'At least 1 lowercase letter is required',
+		invalidityMessage: 'At least 1 lowercase letter is required',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(3)')
-	},{
+	},
+	{
 		isInvalid: function(input) {
 			return !input.value.match(/[A-Z]/g);
 		},
-		invalidityMsg: 'At least 1 uppercase letter is required',
+		invalidityMessage: 'At least 1 uppercase letter is required',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(4)')
-	},{
+	},
+	{
 		isInvalid: function(input) {
 			return !input.value.match(/[\!\@\#\$\%\^\&\*]/g);
 		},
-		invalidityMsg: 'You need one of the required special characters',
+		invalidityMessage: 'You need one of the required special characters',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(5)')
 	}
 ];
-var passwordRepeatValidityChecks = [
+
+var confirmPasswordValidityChecks = [
 	{
 		isInvalid: function() {
-			return password2Input.value != passwordInput.value;
+			return confirmPasswordInput.value != passwordInput.value;
 		},
-		invalidityMsg: 'This password needs to match the first one'
+		invalidityMessage: 'This password needs to match the first one'
 	}
 ];
-// --------------------------------------------------------
 
 
-//--------sets the validation to check on each neccessary input----------------
-var usernameInput = document.getElementById('username');
-var passwordInput = document.getElementById('password');
-var password2Input = document.getElementById('password2');
 
-usernameInput.CustomValidation = new CustomValidation();
-usernameInput.CustomValidation = usernameValidityChecks.validityChecks;
-
-passwordInput.CustomValidation = new CustomValidation();
-passwordInput.CustomValidation = passwordValidityChecks.validityChecks;
-
-password2Input.CustomValidation = new CustomValidation();
-password2Input.CustomValidation = password2ValidityChecks.validityChecks;
-// -------------------------------------------------------------------------------
+var nameInput = document.getElementById('name');
+var usernameInput = document.getElementById('usernameR');
+var emailInput = document.getElementById('email');
+var passwordInput = document.getElementById('passwordR');
+var confirmPasswordInput = document.getElementById('password_repeat');
 
 
-for(var i =0; i<inputs.length; i++){
-    inputs[i].addEventListener('keyup', function() {
-        this.CustomValidation.checkValidity(this);
-    })
-}
+nameInput.realTimeValidation = new realTimeValidation(nameInput);
+nameInput.realTimeValidation.validityChecks = nameValidityChecks;
+
+usernameInput.realTimeValidation = new realTimeValidation(usernameInput);
+usernameInput.realTimeValidation.validityChecks = usernameValidityChecks;
+
+emailInput.realTimeValidation = new realTimeValidation(emailInput);
+emailInput.realTimeValidation.validityChecks = usernameValidityChecks;
+
+passwordInput.realTimeValidation = new realTimeValidation(passwordInput);
+passwordInput.realTimeValidation.validityChecks = passwordValidityChecks;
+
+confirmPasswordInput.realTimeValidation = new realTimeValidation(confirmPasswordInput);
+confirmPasswordInput.realTimeValidation.validityChecks = confirmPasswordValidityChecks;
+
+
+
+
+/* ----------------------------
+
+	Event Listeners
+
+---------------------------- */
 
 var inputs = document.querySelectorAll('input:not([type="submit"])');
+
+
 var submit = document.querySelector('input[type="submit"');
 var form = document.getElementById('register');
 
 function validate() {
 	for (var i = 0; i < inputs.length; i++) {
-		inputs[i].CustomValidation.checkInput();
+		console.log(inputs[i]);
+		inputs[i].realTimeValidation.checkInput();
 	}
 }
 
