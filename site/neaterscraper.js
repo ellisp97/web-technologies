@@ -167,6 +167,7 @@ function scraper(url_param, id, domain){
         else {
           //load the html
           var $ = cheerio.load(body);
+          console.log($);
           //find the html element where the price is located
           $(price_htmls[domain]).each(function(i, element) {
             //grab the text
@@ -235,7 +236,7 @@ async function main(url){
     let id = domain_id[0];
     let domain = domain_id[1];
     let exists = await check_if_id_in_db_already(url, id, domain);
-    if(!exists){
+    if(exists){
       var price_data = await scraper(url, id, domain);
       let price = price_data[0];
       let title = price_data[1];
