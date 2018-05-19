@@ -20,9 +20,6 @@ var LocalStrategy = require('passport-local');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var scraper = require('./neaterscraper');
-var scraperupdater = require('./scraperdatabaseupdater');
-
 var bcrypt = require('bcrypt');
 
 
