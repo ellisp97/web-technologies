@@ -38,7 +38,9 @@
                 <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">×</span>
                 <div class="modal-content animate">
                     <div class="container">
-                        <img src="images/logo.svg" alt="loginpic" />
+                        <div class="modal-header">
+                            <img src="images/logo.svg" alt="loginpic" />
+                        </div>
                         <div class="form-input">
                             <input type="text" id="username" name="username" placeholder="username" />
                             <input type="password" id="password" name="password" placeholder="password" />
@@ -58,7 +60,9 @@
                 <div class="modal-content animate">
                     <div class="container">
                         <div class="register-form">
-                            <h1>Register User</h1>
+                            <div class="modal-header">
+                                <h1>Register User</h1>
+                            </div>
                             <label for="name">
                                 <input type="text" id="name" name = "name" placeholder="Enter Name" minlength="3" required>
                                 <ul class="input-requirements">
@@ -111,7 +115,7 @@
             class="close" title="Close Modal">×</span>
                 <div class="modal-content animate">
                     <div class="container">
-                        <div class="add-header">
+                        <div class="modal-header">
                             <h1>check a product</h1>
                         </div>
                         <div class="add-form">
@@ -138,7 +142,7 @@
         class="close" title="Close Modal">×</span>
             <div class="modal-content animate">
                 <div class="container">
-                    <div class="add-header">
+                    <div class="modal-header">
                         <h1>check a product</h1>
                     </div>
                     <button type="button" onclick="document.getElementById('failadd').style.display='none'" class="cancelbutt">Try Again</button>

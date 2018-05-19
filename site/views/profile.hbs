@@ -15,25 +15,30 @@
 </div>
 
 <div id="left-bar">
+    <div class="dropdown">
+      <button class="dropbtn" id="dropdown-button">Select from the dropdown to display other graphs (up to 5 will be shown)</button>
+      <div id="dropdown_container" class="dropdown-content">
+      </div>
+    </div>
+
     <div class="displayChart">
         <canvas id="myChart"></canvas>
+        <select id="choose-number" name="select-number"></select>
+        <select id="choose-timescale" name="select-timescale">
+          <option value="Days" selected="selected">Days</option>
+          <option value="Weeks">Weeks</option>
+          <option value="Months">Months</option>
+        </select>
+        <button type="button" name="redraw" id="redraw_button">Redraw</button>
     </div>
 </div>
+
+
 {{!-- node modules coudlnt load --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<script src="/javascripts/profile.js" ></script>
-{{!-- 
-<div class="graphbuttons">
+<script id="profile-chart-script" src="/javascripts/profile.js" data-prod_data = '{{{prod_data}}}'></script>
+{{!--<div class="graphbuttons">
     <button onclick="dispFunction()">Pie Chart</button>
     <button onclick="dispFunction()">Bar Chart</button>
     <button onclick="dispFunction()">Line Chart</button>
-</div>
-
-<div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
-  <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
 </div>--}}

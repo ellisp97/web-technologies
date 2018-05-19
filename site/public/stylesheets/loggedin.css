@@ -31,11 +31,12 @@
 .carousel-container {
   position:         relative;
   float:            right;
+  background-color: rgba(154,24,177,0.4);
   margin:           1%;
   font-size:        3em;
   width:            45%;
   height:           40%;
-  border:           1px solid #ccc;
+  border:           3px solid black;
   overflow:         hidden;
   min-width:        250px;
   min-height:       250px;
@@ -67,11 +68,11 @@
 
 @media screen and (max-width:1100px) {
     .carousel-container {
-    width:100%; /* The width is 100%, when the viewport is 800px or smaller */
-    margin: 1%;
+    width:95%; /* The width is 100%, when the viewport is 800px or smaller */
+
   }
   .dropdown, #productinfo {
-    width:40%; /* The width is 100%, when the viewport is 800px or smaller */
+    width:35%; /* The width is 100%, when the viewport is 800px or smaller */
   }
   #productinfo {
     margin-right: 5%
@@ -81,7 +82,7 @@
 /* Use a media query to add a break point at 800px: */
 @media screen and (max-width:700px) {
   .dropdown, #productinfo {
-    margin-left: -1em;
+    /* margin-left: -1em; */
     width:100%; /* The width is 100%, when the viewport is 800px or smaller */
   }
   .dropdown {

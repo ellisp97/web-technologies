@@ -108,6 +108,7 @@ module.exports = {
       console.log("error");
       console.log(JSON.stringify(e));
     }
+    return image_id;
   }
 };
 //main(url);

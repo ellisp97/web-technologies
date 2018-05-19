@@ -35,8 +35,7 @@ db.allAsync = function (sql, params) {
   });
 };
 
-var get_user_data = function(userid, cb) {
-  var query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
+var get_user_data = function(userid, query, cb) {
   db.get(query, [userid], function(err, row) {
     if(err){
       console.error(err);
@@ -48,7 +47,7 @@ var get_user_data = function(userid, cb) {
   });
 };
 
-var get_pd_row = function(id, cb){
+var get_pd_row = function(id, query, cb){
   var query = `SELECT * FROM productData where prod_id =?`;
   db.get(query, [id], function(err, row) {
     // console.log(row);
@@ -61,12 +60,12 @@ var get_pd_row = function(id, cb){
   });
 };
 
-var get_product_data_async = async function(prod_ids, cb){
+var get_product_data_async = async function(prod_ids, query, cb){
   var product_data_array = [];
   var watched_id_string = prod_ids;
   var watched_ids = watched_id_string.split(",");
   for (id of watched_ids){
-    var pd_row = await get_pd_row_async(id);
+    var pd_row = await get_pd_row_async(id, query);
     product_data_array.push(pd_row);
   };
   // console.log(product_data_array);
@@ -111,7 +110,7 @@ function authenticationMiddleware(){
       req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
     // console.log("authenticationmiddleware");
     if (req.isAuthenticated()){
-       return next(); 
+       return next();
     }else {
       return res.redirect('/');
     }
@@ -140,29 +139,54 @@ router.get('/login', authenticationMiddleware(),
   async function(req, res, next) {
   var userid = req.session.passport.user;
   if(isNaN(userid)){ userid = req.session.passport.user.user_id;}
-    
+
   // var url = "https://www.amazon.co.uk/AKORD-Metal-Binder-Clip-Clamp/dp/B0082JFX1M/ref=sr_1_5?s=officeproduct&ie=UTF8&qid=1526309936&sr=1-5&keywords=binder+clips";
-  id_rows = await db.allAsync(`SELECT watched_product_ids FROM userData WHERE user_id =?`, [userid]);
-  console.log(id_rows);
-  console.log("HI: " + id_rows[0].watched_product_ids);
+  // id_rows = await db.allAsync(`SELECT watched_product_ids FROM userData WHERE user_id =?`, [userid]);
+  // console.log(id_rows);
+  // console.log("HI: " + id_rows[0].watched_product_ids);
+  //
+  // var watched_ids = id_rows[0].watched_product_ids.split(",");
 
-  var watched_ids = id_rows[0].watched_product_ids.split(",");
+  (async() => {
+    let id_rows, url_rows, watched_ids;
+    let watched_imgs = [];
+    try {
+      var user_query = `SELECT watched_product_ids FROM userData WHERE user_id =?`;
+      var pd_query = `SELECT prod_link FROM productData where prod_id =?`;
+      id_row = await get_user_data_async(userid, user_query);
+      url_rows = await get_product_data_async(id_row.watched_ids, pd_query);
+      for(row of url_rows){
+        var imgCode = await img_scraper.callImgScraper(row.prod_link);
+        watched_imgs.push(imgCode);
+      }
+    }
+    catch (err) {
+      return console.error(err);
+    }
+    console.log(watched_imgs);
+    // return res.send(product_data_array);
+    // res.cookie('data', JSON.stringify(product_data_array));
+    // console.log(product_data_array);
+    // console.log("^ pd aray");
+    // var pd_array_json = JSON.stringify(product_data_array);
+    // return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
+  })();
 
-  var url_rows =[];
-  for(var i=0;i<watched_ids.length;i++){
-    result = await db.allAsync(`SELECT prod_link FROM productData WHERE prod_id =? `, [watched_ids[i]]);
-    var ele = result[0].prod_link;
-    url_rows.push(ele);
-  }
-  console.log(url_rows);
-  console.log(url_rows[0]);
-
-  var watched_imgs=[]
-  for(var j=0;j<url_rows.length; j++){
-    var imgCode = await img_scraper.callImgScraper(url_rows[j]);
-    watched_imgs.push(imgCode);
-  }
-  console.log(watched_imgs);
+  // var url_rows =[];
+  // for(watched_id of watched_ids){
+  //   result = await db.allAsync(`SELECT prod_link FROM productData WHERE prod_id =? `, [watched_id]);
+  //   var ele = result[0].prod_link;
+  //   url_rows.push(ele);
+  // }
+  // console.log(url_rows);
+  // console.log(url_rows[0]);
+  //
+  // var watched_imgs=[]
+  // for(row of url_rows){
+  //   var imgCode = await img_scraper.callImgScraper(row);
+  //   watched_imgs.push(imgCode);
+  // }
+  // console.log(watched_imgs);
 
 
   rows = await db.allAsync(`SELECT username, email FROM userData WHERE user_id =?`, [userid]);
@@ -223,8 +247,35 @@ router.post('/login', function(req, res, next) {
 });
 
 
+// router.get('/profile', authenticationMiddleware(), function(req, res, next) {
+//   var userid = req.user.user_id;
+
+//   (async() => {
+//     let user_data, product_data_array;
+//     try {
+//       var user_query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
+//       var pd_query = `SELECT * FROM productData where prod_id =?`;
+//       user_data = await get_user_data_async(userid, user_query);
+//       product_data_array = await get_product_data_async(user_data.watched_ids, pd_query);
+//     }
+//     catch (err) {
+//       return console.error(err);
+//     }
+//     // return res.send(product_data_array);
+//     // res.cookie('data', JSON.stringify(product_data_array));
+//     // console.log(product_data_array);
+//     // console.log("^ pd aray");
+//     var pd_array_json = JSON.stringify(product_data_array);
+//     return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
+//   })();
+// });
+
 router.get('/profile', authenticationMiddleware(), function(req, res, next) {
+  console.log(req.session);
   var userid = req.user.user_id;
+  console.log(req.user.user_id);
+  console.log(userid);
+
 
   (async() => {
     let user_data, product_data_array;
@@ -237,13 +288,12 @@ router.get('/profile', authenticationMiddleware(), function(req, res, next) {
     }
     // return res.send(product_data_array);
     // res.cookie('data', JSON.stringify(product_data_array));
-    // console.log(product_data_array);
-    // console.log("^ pd aray");
+    console.log(product_data_array);
+    console.log("^ pd aray");
     var pd_array_json = JSON.stringify(product_data_array);
     return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
   })();
 });
-
 
 
 router.post('/sumbit', function(req,res,next){
