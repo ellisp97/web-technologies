@@ -1,36 +1,40 @@
-<div id = "right-bar">
-    <div class="card">
-        <h1>Profile</h1>
-        <img src = "frog.jpg" alt = "frog">
-        <p class="username">{{username}} : {{userid}} </p>
-        <p class = "email">{{email}}</p>
-        <p>University of Bristol</p>
-        <p><button>Contact</button></p>
-    </div>
-    <div class="card2">
-        <h1>Products Tracked : </h1>
-        <h1>Saving Made : </h1>
-        <h1>Products Purchased : </h1>
-    </div>
-</div>
+<div id="wrapper">
+    <div id="left-bar">
+        <div class="dropdown">
+            <button class="dropbtn" id="dropdown-button">Select from the dropdown to display other graphs (up to 5 will be shown)</button>
+            <div id="dropdown_container" class="dropdown-content">
+            </div>
+        </div>
 
-<div id="left-bar">
-    <div class="dropdown">
-      <button class="dropbtn" id="dropdown-button">Select from the dropdown to display other graphs (up to 5 will be shown)</button>
-      <div id="dropdown_container" class="dropdown-content">
-      </div>
+        <div class="displayChart">
+            <canvas id="myChart"></canvas>
+            <select id="choose-number" name="select-number"></select>
+            <select id="choose-timescale" name="select-timescale">
+            <option value="Days" selected="selected">Days</option>
+            <option value="Weeks">Weeks</option>
+            <option value="Months">Months</option>
+            </select>
+            <button type="button" name="redraw" id="redraw_button">Redraw</button>
+        </div>
+    </div>    
+    <div id = "right-bar">
+        <div class="card">
+            <div id="modal-header">
+                <h1>Profile</h1>
+            </div>
+            <img src = "frog.jpg" alt = "frog">
+            <p class="username">{{username}} : {{userid}} </p>
+            <p class = "email">{{email}}</p>
+            <p>University of Bristol</p>
+            <p><button>Contact</button></p>
+        </div>
+        <div class="card">
+            <h1>Products Tracked : </h1>
+            <h1>Saving Made : </h1>
+            <h1>Products Purchased : </h1>
+        </div>
     </div>
 
-    <div class="displayChart">
-        <canvas id="myChart"></canvas>
-        <select id="choose-number" name="select-number"></select>
-        <select id="choose-timescale" name="select-timescale">
-          <option value="Days" selected="selected">Days</option>
-          <option value="Weeks">Weeks</option>
-          <option value="Months">Months</option>
-        </select>
-        <button type="button" name="redraw" id="redraw_button">Redraw</button>
-    </div>
 </div>
 
 

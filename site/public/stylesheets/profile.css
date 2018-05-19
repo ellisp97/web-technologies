@@ -1,32 +1,54 @@
 #right-bar {
     height: 100%;
     width: 20%;
-    float: right;
     min-width: 300px;
-    margin-right: 5%;
+    overflow:hidden;
+    min-height:200px;
 }
 
 #left-bar {
     height: 100%;
-    width: 70%;
+    width: 75%;
     float: left;
-    min-width: 300px;
+    min-width: 800px;
+    margin: 2%;
+}
+
+@media screen and (max-width:1450px) {
+    #left-bar{
+        width: 100%;
+    }
+    #right-bar{
+        width: 80%;
+        margin: 5%;
+        height: auto;
+        width: auto;
+    }
+}
+@media screen and (max-width:1105px) {
+    .dropdown, .displayChart{
+        min-width: 95%;
+        height: auto;
+        width: auto;
+    }
+}
+
+.wrapper { 
+    border : 2px solid #000; 
+    overflow:hidden;
+}
+  
+.wrapper div {
+    min-height: 200px;
+    padding: 10px;
 }
 
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.4);
     position: relative;
-    width: 50%;
-    margin: auto;
-    margin-bottom: 20%;
     text-align: center;
-}
-
-.card2 {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-    position: relative;
-    margin: auto;
-    text-align: center;
+    border: 2px solid white;
+    margin: 3em;
 }
 
 .username {
@@ -48,10 +70,9 @@ button:hover, a:hover {
     position:relative;
     height:100%;
     width:70%;
-    max-width: 70%;
-    margin-right: 0;
-    padding: 0;
     float: right;
+    margin-right: 3em;
+    border: 2px solid white;
 }
 
 #myChart {
@@ -62,7 +83,7 @@ button:hover, a:hover {
 }
 
 .dropdown {
-  width:20%;
+  width:auto;
 }
 
 .dropbtn {
@@ -80,27 +101,4 @@ button:hover, a:hover {
 
 .dropdown-content button[value="OFF"]{
     background-color: #c0392b;
-}
-
-.graphbuttons {
-    position: relative;
-    left:480px;
-    top:400px;
-}
-
-.graphbuttons button {
-    padding: 10px 24px;
-    cursor: pointer;
-    width: 170px;
-    float: left;
-}
-
-.graphbuttons:after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.graphbuttons button:not(:last-child) {
-    border-right: none; /* Prevent double borders */
 }
