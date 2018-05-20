@@ -6,4 +6,8 @@ if(login_failure=='true'){
     var login = document.getElementById('login');
     login.style.display = 'block';
     fail_modal.style.zIndex = 20;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cd5895571353edaafde643bdf790db42cc92d597

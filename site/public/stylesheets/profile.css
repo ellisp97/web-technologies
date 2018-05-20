@@ -102,3 +102,29 @@ button:hover, a:hover {
 .dropdown-content button[value="OFF"]{
     background-color: #c0392b;
 }
+<<<<<<< HEAD
+=======
+
+.graphbuttons {
+    position: relative;
+    left:480px;
+    top:400px;
+}
+
+.graphbuttons button {
+    padding: 10px 24px;
+    cursor: pointer;
+    width: 170px;
+    float: left;
+}
+
+.graphbuttons:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.graphbuttons button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+>>>>>>> cd5895571353edaafde643bdf790db42cc92d597

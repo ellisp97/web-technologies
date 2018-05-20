@@ -15,7 +15,11 @@ body{
   width: 40%;
   min-width: 400px;
   min-height:300px;
+<<<<<<< HEAD
   height: 60%;
+=======
+  height: 65%;
+>>>>>>> cd5895571353edaafde643bdf790db42cc92d597
   text-align: center;
   background-color: thistle;
   margin: auto;
@@ -28,7 +32,10 @@ button:hover {
 
 button:focus {outline:0;}
 
+<<<<<<< HEAD
 .dropdow
+=======
+>>>>>>> cd5895571353edaafde643bdf790db42cc92d597
 
 .container img{
   height: 140px;
@@ -325,7 +332,11 @@ button {
 }
 .button:active {
   position: relative;
+<<<<<<< HEAD
   /* transform: translateY(4px); */
+=======
+  transform: translateY(4px);
+>>>>>>> cd5895571353edaafde643bdf790db42cc92d597
   outline: none;
   -webkit-box-shadow: none;
   box-shadow: none;

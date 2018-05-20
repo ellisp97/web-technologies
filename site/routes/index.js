@@ -6,9 +6,8 @@ var cheerio = require('cheerio');
 var request = require('request');
 var util = require('util');
 var scraper = require('../neaterscraper');
-var img_scraper = require('../imagescraper');
+// var img_scraper = require('../imagescraper');
 var scraperupdater = require('../scraperdatabaseupdater');
-
 
 var fail = false;
 var URLcode = 1;
@@ -42,14 +41,12 @@ var get_user_data = function(userid, query, cb) {
       console.error(err);
       cb("error", null);
     } else{
-      var user_data = {userid:userid, username:row.username, email:row.email, watched_ids:row.watched_product_ids};
-      cb(null, user_data);
+      cb(null, row);
     }
   });
 };
 
 var get_pd_row = function(id, query, cb){
-  var query = `SELECT * FROM productData where prod_id =?`;
   db.get(query, [id], function(err, row) {
     // console.log(row);
     if(err){
@@ -65,13 +62,24 @@ var get_product_data_async = async function(prod_ids, query, cb){
   var product_data_array = [];
   var watched_id_string = prod_ids;
   var watched_ids = watched_id_string.split(",");
-  for (id of watched_ids){
+  for (let id of watched_ids){
     var pd_row = await get_pd_row_async(id, query);
     product_data_array.push(pd_row);
   };
   // console.log(product_data_array);
   return product_data_array;
 };
+
+var get_image_urls = async function(url_rows, cb){
+  var img_urls = [];
+  for (let url of url_rows){
+    console.log(url.prod_link);
+    var imgCode = await img_scraper.callImgScraper(url.prod_link);
+    console.log("image link", imgCode);
+    img_urls.push(imgCode);
+  }
+  return img_urls;
+}
 
 const get_user_data_async = util.promisify(get_user_data);
 const get_pd_row_async = util.promisify(get_pd_row);
@@ -136,8 +144,7 @@ function authenticationMiddleware(){
 
 
 /* GET Logged In page ? */
-router.get('/login', authenticationMiddleware(),
-  async function(req, res, next) {
+router.get('/login', authenticationMiddleware(), function(req, res, next) {
   var userid = req.session.passport.user;
   if(isNaN(userid)){ userid = req.session.passport.user.user_id;}
 
@@ -152,19 +159,22 @@ router.get('/login', authenticationMiddleware(),
     let id_rows, url_rows, watched_ids;
     let watched_imgs = [];
     try {
-      var user_query = `SELECT watched_product_ids FROM userData WHERE user_id =?`;
+      var user_query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
       var pd_query = `SELECT prod_link FROM productData where prod_id =?`;
       id_row = await get_user_data_async(userid, user_query);
-      url_rows = await get_product_data_async(id_row.watched_ids, pd_query);
-      for(row of url_rows){
-        var imgCode = await img_scraper.callImgScraper(row.prod_link);
-        watched_imgs.push(imgCode);
-      }
+      console.log("id row", id_row);
+      url_rows = await get_product_data_async(id_row.watched_product_ids, pd_query);
+      // console.log("url row", url_rows);
+      // watched_imgs = await get_image_urls(url_rows);
+      // console.log("watched images", watched_imgs);
+      var username = id_row.username;
+      var email = id_row.email;
     }
     catch (err) {
       return console.error(err);
     }
-    console.log(watched_imgs);
+    console.log("urls:", watched_imgs);
+    return res.render('loggedin',  { title: 'LOGGED IN',userid: userid, username: username, email:email,URLcode:URLcode});
     // return res.send(product_data_array);
     // res.cookie('data', JSON.stringify(product_data_array));
     // console.log(product_data_array);
@@ -190,12 +200,12 @@ router.get('/login', authenticationMiddleware(),
   // console.log(watched_imgs);
 
 
-  rows = await db.allAsync(`SELECT username, email FROM userData WHERE user_id =?`, [userid]);
-  var username = rows[0].username;
-  var email = rows[0].email;
+  // rows = await db.allAsync(`SELECT username, email FROM userData WHERE user_id =?`, [userid]);
+  // var username = rows[0].username;
+  // var email = rows[0].email;
   // console.log(URLcode);
   // console.log(fail);
-  res.render('loggedin',  { title: 'LOGGED IN',userid: userid, username: username, email:email,URLcode:URLcode});
+  // res.render('loggedin',  { title: 'LOGGED IN',userid: userid, username: username, email:email,URLcode:URLcode});
   // db.all(`SELECT username, email FROM userData WHERE user_id =?`, [userid], function(err,results,fields){
   //   var username = results[0].username;
   //   var email = results[0].email;
@@ -248,12 +258,6 @@ router.post('/login', function(req, res, next) {
 });
 
 
-router.post('/', function(req,res) {
-  req.logout();
-  req.session.destroy();
-  res.redirect('/');
-});
-
 // router.get('/profile', authenticationMiddleware(), function(req, res, next) {
 //   var userid = req.user.user_id;
 
@@ -287,8 +291,10 @@ router.get('/profile', authenticationMiddleware(), function(req, res, next) {
   (async() => {
     let user_data, product_data_array;
     try {
-      user_data = await get_user_data_async(userid);
-      product_data_array = await get_product_data_async(user_data.watched_ids);
+      var user_query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
+      var pd_query = `SELECT * FROM productData where prod_id =?`;
+      user_data = await get_user_data_async(userid, user_query);
+      product_data_array = await get_product_data_async(user_data.watched_product_ids, pd_query);
     }
     catch (err) {
       return console.error(err);
@@ -345,27 +351,22 @@ router.post('/sumbit', function(req,res,next){
 });
 
 router.post('/add', async function(req,res,next){
-
+    var userid = req.user.user_id;
     var url = req.body.prod_link;//'https://www.amazon.co.uk/AKORD-Metal-Binder-Clip-Clamp/dp/B0082JFX1M';
+    console.log("the given url is", url);
     // console.log(url);
-    URLcode = await scraper.callScraper(url);
+    var scraper_returner = await scraper.callScraper(url);
+    URLcode = scraper_returner[0];
+    var prod_id = scraper_returner[1];
+    var user_data = await get_user_data_async(userid, `SELECT watched_product_ids FROM userData WHERE user_id =?`);
+    var watched_ids = user_data.watched_product_ids;
     // console.log(URLcode);
-    if(!URLcode){
+    if(URLcode!=1){
       res.redirect('/login');
     }else{
-      const sqlite3 = require('sqlite3').verbose();
-      let db = new sqlite3.Database('./db/prices.db');
-
-      //db.run('CREATE TABLE productData(prod_id TEXT, prod_name TEXT,prod_currency TEXT, prod_price REAL, prod_url TEXT, user_id INTEGER)');// --- INITIAL PRODUCT TABLE HAS BEEN MADE
-
-      var userid = req.user.user_id;
-      var title_text = req.body.prod_name;
-      var price = req.body.prod_price;
-      var price_num;
-      var currency = '£';
-      var title_text;
-
-      db.run(`INSERT INTO productData(prod_name,prod_currency, prod_price, prod_url, user_id) VALUES(?,?,?,?,?)`, [title_text,currency,price_num,url,userid], function(err) {
+      console.log("product id is", prod_id);
+      watched_ids = watched_ids + "," + prod_id;
+      db.run(`UPDATE userData SET watched_product_ids = ? WHERE user_id=?`, [watched_ids,userid], function(err) {
         if (err) {
           return // console.log(err.message);
         }

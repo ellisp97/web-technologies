@@ -29,6 +29,7 @@
 }
 
 .carousel-container {
+<<<<<<< HEAD
 position:         relative;
 float:            right;
 background:       #219d218a;
@@ -40,6 +41,19 @@ border:           3px solid white;
 overflow:         hidden;
 min-width:        250px;
 min-height:       250px;
+=======
+  position:         relative;
+  float:            right;
+  background-color: rgba(154,24,177,0.4);
+  margin:           1%;
+  font-size:        3em;
+  width:            45%;
+  height:           40%;
+  border:           3px solid black;
+  overflow:         hidden;
+  min-width:        250px;
+  min-height:       250px;
+>>>>>>> cd5895571353edaafde643bdf790db42cc92d597
 }
 
 .carousel-content {
@@ -67,8 +81,17 @@ margin: 5%;
 
 
 @media screen and (max-width:1100px) {
+<<<<<<< HEAD
   .carousel-container {
     width:95%; /* The width is 100%, when the viewport is 800px or smaller */
+=======
+    .carousel-container {
+    width:95%; /* The width is 100%, when the viewport is 800px or smaller */
+
+  }
+  .dropdown, #productinfo {
+    width:35%; /* The width is 100%, when the viewport is 800px or smaller */
+>>>>>>> cd5895571353edaafde643bdf790db42cc92d597
   }
   #productinfo {
     height: auto;
@@ -82,6 +105,7 @@ margin: 5%;
 }
 
 /* Use a media query to add a break point at 800px: */
+<<<<<<< HEAD
 @media screen and (max-width:850px) {
 #productinfo {
   /* margin-left: -1em; */
@@ -93,6 +117,17 @@ margin: 5%;
   float: left;
   width: 100%;
 }
+=======
+@media screen and (max-width:700px) {
+  .dropdown, #productinfo {
+    /* margin-left: -1em; */
+    width:100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
+  .dropdown {
+    margin-left: 1em;
+    width: 90%;
+  }
+>>>>>>> cd5895571353edaafde643bdf790db42cc92d597
 }
 
 
