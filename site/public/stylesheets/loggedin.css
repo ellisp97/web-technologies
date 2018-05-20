@@ -1,209 +1,234 @@
 
 
 .sell-header {
-    box-sizing: border-box;
-    position: relative;
-    padding: 50px;
+  box-sizing: border-box;
+  position: relative;
+  padding: 50px;
 }
 
 .sell-form {
-    margin-top: 50px;
-    margin: 10px 10px;
-    padding: 2px 0;
+  margin-top: 50px;
+  margin: 10px 10px;
+  padding: 2px 0;
 }
-  
+
 .sell-form input{
-    padding: 10px 0;
-    text-align: center;
+  padding: 10px 0;
+  text-align: center;
 }
 
 .sell-desc{
-    margin-top: 50px;
-    margin: 10px 10px;
-    padding: 2px 0;
+  margin-top: 50px;
+  margin: 10px 10px;
+  padding: 2px 0;
 }
 
 .sell-desc input {
-    padding: 40px 0;
-    text-align: center;
+  padding: 40px 0;
+  text-align: center;
 }
 
 .carousel-container {
-  position:         relative;
-  float:            right;
-  margin:           1%;
-  font-size:        3em;
-  width:            45%;
-  height:           40%;
-  border:           1px solid #ccc;
-  overflow:         hidden;
-  min-width:        250px;
-  min-height:       250px;
+position:         relative;
+float:            right;
+background:       #219d218a;
+margin:           1%;
+font-size:        3em;
+width:            55%;
+height:           40%;
+border:           3px solid white;
+overflow:         hidden;
+min-width:        250px;
+min-height:       250px;
 }
 
 .carousel-content {
-  height:           auto;
-  margin:           0;
+height:           auto;
+margin:           0;
 }
 
 .dropdown {
-  position: relative;
-  float: left;
-  height: 100%;
-  width: 20%;
-  margin: 2%;
-}
-#dropbtn{
-  margin: 1%;
+height: auto;
+width: auto;
 }
 
 #productinfo{
-  position: relative;
-  float: left;
-  height: 100%;
-  width: 20%;
-  margin: 1%;
+position: relative;
+float: left;
+height: 100%;
+width: 40%;
 }
 
+
+#select{
+width: 80%;
+margin: 5%;
+}
+
+
 @media screen and (max-width:1100px) {
-    .carousel-container {
-    width:100%; /* The width is 100%, when the viewport is 800px or smaller */
-    margin: 1%;
-  }
-  .dropdown, #productinfo {
-    width:40%; /* The width is 100%, when the viewport is 800px or smaller */
+  .carousel-container {
+    width:95%; /* The width is 100%, when the viewport is 800px or smaller */
   }
   #productinfo {
-    margin-right: 5%
+    height: auto;
+    width:100%; /* The width is 100%, when the viewport is 800px or smaller */
+    margin-right: 5%;
+  }
+  #select{
+    width: 20%;
+    float: right;
   }
 }
 
 /* Use a media query to add a break point at 800px: */
-@media screen and (max-width:700px) {
-  .dropdown, #productinfo {
-    margin-left: -1em;
-    width:100%; /* The width is 100%, when the viewport is 800px or smaller */
-  }
-  .dropdown {
-    margin-left: 1em;
-    width: 90%;
-  }
+@media screen and (max-width:850px) {
+#productinfo {
+  /* margin-left: -1em; */
+  position: relative;
+  margin: 5%;
+  width:100%; /* The width is 100%, when the viewport is 800px or smaller */
+}
+#select{
+  float: left;
+  width: 100%;
+}
 }
 
 
+/* ---------CAROUSEL - DESIGN ---------- */
 
 .carousel-element {
-  font-size:        1em;
-  width:            100%;
-  list-style:       none;
-  text-align:       center;
+font-size:        1em;
+width:            100%;
+list-style:       none;
+text-align:       center;
 }
 
 .active {
-  height:           100%;
+height:           100%;
 }
 
 .active .carousel-element {
-  position:         absolute;
-  /* width:         90%;
-  height:           90%; */
-  opacity:          0;
-  transform:        scale(0);
-  transition:       1s;
+position:         absolute;
+opacity:          0;
+transform:        scale(0);
+transition:       .8s ease;
 }
 
 .active .carousel-element.current {
-  top:              -.75em; 
-  position:         relative; 
-  display:          block;
-  opacity:          1;
-  transform:        scale(1);
-  transition:       ease-in 1s;
-  margin:           10% auto;
+top:              -.75em; 
+position:         relative; 
+display:          block;
+opacity:          1;
+transform:        scale(1);
+transition:       .8s ease;
+margin:           10% auto;
 }
 
 .active .buttons {
-  padding:          0;
-  background:       #1e90ff;
-  text-align:       center;
-  z-index:          3;
-  position:         relative;
+padding:          0;
+background:       white;
+text-align:       center;
+z-index:          3;
+position:         relative;
 }
 
 .active .anchor-buttons {
-  background:       #1e90ff;
-  text-align:       center;
-  z-index:          3;
-  position:         absolute;
-  bottom:           0;
-  width:            100%;
+background:       white;
+text-align:       center;
+z-index:          3;
+position:         absolute;
+bottom:           0;
+width:            100%;
 }
 
 .carousel-container button {
-  border:           none;
-  display:          none;
+  background:       white;
+
+border:           none;
+display:          none;
 }
 
 .active button {
-  width:            2em;
-  display:          inline-block;
-  background-color: #ff7f50
+color: #219d218a;
+width:            2em;
+display:          inline-block;
 }
+
+.carousel-content img{
+width:            100%;
+height:           100%;
+max-width:        500px;
+max-height:       500px;
+}
+
 .offscreen {
   position:         absolute;
   left:             -20000px;
 }
-.carousel-content img{
-  width:            100%;
-  height:           100%;
-  max-width:        500px;
-  max-height:       500px;
+
+.grab{
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
 }
 
+.grabbing{
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+}
+
+/* ---------END-OF-DESIGN ---------- */
+
 .carousel-text{
-  float: left;
-  width: 100%;
-  margin: 5%;
-  height: auto;
-  /* min-width: 200px; */
-  max-width: 500px;
-  border: 1px solid black;
-  text-align: center;
+float: left;
+width: 100%;
+margin: 5%;
+height: auto;
+/* min-width: 200px; */
+max-width: 500px;
+border: 1px solid black;
+text-align: center;
 }
 
 
 .dropdown-content {
-  display: none;
-  position: relative;
-  margin-left: 0.4em; /* recenter dropdown box */
-  background-color: #f9f9f9;
-  min-width: 100px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+display: none;
+position: relative;
+margin-left: 0.4em; /* recenter dropdown box */
+background-color: #f9f9f9;
+min-width: 100px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
 }
 
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
 }
 
-#select {
-  width: 100%;
-}
+/* #select {
+width: 100%;
+} */
 
 .dropdown-content a:hover {background-color: #f1f1f1}
 
 .dropdown:hover .dropdown-content {
-  display: block;
+display: block;
 }
 
 .dropdown:hover #dropbtn {
-  background-color: #3e8e41;
+background-color: #3e8e41;
 }
 #myInput {
   position: relative;
   width: inherit;
   border: none;
+}
+.datalist-form input{
+  position: relative;
+  width: 100%;
+  border: 1px solid white;
 }

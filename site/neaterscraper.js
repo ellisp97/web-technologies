@@ -5,12 +5,18 @@ var fs = require('fs'),
     express = require('express'),
     router = express.Router(),
     passport = require('passport');
-
+var URLmatch = false;
+var URLworks = true; 
+var exitCode = 1; //return 0 if product is already in db
+// return 1 if product works and is not exisiting , return -1 if product could not be found
 
 // var url = "http://www.asos.com/pullbear/pullbear-hoodie-in-black/prd/8828973?clr=black&SearchQuery=&cid=5668&gridcolumn=4&gridrow=6&gridsize=4&pge=1&pgesize=72&totalstyles=1379";
 // var url = "http://www.asos.com/new-balance/new-balance-501-trainers-in-blue/prd/8691396";
 // var url = "https://www.amazon.co.uk/Maxwell-Williams-Porcelain-William-Strawberry/dp/B00THEAN3E/ref=sr_1_3?ie=UTF8&qid=1526403589&sr=8-3&keywords=mug";
-var url = "https://www.amazon.co.uk/AKORD-Metal-Binder-Clip-Clamp/dp/B0082JFX1M/ref=sr_1_5?s=officeproduct&ie=UTF8&qid=1526309936&sr=1-5&keywords=binder+clips";
+// var url = "https://www.amazon.co.uk/AKORD-Metal-Binder-Clip-Clamp/dp/B0082JFX1M/ref=sr_1_5?s=officeproduct&ie=UTF8&qid=1526309936&sr=1-5&keywords=binder+clips";
+
+
+
 
 var domains_and_id_precede = [{domain:"amazon", id_precede:"/dp/"},
                               {domain:"asos",   id_precede:"/prd/"}];
@@ -69,9 +75,12 @@ function find_domain_and_id(url) {
   let i = 0;
   while(!url.includes(domains_and_id_precede[i].domain)){
     i+=1;
-    if(i > domains_and_id_precede.length){
+    console.log(i);
+    console.log(domains_and_id_precede.length);
+    if(i >= domains_and_id_precede.length){
       console.log("domain unsupported at this time");
-      break;
+      exitCode = -1;
+      return false;
     }
   }
   var product_id_possible = url.split(domains_and_id_precede[i].id_precede)[1];
@@ -106,14 +115,16 @@ async function check_if_id_in_db_already(url, id, domain){
   var rows = await db.allAsync(query, [id]);
   if (!Array.isArray(rows) || !rows.length) {
     //ID does not exist, continues as before
-    return false;
+    URLmatch = false;
+    return URLmatch;
   } else{
     //ID exists in the database, beware
     for(let row of rows){
       console.log(row);
       if(row.domain == domain){
         console.log("THIS ID IS ALREADY IN THE DATABASE WITH ITS DOMAIN");
-        return true;
+        URLmatch = true;
+        return URLmatch;
       }
     };
   }
@@ -142,9 +153,13 @@ function scraper(url_param, id, domain){
     request(options, function(error, response, body) {
       console.log("in request");
       if(error){
+        exitCode = -1;
         console.log(error);
         reject(error);
       }else if(response.statusCode != 200){
+        //LINK DID NOT MATCH A PRODUCT
+        URLworks = false;
+        exitCode = -1;
         console.log(response.statusCode);
         reject(error);
       } else {
@@ -167,7 +182,6 @@ function scraper(url_param, id, domain){
         else {
           //load the html
           var $ = cheerio.load(body);
-          console.log($);
           //find the html element where the price is located
           $(price_htmls[domain]).each(function(i, element) {
             //grab the text
@@ -229,35 +243,45 @@ async function insert_new_product(id, title, url, domain, currency, price){
     console.log("inserted");
 };
 
-
-async function main(url){
-  try{
-    let domain_id = find_domain_and_id(url);
-    let id = domain_id[0];
-    let domain = domain_id[1];
-    let exists = await check_if_id_in_db_already(url, id, domain);
-    if(exists){
-      var price_data = await scraper(url, id, domain);
-      let price = price_data[0];
-      let title = price_data[1];
-      let currency = price_data[2];
-      await insert_new_product(id, title, url, domain, currency, price);
-    }
-
-    await db.all(`SELECT * from productData`, [], (err, rows) => {
-      if (err) {
-        return console.error(err.message);
+module.exports = {
+  callScraper : async function (url){
+    try{
+      console.log('start of scraping');
+      let domain_id = find_domain_and_id(url);
+      if(domain_id){
+        let id = domain_id[0];
+        let domain = domain_id[1];
+        let exists = await check_if_id_in_db_already(url, id, domain);
+        if(!exists){
+          var price_data = await scraper(url, id, domain);
+          
+          let price = price_data[0];
+          let title = price_data[1];
+          let currency = price_data[2];
+          await insert_new_product(id, title, url, domain, currency, price);
+        }
+        if(exists){
+          console.log('Match Occured');
+          exitCode = 0;
+        }
+        if(exitCode!=-1){
+          await db.all(`SELECT * from productData`, [], (err, rows) => {
+            if (err) {
+              return console.error(err.message);
+            }
+            rows.forEach((row) => {
+              // console.log(row);
+            });
+          });
+        db.close();
+        }
       }
-      rows.forEach((row) => {
-        // console.log(row);
-      });
-    });
-    db.close();
+      return exitCode;
+    }
+    catch (e) {
+      console.log("error");
+      console.log(JSON.stringify(e));
+    }
   }
-  catch (e) {
-    console.log("error");
-    console.log(JSON.stringify(e));
-  }
-}
-
-main(url);
+};
+//main(url);
