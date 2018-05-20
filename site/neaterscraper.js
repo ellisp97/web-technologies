@@ -161,51 +161,8 @@ function scraper(url_param, id, domain){
             method : 'GET',
             headers: {
                 'User-Agent': 'Mozilla/5.0'
-  return new Promise(function(resolve, reject) {
-    request(options, function(error, response, body) {
-      console.log("in request");
-      if(error){
-        console.log(error);
-        reject(error);
-      }else if(response.statusCode != 200){
-        console.log(response.statusCode);
-        reject(error);
-      } else {
-        //handle ASOS with an API call
-        if(domain == 1){
-          let json = JSON.parse(body);
-          console.log(json.price.current.value);
-          price_num = Number(json.price.current.value);
-          if(json.price.currency == "GBP"){
-            currency = "£ pence"
-          }
-          if(json.price.currency == "EUR"){
-            currency = "€ cents"
-          }
-          if(json.price.currency == "USD"){
-            currency = "$ cents"
-          }
-          title = json.name;
-        }//handle all other sites normally
-        else {
-          //load the html
-          var $ = cheerio.load(body);
-          console.log($);
-          //find the html element where the price is located
-          $(price_htmls[domain]).each(function(i, element) {
-            //grab the text
-            var el = $(this);
-            var price_text = el.text();
-            //separate off the currency
-            if(price_text[0] == "£"){
-              price = price_text.split("£")[1];
-              currency = "£ pence";
             }
-            if(price_text[0] == "$"){
-              price = price_text.split("$")[1];
-              currency = "$ cents";
-            }
-        };
+        }
     }
     console.log("about to request");
 
