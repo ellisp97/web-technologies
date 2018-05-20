@@ -1,6 +1,6 @@
 #right-bar {
     height: 100%;
-    width: 30%;
+    width: 20%;
     float: right;
     min-width: 300px;
     margin-right: 5%;
@@ -8,7 +8,7 @@
 
 #left-bar {
     height: 100%;
-    width: 60%;
+    width: 70%;
     float: left;
     min-width: 300px;
 }
@@ -29,21 +29,6 @@
     text-align: center;
 }
 
-#displayChart {
-    display: none;
-}
-
-
-#myChart {
-    position: relative;
-    width: 100%;
-    min-width: 500px;
-    max-width: 800px;
-    color: black;
-    border: 5px solid thistle;
-}
-
-
 .username {
     color: grey;
     font-size: 18px;
@@ -61,16 +46,23 @@ button:hover, a:hover {
 
 .displayChart {
     position:relative;
-    height:70%;
-    width:50%
+    height:100%;
+    width:70%;
+    max-width: 70%;
+    margin-right: 0;
+    padding: 0;
+    float: right;
 }
 
 #myChart {
     position: relative;
-    top:30em;
-    left: 15em;
     color: black;
     border: 5px solid thistle;
+    width: 100%;
+}
+
+.dropdown {
+  width:20%;
 }
 
 .dropbtn {
@@ -79,6 +71,15 @@ button:hover, a:hover {
     font-size: 16px;
     border: none;
     cursor: pointer;
+    height: 80%;
+}
+
+.dropdown-content {
+  background-color: thistle;
+}
+
+.dropdown-content button[value="OFF"]{
+    background-color: #c0392b;
 }
 
 .graphbuttons {

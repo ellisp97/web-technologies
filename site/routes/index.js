@@ -260,8 +260,35 @@ router.post('/login', function(req, res, next) {
 });
 
 
+// router.get('/profile', authenticationMiddleware(), function(req, res, next) {
+//   var userid = req.user.user_id;
+
+//   (async() => {
+//     let user_data, product_data_array;
+//     try {
+//       var user_query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
+//       var pd_query = `SELECT * FROM productData where prod_id =?`;
+//       user_data = await get_user_data_async(userid, user_query);
+//       product_data_array = await get_product_data_async(user_data.watched_ids, pd_query);
+//     }
+//     catch (err) {
+//       return console.error(err);
+//     }
+//     // return res.send(product_data_array);
+//     // res.cookie('data', JSON.stringify(product_data_array));
+//     // console.log(product_data_array);
+//     // console.log("^ pd aray");
+//     var pd_array_json = JSON.stringify(product_data_array);
+//     return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
+//   })();
+// });
+
 router.get('/profile', authenticationMiddleware(), function(req, res, next) {
+  console.log(req.session);
   var userid = req.user.user_id;
+  console.log(req.user.user_id);
+  console.log(userid);
+
 
   (async() => {
     let user_data, product_data_array;
@@ -276,13 +303,12 @@ router.get('/profile', authenticationMiddleware(), function(req, res, next) {
     }
     // return res.send(product_data_array);
     // res.cookie('data', JSON.stringify(product_data_array));
-    // console.log(product_data_array);
-    // console.log("^ pd aray");
+    console.log(product_data_array);
+    console.log("^ pd aray");
     var pd_array_json = JSON.stringify(product_data_array);
     return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
   })();
 });
-
 
 
 router.post('/sumbit', function(req,res,next){
