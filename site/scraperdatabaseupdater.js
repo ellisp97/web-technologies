@@ -78,12 +78,18 @@ async function get_changed_ids_prices() {
     for (let row of rows) {
       //wait until the request has fetched the live price
       live_price = await check_price(row.prod_link, row.prod_id, row.prod_domain);
+      console.log(live_price);
+      console.log(row.prod_price_current);
       if(live_price != row.prod_price_current) {
-        ids_and_data_to_update.push({id:row.prod_id, price:live_price, history:row.prod_price_history, dates:row.date_update_history});
-        //if it is not the same as the current, store it
+          if(live_price == null && row.prod_price_current == null){}
+          else{
+              ids_and_data_to_update.push({id:row.prod_id, price:live_price, history:row.prod_price_history, dates:row.date_update_history});
+              //if it is not the same as the current, store it
+          }
       }
     };
   }
+  console.log(ids_and_data_to_update);
   return ids_and_data_to_update;
 };
 
@@ -97,6 +103,7 @@ async function update_prices(ids_data) {
   for(let prod_data of ids_data) {
     let id = prod_data.id;
     let price = prod_data.price;
+    console.log(price);
     let history = prod_data.history;
     let date_history = prod_data.dates;
     let today = new Date();
@@ -161,6 +168,10 @@ function check_price(url_param, id, domain){
             price_num = Number(price);
           });
         }
+        if(isNaN(price_num)){
+          console.log("the price is not a number");
+          resolve(null);
+        }
         price_int = Number(Math.round(price_num*100));
         resolve(price_int);
         //resolve the promise with the live price
@@ -173,6 +184,7 @@ function check_price(url_param, id, domain){
 async function main() {
   try {
     var id_data = await get_changed_ids_prices();
+    console.log(id_data);
     //use the chained async functions to get the data to update
     //wait for it to complete
     await update_prices(id_data);
@@ -181,7 +193,7 @@ async function main() {
   }
   catch (e) {
     console.log("error");
-    console.log(JSON.stringify(e));
+    console.log(e);
   }
 }
 

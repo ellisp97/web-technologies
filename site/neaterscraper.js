@@ -6,7 +6,7 @@ var fs = require('fs'),
     router = express.Router(),
     passport = require('passport');
 var URLmatch = false;
-var URLworks = true; 
+var URLworks = true;
 var exitCode = 1; //return 0 if product is already in db
 // return 1 if product works and is not exisiting , return -1 if product could not be found
 
@@ -218,6 +218,10 @@ function scraper(url_param, id, domain){
           });
         }
       }
+      if(isNaN(price_num)){
+        exitCode = -2;
+        reject(price_num);
+      }
       var price_int = Number(Math.round(price_num*100));
       var returner = [price_int, title, currency];
       resolve(returner);
@@ -254,7 +258,7 @@ module.exports = {
         let exists = await check_if_id_in_db_already(url, id, domain);
         if(!exists){
           var price_data = await scraper(url, id, domain);
-          
+
           let price = price_data[0];
           let title = price_data[1];
           let currency = price_data[2];
