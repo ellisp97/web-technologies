@@ -79,8 +79,11 @@ async function get_changed_ids_prices() {
       //wait until the request has fetched the live price
       live_price = await check_price(row.prod_link, row.prod_id, row.prod_domain);
       if(live_price != row.prod_price_current) {
-        ids_and_data_to_update.push({id:row.prod_id, price:live_price, history:row.prod_price_history, dates:row.date_update_history});
-        //if it is not the same as the current, store it
+          if(live_price == null && row.prod_price_current == null){}
+          else{
+              ids_and_data_to_update.push({id:row.prod_id, price:live_price, history:row.prod_price_history, dates:row.date_update_history});
+              //if it is not the same as the current, store it
+          }
       }
     };
   }
@@ -130,7 +133,7 @@ function check_price(url_param, id, domain){
   return new Promise(function(resolve, reject) {
     request(options, function(error, response, body) {
       var price;
-      var price_htmls = ['span#priceblock_ourprice', '#product-price'];
+      var price_htmls = [{standard: 'span#priceblock_ourprice', sale: 'span#priceblock_saleprice', book_sale: 'span.a-size-medium.a-color-price.offer-price.a-text-normal'}, '#product-price'];
       var title_htmls = ['span#productTitle', 'h1'];
       if(error){ //if error, reject
         console.log("error in http request");
@@ -142,24 +145,43 @@ function check_price(url_param, id, domain){
       }//otherwise there are no errors in the request
       else {
         //handle ASOS with an API call
-        if(domain=="1"){
+        if(domain==1){
           let json = JSON.parse(body);
           price_num = Number(json.price.current.value);
         }//handle all other sites normally
         else{
           //load the html
           var $ = cheerio.load(body);
+            var html_use
+            if(domain==0){
+                if($(price_htmls[domain].standard).length){
+                    html_use = price_htmls[domain].standard;
+                } else if($(price_htmls[domain].sale).length){
+                    html_use = price_htmls[domain].sale;
+                } else if($(price_htmls[domain].book_sale).length){
+                    html_use = price_htmls[domain].book_sale;
+                } else{
+                    console.log("no price found for id" + id);
+                    resolve(null);
+                }
+            }
+            else{
+                html_use = price_htmls[domain];
+            }
           //find the html element where the price is located
-          $(price_htmls[domain]).each(function(i, element) {
+          $(html_use).each(function(i, element) {
             //grab the text
             var el = $(this);
             var price_text = el.text();
             //separate off the currency
-            console.log(price_text);
             price = price_text.split(price_text[0])[1];
             //save the price as a number
             price_num = Number(price);
           });
+        }
+        if(isNaN(price_num)){
+          console.log("the price is not a number");
+          resolve(null);
         }
         price_int = Number(Math.round(price_num*100));
         resolve(price_int);
@@ -173,6 +195,7 @@ function check_price(url_param, id, domain){
 async function main() {
   try {
     var id_data = await get_changed_ids_prices();
+    console.log(id_data);
     //use the chained async functions to get the data to update
     //wait for it to complete
     await update_prices(id_data);
@@ -181,7 +204,7 @@ async function main() {
   }
   catch (e) {
     console.log("error");
-    console.log(JSON.stringify(e));
+    console.log(e);
   }
 }
 

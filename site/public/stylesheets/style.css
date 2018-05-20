@@ -15,7 +15,7 @@ body{
   top: 50%;
   width: 40%;
   min-width: 400px;
-  min-height:500px;
+  min-height:300px;
   height: 65%;
   text-align: center;
   background-color: thistle;
@@ -26,6 +26,9 @@ body{
 button:hover {
   opacity: 0.8;
 }
+
+button:focus {outline:0;}
+
 
 .container img{
   height: 140px;
@@ -56,6 +59,40 @@ input{
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
     box-shadow: 5px 5px 50px 5px thistle;
+    animation-name: modalbox;
+    animation-duration: .3s;
+    animation-timing-function: ease-out;
+}
+
+/* Animation */
+@-webkit-keyframes modalbox {
+  0% {
+    top: -250px; 
+    opacity: 0;
+  }
+  100% {
+    top: 0; 
+    opacity: 1;
+  }
+}
+
+@keyframes modalbox {
+  0% {
+    top: -250px; 
+    opacity: 0;
+  }
+  100% {
+    top: 0; 
+    opacity: 1;
+  }
+}
+
+
+.modal-header {
+  padding: 20px 40px;
+  background: #219d218a;
+  color: #ffffff;
+  margin-bottom: 20px;
 }
 
 /* Modal Content/Box */
@@ -83,10 +120,9 @@ input{
     cursor: pointer;
 }
 
-/* Add Zoom Animation */
 .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
+    -webkit-animation: animatezoom 0.7s;
+    animation: animatezoom 0.7s
 }
 
 @-webkit-keyframes animatezoom {
@@ -132,22 +168,26 @@ ul{
 .intro-form a {
   cursor: crosshair; 
   display: block;
-  padding: 38px 40px;
+  padding: 40px;
   line-height: 30px;
   color: #191919;
   text-decoration: none;
 }
-
+/* 
 .intro-form .main-menu a:hover{
   background-color: #ffff90;
   color: thistle;
-}
+} */
 
 svg #titletext path{
   fill: thistle !important;
   stroke: #000 !important;
   stroke-dasharray: 640;
   animation:at 3000ms;
+}
+
+#select {
+  max-width: 500px;
 }
 
 svg {
@@ -214,7 +254,7 @@ svg {
 #login .container input{
   margin:15px 0px;
 }
-#sell .container input{
+#add .container input{
   margin:15px 0px;
 }
 
@@ -244,7 +284,11 @@ textarea:focus .register-form {
 }
 
 input:not([type="submit"]):valid {
-  border-color: #2ecc71;
+  -moz-transition: all .2s ease-in;
+  -o-transition: all .2s ease-in;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+  border-color: #04a547;
 }
 
 
@@ -279,7 +323,8 @@ button {
   box-shadow: inset 0 -2px #219d218a;
 }
 .button:active {
-  top: 1px;
+  position: relative;
+  transform: translateY(4px);
   outline: none;
   -webkit-box-shadow: none;
   box-shadow: none;

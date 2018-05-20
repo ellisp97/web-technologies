@@ -5,7 +5,6 @@ function realTimeValidation(input) {
 
 	//add reference to the input node
 	this.inputNode = input;
-	console.log(this.inputNode);
 
 	//trigger method to attach the listener
 	this.registerListener();
@@ -114,10 +113,11 @@ var emailValidityChecks = [
 	},
 	{
 		isInvalid: function(input) {
-			var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-			return re.test(email);
+
+			var reg =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+			return reg.test(input.value) ? false : true;
 		},
-		invalidityMessage: 'Valid Emailis Required',
+		invalidityMessage: 'Valid Email is Required',
 		element: document.querySelector('label[for="email"] .input-requirements li:nth-child(2)')
 	}
 ];
@@ -185,7 +185,7 @@ usernameInput.realTimeValidation = new realTimeValidation(usernameInput);
 usernameInput.realTimeValidation.validityChecks = usernameValidityChecks;
 
 emailInput.realTimeValidation = new realTimeValidation(emailInput);
-emailInput.realTimeValidation.validityChecks = usernameValidityChecks;
+emailInput.realTimeValidation.validityChecks = emailValidityChecks;
 
 passwordInput.realTimeValidation = new realTimeValidation(passwordInput);
 passwordInput.realTimeValidation.validityChecks = passwordValidityChecks;
@@ -210,7 +210,6 @@ var form = document.getElementById('register');
 
 function validate() {
 	for (var i = 0; i < inputs.length; i++) {
-		console.log(inputs[i]);
 		inputs[i].realTimeValidation.checkInput();
 	}
 }
