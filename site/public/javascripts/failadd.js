@@ -2,7 +2,6 @@
 var failure = document.getElementById('fail-script').getAttribute('data-urlcode');
 if(failure==0){
     console.log('product already exists');
-
     document.getElementById("error-message").innerHTML = 'product already exists';
     var fail_modal = document.getElementById('failadd');
     fail_modal.style.display = 'block';

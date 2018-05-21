@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //secret key r stringandom
 app.use(session({
   store: new SQLiteStore,
-  secret: 'ershthtsjy',
+  secret: 'eOyfM4KdW9rNwu7TeJfS',
   resave: false,
   saveUninitialized: false
 }));
@@ -152,7 +152,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('404');
+  res.render('404',{  URLcode : 1  });
 });
 
 

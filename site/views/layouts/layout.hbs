@@ -3,19 +3,41 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="msapplication-TileColor" content="#ffffff"/>
+    <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png"/>
+    <meta name="theme-color" content="#ffffff"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Price Tracker</title>
+
     <link rel="stylesheet" href ="/stylesheets/404.css"/>
     <link rel="stylesheet" href ="/stylesheets/profile.css"/>
     <link rel="stylesheet" href ="/stylesheets/style.css"/>
     <link rel="stylesheet" href ="/stylesheets/loggedin.css"/>
-    <link rel="shortcut icon" href="/images/logo.png"/>
+
+    {{!-- favicon for all platforms --}}
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/manifest.json">
+
     <script src="/javascripts/loadcolor.js" defer="defer"></script>
     <script src="/javascripts/check.js" defer="defer"></script>
     <script src="/javascripts/checklink.js" defer="defer"></script>
     <script defer="defer" src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
     <script data-urlcode='{{{URLcode}}}' id='fail-script' src='/javascripts/failadd.js' defer="defer"></script>
 </head>
-<body>
+<body >{{!--onload="random_col()" --}}
     <div class="intro-form">
         {{#if isAuthenticated}}
         <ul class="main-menu">
@@ -32,6 +54,28 @@
 
         {{/if}}
     </div>
+
+
+    <form action="/login" method="post">
+        <div id="login" class="modal">
+            <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">×</span>
+            <div class="modal-content animate">
+                <div class="container">
+                    <div class="modal-header">
+                        <img src="images/logo.png" id="loginpic" />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" id="username" name="username" placeholder="username" />
+                        <input type="password" id="password" name="password" placeholder="password" />
+                    </div>
+                    <div class="loginbutt">
+                        <button type="submit">Login</button>
+                        <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
 
     <form action="/login" method="post">
@@ -62,7 +106,16 @@
                 <div class="container">
                     <div class="register-form">
                         <div class="modal-header">
-                            <h1>Register User</h1>
+                            <h1>List a product</h1>
+                        </div>
+                        <div class="add-form">
+                            <label for="prod_link">
+                                <input type="text" id="prod_link" name="prod_link" placeholder="Enter Product Link" minlength="6" required>
+                                <ul class="input-requirements">
+                                    <li>Link must be more than 6 characters</li>
+                                    <li>Valid URL is Needed</li>
+                                </ul>
+                            </label>
                         </div>
                         <label for="name">
                             <input type="text" id="name" name = "name" placeholder="Enter Name" minlength="3" required/>
