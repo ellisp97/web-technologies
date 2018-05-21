@@ -1,0 +1,73 @@
+.about-us-wrapper{
+    position:relative
+}
+.about-us-wrapper h1{
+    text-align: center;
+    padding-bottom: 5%;
+    float:none;
+}
+
+.about-us-wrapper h2{
+    text-align: center;
+    padding-bottom: 5%;
+    float:none;
+}
+
+#about-us-image-card{
+    /* position:absolute; */
+    width:40%;
+    margin: 0 auto;
+    float:none;
+}
+#about-us-image-card img{
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.text{
+    display:table;
+}
+.ellis-card{
+    width:30%;
+    padding:0 5%;
+    display: table-cell;
+}
+
+.shanik-card{
+    width:30%;
+    padding:0 5%;
+    display: table-cell;
+}
+
+.both-card{
+    width:30%;
+    padding:0 5%;
+    display:table-cell;
+}
+
+/* Use a media query to add a break point at 800px: */
+@media screen and (max-width:850px) {
+    #about-us-image-card{
+        /* position:absolute; */
+        width:95%;
+        margin: 0 auto;
+        float:none;
+    }
+    .ellis-card{
+        width:80%;
+        padding: 0 5%;
+        display: block;
+    }
+
+    .shanik-card{
+        width:80%;
+        padding:0 5%;
+        display: block;
+    }
+
+    .both-card{
+        width:80%;
+        padding:0 5%;
+        display:block;
+    }
+}

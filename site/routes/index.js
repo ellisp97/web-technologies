@@ -115,6 +115,12 @@ router.get('/', function(req, res, next) {
     fail=1;
   }
 });
+/*GET about us page*/
+router.get('/aboutus', function(req, res, next) {
+  // console.log(req.user);
+  // console.log(req.isAuthenticated());
+  res.render('aboutus', {URLcode: 1});
+});
 
 
 function authenticationMiddleware(){

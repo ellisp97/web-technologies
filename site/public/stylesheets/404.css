@@ -1,3 +1,27 @@
+.error-wrapper{
+}
+
 #errorpage{
     text-align: center;
+}
+
+#fourofour-image-card{
+    /* position:absolute; */
+    width:20%;
+    margin: 0 auto;
+    float:none;
+}
+#fourofour-image-card img{
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Use a media query to add a break point at 800px: */
+@media screen and (max-width:850px) {
+    #fourofour-image-card{
+        /* position:absolute; */
+        width:95%;
+        margin: 0 auto;
+        float:none;
+    }
 }

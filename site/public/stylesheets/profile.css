@@ -144,6 +144,11 @@ button:hover{
     color: white;
     border: none;
     min-width: 200px;
+    -moz-border-radius: 9px 9px 9px 9px;
+    -webkit-border-radius: 9px 9px 9px 9px;
+    border-radius: 9px 9px 9px 9px;
+    box-shadow: 1px 1px 11px #330033;
+    background: #219d218a;
 }
 
 

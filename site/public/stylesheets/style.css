@@ -2,6 +2,10 @@ html, body {
     overflow-x: hidden;
 }
 
+a{
+    text-decoration: underline;
+}
+
 body{
     margin: 0px;
     padding: 0px;
@@ -335,6 +339,9 @@ button {
 #loginpic{
     max-width: 100px;
     max-height: 100px;
+}
+#about-us-h3{
+    text-align: center;
 }
 
 datalist {

@@ -61,10 +61,17 @@ margin:           0;
     width: 100%;
 }
 
+
 #carousel-select{
-    width: 50%;
-    margin-top:2%;
-    overflow-x:hidden;
+  overflow:hidden;
+  max-width:300px;
+  color: white;
+  -moz-border-radius: 9px 9px 9px 9px;
+  -webkit-border-radius: 9px 9px 9px 9px;
+  border-radius: 9px 9px 9px 9px;
+  box-shadow: 1px 1px 11px #330033;
+  background: #219d218a;
+  margin:3%;
 }
 
 /* Use a media query to add a break point at 800px: */
