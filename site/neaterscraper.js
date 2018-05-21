@@ -346,9 +346,10 @@ module.exports = {
                             // console.log(row);
                         });
                     });
-                    db.close();
+                    // db.close();
                 }
             }
+            console.log("Exit Code : ",exitCode);
             return [exitCode, id];
         }
         catch (e) {

@@ -17,6 +17,7 @@ const saltRounds = 10;
 const sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('./db/users.db');
 
+
 //initialise table
 //db.run('CREATE TABLE userData(user_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,username TEXT, email TEXT, password TEXT)');// --- INITIAL TABLE HAS BEEN MADE
 //db.run('CREATE TABLE productData(product_id INTEGER PRIMARY KEY AUTOINCREMENT, prod_name TEXT, prod_price PRICE, prod_url TEXT, user_id INTEGER');// --- INITIAL PRODUCT TABLE HAS BEEN MADE
@@ -61,7 +62,13 @@ var get_pd_row = function(id, query, cb){
 var get_product_data_async = async function(prod_ids, query, cb){
   var product_data_array = [];
   var watched_id_string = prod_ids;
-  var watched_ids = watched_id_string.split(",");
+  var watched_ids;
+  if (watched_id_string!= null){
+    watched_ids = watched_id_string.split(",");
+  }else{
+    watched_ids = null;
+    return product_data_array
+  }
   for (let id of watched_ids){
     var pd_row = await get_pd_row_async(id, query);
     product_data_array.push(pd_row);
@@ -182,38 +189,6 @@ router.get('/login', authenticationMiddleware(), function(req, res, next) {
     // var pd_array_json = JSON.stringify(product_data_array);
     // return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
   })();
-
-  // var url_rows =[];
-  // for(watched_id of watched_ids){
-  //   result = await db.allAsync(`SELECT prod_link FROM productData WHERE prod_id =? `, [watched_id]);
-  //   var ele = result[0].prod_link;
-  //   url_rows.push(ele);
-  // }
-  // console.log(url_rows);
-  // console.log(url_rows[0]);
-  //
-  // var watched_imgs=[]
-  // for(row of url_rows){
-  //   var imgCode = await img_scraper.callImgScraper(row);
-  //   watched_imgs.push(imgCode);
-  // }
-  // console.log(watched_imgs);
-
-
-  // rows = await db.allAsync(`SELECT username, email FROM userData WHERE user_id =?`, [userid]);
-  // var username = rows[0].username;
-  // var email = rows[0].email;
-  // console.log(URLcode);
-  // console.log(fail);
-  // res.render('loggedin',  { title: 'LOGGED IN',userid: userid, username: username, email:email,URLcode:URLcode});
-  // db.all(`SELECT username, email FROM userData WHERE user_id =?`, [userid], function(err,results,fields){
-  //   var username = results[0].username;
-  //   var email = results[0].email;
-
-  //   // console.log(URLcode);
-  //   res.render('loggedin', { title: 'LOGGED IN',userid: userid, username: username, email:email,URLcode:URLcode});
-  // });
-  URLcode =1;
 });
 
 
@@ -281,10 +256,20 @@ router.post('/login', function(req, res, next) {
 //   })();
 // });
 
+function cleanArray(actual) {
+  var newArray = new Array();
+  for (var i = 0; i < actual.length; i++) {
+    if (actual[i]) {
+      newArray.push(actual[i]);
+    }
+  }
+  return newArray;
+}
+
 router.get('/profile', authenticationMiddleware(), function(req, res, next) {
-  console.log(req.session);
-  var userid = req.user.user_id;
-  console.log(req.user.user_id);
+  var userid = req.session.passport.user;
+  if(isNaN(userid)){ userid = req.session.passport.user.user_id;}
+  // console.log(req.user.user_id);
   console.log(userid);
 
 
@@ -294,7 +279,70 @@ router.get('/profile', authenticationMiddleware(), function(req, res, next) {
       var user_query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
       var pd_query = `SELECT * FROM productData where prod_id =?`;
       user_data = await get_user_data_async(userid, user_query);
-      product_data_array = await get_product_data_async(user_data.watched_product_ids, pd_query);
+      console.log(user_data);
+      var watched_lengths;
+      var watched_prices;
+      var current_price;
+      var watched_currency;
+      var savings_made;
+      var current_saving;
+      var saving_if_null;
+      var current_max;
+      var saving_diff;
+      var total_saving;
+      var max_saving;
+      var product_max_saving;
+      watched_prices = 0;
+      total_saving = 0;
+      max_saving = 0;
+      watched_lengths = 0;
+      if (user_data.watched_product_ids){
+        product_data_array = await get_product_data_async(user_data.watched_product_ids, pd_query);
+
+        for(var prod of product_data_array){
+          if(prod!=null){
+            watched_lengths += 1;
+            // console.log("THIS IS CURRENT PRICE  ==============", prod.prod_price_current);
+            current_price = prod.prod_price_current;
+            current_saving = prod.prod_price_history;
+            // console.log("CURRRENT SAVING IS         ",current_saving.split(","))
+            saving_if_null = current_saving.split(",");
+            var saving_if =[];
+            for(var saving of saving_if_null){
+              if(!isNaN(saving)){
+                saving_if.push(parseInt(saving));
+              }
+            }
+            // console.log("OLD ARRAY", saving_if_null);
+            // console.log("NEW ARRAY", saving_if);
+
+            current_max = Math.max.apply(null,saving_if);
+            // console.log("THIS IS NEW CURRENT MIN", current_max);
+
+            saving_diff = (current_max - current_price);
+            if(max_saving<saving_diff){
+              max_saving = saving_diff;
+              product_max_saving = prod.prod_name;
+            } 
+            // console.log("SACING DIFF", saving_diff);
+
+            total_saving += saving_diff;
+            // console.log("TOTAAL SAVING", total_saving);
+
+
+            if(!isNaN(current_price)||current_price==null){
+              watched_prices += current_price;
+            }
+            // console.log("THIS IS TOTAL PRICE  ==============",watched_prices);
+          }
+          watched_currency = product_data_array[0].prod_currency.charAt(0);
+        }
+        total_saving = (total_saving/100).toFixed(2);
+        watched_prices = (watched_prices/100).toFixed(2);
+        max_saving = (max_saving/100).toFixed(2);
+      }else{
+        watched_ids = null;
+      }
     }
     catch (err) {
       return console.error(err);
@@ -304,7 +352,7 @@ router.get('/profile', authenticationMiddleware(), function(req, res, next) {
     console.log(product_data_array);
     console.log("^ pd aray");
     var pd_array_json = JSON.stringify(product_data_array);
-    return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
+    return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json,watched_lengths:watched_lengths,watched_prices:watched_prices,watched_currency:watched_currency,total_saving:total_saving,product_max_saving:product_max_saving,max_saving:max_saving, URLcode : 1 });
   })();
 });
 
@@ -351,21 +399,43 @@ router.post('/sumbit', function(req,res,next){
 });
 
 router.post('/add', async function(req,res,next){
-    var userid = req.user.user_id;
+    var userid = req.session.passport.user;
+    if(isNaN(userid)){ userid = req.session.passport.user.user_id;}
+
     var url = req.body.prod_link;//'https://www.amazon.co.uk/AKORD-Metal-Binder-Clip-Clamp/dp/B0082JFX1M';
     console.log("the given url is", url);
     // console.log(url);
     var scraper_returner = await scraper.callScraper(url);
+    console.log("==============SCRAPER-RETURNER====================",scraper_returner);
     URLcode = scraper_returner[0];
     var prod_id = scraper_returner[1];
     var user_data = await get_user_data_async(userid, `SELECT watched_product_ids FROM userData WHERE user_id =?`);
-    var watched_ids = user_data.watched_product_ids;
+    console.log(user_data);
+    var watched_ids;
+    var check_if_in_watched_ids;
+    if(user_data.watched_product_ids){
+      watched_ids = user_data.watched_product_ids;
+      check_if_in_watched_ids = watched_ids.split(',');
+      console.log(check_if_in_watched_ids);
+      // $.inArray(prod_id,check_if_in_watched_ids);
+      console.log(check_if_in_watched_ids.includes(prod_id));
+      if(!check_if_in_watched_ids.includes(prod_id) && URLcode==0){
+        URLcode = 1;
+      }
+    }else if(URLcode==0){
+      URLcode = 1;
+    }
+
     // console.log(URLcode);
     if(URLcode!=1){
       res.redirect('/login');
     }else{
       console.log("product id is", prod_id);
-      watched_ids = watched_ids + "," + prod_id;
+      if(watched_ids){
+        watched_ids = watched_ids + "," + prod_id;
+      }else{
+        watched_ids = prod_id;
+      }
       db.run(`UPDATE userData SET watched_product_ids = ? WHERE user_id=?`, [watched_ids,userid], function(err) {
         if (err) {
           return // console.log(err.message);

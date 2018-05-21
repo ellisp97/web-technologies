@@ -1,12 +1,8 @@
 
 var failure = document.getElementById('fail-script').getAttribute('URLcode');
+console.log("this is the fail ",failure);
 if(failure==0){
     console.log('product already exists');
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> cd5895571353edaafde643bdf790db42cc92d597
     document.getElementById("error-message").innerHTML = 'product already exists';
     var fail_modal = document.getElementById('failadd');
     fail_modal.style.display = 'block';
@@ -23,9 +19,6 @@ if(failure==0){
     login.style.display = 'block';
     fail_modal.style.zIndex = 20;
     // count = 0;
-<<<<<<< HEAD
-}
-=======
 }else if(failure==-2){
     console.log('product found, no price in product');
     document.getElementById("error-message").innerHTML = 'product found from link has no price';
@@ -36,4 +29,3 @@ if(failure==0){
     fail_modal.style.zIndex = 20;
     // count = 0;
 }
->>>>>>> cd5895571353edaafde643bdf790db42cc92d597

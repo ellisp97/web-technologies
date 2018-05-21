@@ -1,22 +1,26 @@
 #right-bar {
+    position: relative;
     height: 100%;
-    width: 20%;
-    min-width: 300px;
+    width: 28%;
+    float: left;
     overflow:hidden;
-    min-height:200px;
 }
 
 #left-bar {
     height: 100%;
-    width: 75%;
-    float: left;
+    width: 65%;
+    float: right;
     min-width: 800px;
     margin: 2%;
 }
 
-@media screen and (max-width:1450px) {
+#redraw_button{
+    margin-top: 3em;
+}
+
+/* @media screen and (max-width:1450px) {
     #left-bar{
-        width: 100%;
+        width: 90%;
     }
     #right-bar{
         width: 80%;
@@ -24,15 +28,15 @@
         height: auto;
         width: auto;
     }
-}
-@media screen and (max-width:1105px) {
-    .dropdown, .displayChart{
-        min-width: 95%;
-        height: auto;
-        width: auto;
+} */
+@media screen and (max-width:1275px) {
+    #right-bar,#left-bar{
+        margin-top:0em;
+        width: 100%;
     }
-}
 
+}
+/* 
 .wrapper { 
     border : 2px solid #000; 
     overflow:hidden;
@@ -41,7 +45,7 @@
 .wrapper div {
     min-height: 200px;
     padding: 10px;
-}
+} */
 
 .card {
     box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.4);
@@ -58,7 +62,7 @@
 
 a {
     text-decoration: none;
-    font-size: 22px;
+    font-size: 16px;
     color: black;
 }
 
@@ -67,64 +71,77 @@ button:hover, a:hover {
 }
 
 .displayChart {
-    position:relative;
-    height:100%;
-    width:70%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height:auto;
+    width:90%;
+    min-width:300px;
     float: right;
-    margin-right: 3em;
+    margin-top: 4em;
     border: 2px solid white;
 }
 
 #myChart {
     position: relative;
+    float: right;
     color: black;
     border: 5px solid thistle;
     width: 100%;
 }
 
-.dropdown {
-  width:auto;
+#left-bar .dropdown-content button{
+    top: -1em;
+    font-size: 16px;
+    width: auto;
+    overflow: hidden;
+}
+#left-bar .dropdown-content{
+    background-color: thistle;
+}
+/* 
+button:hover{
+    width: auto;
+} */
+
+
+.dropdown{
+    position: absolute;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .dropbtn {
+    position: relative;
+    width: 100%;
+    margin-top: 0;
     color: white;
-    padding: 16px;
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     cursor: pointer;
-    height: 80%;
+    z-index: 2;
+    display: block;
+}
+.dropbtn:hover {
+    display: block;
+    width: auto;
 }
 
-.dropdown-content {
-  background-color: thistle;
+.dropdown-content input{
+    font-size: 14px;
+    width: auto;
+    background-color: none;
 }
 
 .dropdown-content button[value="OFF"]{
     background-color: #c0392b;
 }
-<<<<<<< HEAD
-=======
 
-.graphbuttons {
+#choose-timescale, #choose-number{
     position: relative;
-    left:480px;
-    top:400px;
-}
-
-.graphbuttons button {
-    padding: 10px 24px;
-    cursor: pointer;
-    width: 170px;
     float: left;
+    background-color: #219d218a;
+    color: white;
+    border: none;
+    min-width: 200px;
 }
-
-.graphbuttons:after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.graphbuttons button:not(:last-child) {
-    border-right: none; /* Prevent double borders */
-}
->>>>>>> cd5895571353edaafde643bdf790db42cc92d597

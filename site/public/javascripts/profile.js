@@ -2,6 +2,8 @@
 var ctx = document.getElementById("myChart");
 var prod_data = document.getElementById("profile-chart-script").getAttribute( "data-prod_data" );
 var data_parsed = JSON.parse(prod_data);
+console.log("DATA PARSED",data_parsed);
+data_parsed = data_parsed.filter(function(n){ return n != undefined }); 
 const colours = ['#FEA47F', '#25CCF7', '#EAB543','#55E6C1','#CAD3C8','#F97F51','#1B9CFC','#F8EFBA','#58B19F','#2C3A47'];
 var active_buttons = [];
 
