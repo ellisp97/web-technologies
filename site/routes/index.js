@@ -361,36 +361,38 @@ router.post('/add', async function(req,res,next){
     var watched_ids;
     var check_if_in_watched_ids;
     if(user_data.watched_product_ids){
-      watched_ids = user_data.watched_product_ids;
-      check_if_in_watched_ids = watched_ids.split(',');
-      console.log(check_if_in_watched_ids);
-      // $.inArray(prod_id,check_if_in_watched_ids);
-      console.log(check_if_in_watched_ids.includes(prod_id));
-      if(!check_if_in_watched_ids.includes(prod_id) && URLcode==0){
-        URLcode = 1;
-      }
+        watched_ids = user_data.watched_product_ids;
+        check_if_in_watched_ids = watched_ids.split(',');
+        console.log(check_if_in_watched_ids);
+        // $.inArray(prod_id,check_if_in_watched_ids);
+        console.log(check_if_in_watched_ids.includes(prod_id));
+        if(!check_if_in_watched_ids.includes(prod_id) && URLcode==0){
+            URLcode = 1;
+        }
     }else if(URLcode==0){
-      URLcode = 1;
+        URLcode = 1;
     }
 
     // console.log(URLcode);
     if(URLcode!=1){
-      res.redirect('/login');
-    }else{
-      console.log("product id is", prod_id);
-      if(watched_ids){
-        watched_ids = watched_ids + "," + prod_id;
-      }else{
-        watched_ids = prod_id;
-      }
-      db.run(`UPDATE userData SET watched_product_ids = ? WHERE user_id=?`, [watched_ids,userid], function(err) {
-        if (err) {
-          return // console.log(err.message);
-        }
-        // console.log('SUCCESS');
         res.redirect('/login');
-    });
+    }else{
+        console.log("product id is", prod_id);
+        if(watched_ids){
+            watched_ids = watched_ids + "," + prod_id;
+        }else{
+            watched_ids = prod_id;
+        }
+        db.run(`UPDATE userData SET watched_product_ids = ? WHERE user_id=?`, [watched_ids,userid], function(err) {
+            if (err) {
+                return // console.log(err.message);
+            }
+        // console.log('SUCCESS');
+            res.redirect('/login');
+        });
+    }
 });
+
 
 
 passport.serializeUser(function(user_id, done){
