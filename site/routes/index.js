@@ -9,7 +9,7 @@ var scraper = require('../neaterscraper');
 // var img_scraper = require('../imagescraper');
 var scraperupdater = require('../scraperdatabaseupdater');
 
-var fail = false;
+var fail = 1;
 var URLcode = 1;
 
 const saltRounds = 10;
@@ -103,12 +103,17 @@ db.serialize(function() {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    if(req.isAuthenticated()){
-        res.redirect('/login');
-    }else{
-        res.render('index', {title: 'HOMEPAGE', URLcode: URLcode, flop:fail});
-        fail=false;
-    }
+  // console.log(req.user);
+  // console.log(req.isAuthenticated());
+  if(req.isAuthenticated()){
+    res.redirect('/login');
+  }else{
+    // console.log("you are in the get /request");
+    // console.log("fail value is", fail);
+    console.log("ne3jkhwfueyrwhniuwrefuiyrewku",fail);
+    res.render('index', {title: 'HOMEPAGE', URLcode: URLcode, flop:fail});
+    fail=1;
+  }
 });
 
 
@@ -159,50 +164,27 @@ router.post('/logout', function(req,res) {
 });
 
 router.post('/login', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
-        if(err) {
-            console.error(err);
-            return next(err);
-        }
-        if(!user){
-            fail = true;
-            return res.redirect('/');
-        }
-        req.logIn(user, function(err) {
-            // console.log("logging in");
-            fail = false;
-            if(err){
-                console.error(err);
-                return next(err);
-            }
-            return res.redirect('/login');
-        });
-    })(req, res, next);
+  passport.authenticate('local', function(err, user, info) {
+    if(err) {
+      console.error(err);
+      return next(err);
+    }
+    if(!user){
+      fail = 1;
+      return res.redirect('/');
+    }
+    req.logIn(user, function(err) {
+      // console.log("logging in");
+      fail = 0;
+      if(err){
+        console.error(err);
+        return next(err);
+      }
+      return res.redirect('/login');
+    });
+  })(req, res, next);
 });
 
-
-// router.get('/profile', authenticationMiddleware(), function(req, res, next) {
-//   var userid = req.user.user_id;
-
-//   (async() => {
-//     let user_data, product_data_array;
-//     try {
-//       var user_query = `SELECT username, email, watched_product_ids FROM userData WHERE user_id =?`;
-//       var pd_query = `SELECT * FROM productData where prod_id =?`;
-//       user_data = await get_user_data_async(userid, user_query);
-//       product_data_array = await get_product_data_async(user_data.watched_ids, pd_query);
-//     }
-//     catch (err) {
-//       return console.error(err);
-//     }
-//     // return res.send(product_data_array);
-//     // res.cookie('data', JSON.stringify(product_data_array));
-//     // console.log(product_data_array);
-//     // console.log("^ pd aray");
-//     var pd_array_json = JSON.stringify(product_data_array);
-//     return res.render('profile', {title: 'YOUR PROFILE', userid:user_data.userid, username:user_data.username, email:user_data.email, prod_data:pd_array_json});
-//   })();
-// });
 
 function cleanArray(actual) {
   var newArray = new Array();
@@ -228,18 +210,8 @@ router.get('/profile', authenticationMiddleware(), function(req, res, next) {
       var pd_query = `SELECT * FROM productData where prod_id =?`;
       user_data = await get_user_data_async(userid, user_query);
       console.log(user_data);
-      var watched_lengths;
-      var watched_prices;
-      var current_price;
-      var watched_currency;
-      var savings_made;
-      var current_saving;
-      var saving_if_null;
-      var current_max;
-      var saving_diff;
-      var total_saving;
-      var max_saving;
-      var product_max_saving;
+      var watched_lengths, watched_prices, current_price, watched_currency, savings_made, current_saving, saving_if_null, current_max;
+      var saving_diff, total_saving, max_saving, product_max_saving;
       watched_prices = 0;
       total_saving = 0;
       max_saving = 0;
@@ -339,9 +311,11 @@ router.post('/submit', function(req,res,next){
                 });
             }
         } else{
-        // console.log('username already exists');
+          console.log('username already exists');
+          fail=-1;
+          console.log(fail);
+          res.redirect('/');
         }
-    // });
     });
 });
 
