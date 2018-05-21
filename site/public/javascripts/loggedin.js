@@ -91,9 +91,11 @@ function create_product_table_entry(row, id){
     trow.id = "table-row-" + id;
     trow.className = "table-row-active";
     var td_name = document.createElement('td');
-    td_name.className = "table-name";
+    td_name.className = "table-name no-left";
+    td_name.setAttribute('colspan', '3');
     var td_price = document.createElement('td');
-    td_price.className = "table-price";
+    td_price.className = "table-price no-right";
+    td_price.setAttribute('colspan', '1');
     var name = row.prod_name;
     var prod_url = row.prod_link;
     var currency = row.prod_currency;
@@ -121,7 +123,11 @@ function create_product_table(urls_and_names_not_null, urls_and_names_null, cont
     var i;
     var trows_array = [];
     heading1.innerHTML = "Product Name (click to be sent to the link)";
+    heading1.setAttribute('colspan', '3');
+    heading1.className = "bottom no-left";
     heading2.innerHTML = "Current Product Price";
+    heading2.setAttribute('colspan', '1');
+    heading2.className = "bottom no-right";
     headingrow.appendChild(heading1);
     headingrow.appendChild(heading2);
     thead.appendChild(headingrow);

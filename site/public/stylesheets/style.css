@@ -1,48 +1,52 @@
 html, body {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 body{
-  margin: 0px;
-  padding: 0px;
-  font-family: sans-serif;
-  background-color: thistle;
+    margin: 0px;
+    padding: 0px;
+    font-family: Bitter, sans-serif;
+    background-color: thistle;
+}
+
+button{
+    font-family: Bitter, sans-serif;
 }
 
 .container{
-  position: relative;
-  top: 50%;
-  width: 40%;
-  min-width: 400px;
-  min-height:300px;
-  height: 60%;
-  text-align: center;
-  background-color: thistle;
-  margin: auto;
-  border: 3px solid #f1f1f1;
+    position: relative;
+    top: 50%;
+    width: 40%;
+    min-width: 400px;
+    min-height:300px;
+    height: 60%;
+    text-align: center;
+    background-color: thistle;
+    margin: auto;
+    border: 3px solid #f1f1f1;
 }
 
 button:hover {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 
 button:focus {outline:0;}
 
 .container img{
-  height: 140px;
-  width: 140px;
-  margin: 10px 0px;
+    height: 140px;
+    width: 140px;
+    margin: 10px 0px;
 }
 
 input{
-  height: 50px;
-  width: auto;
-  text-align: center;
+    height: 50px;
+    width: auto;
+    text-align: center;
 }
 
 .loginbutt{
-  margin-top: 40px;
-  font-size: 20px;
+    margin-top: 40px;
+    font-size: 20px;
 }
 
 .modal {
@@ -64,33 +68,33 @@ input{
 
 /* Animation */
 @-webkit-keyframes modalbox {
-  0% {
-    top: -250px;
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
+    0% {
+        top: -250px;
+        opacity: 0;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
 }
 
 @keyframes modalbox {
-  0% {
-    top: -250px;
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
+    0% {
+        top: -250px;
+        opacity: 0;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
 }
 
 
 .modal-header {
-  padding: 20px 40px;
-  background: #219d218a;
-  color: #ffffff;
-  margin-bottom: 20px;
+    padding: 20px 40px;
+    background: #219d218a;
+    color: #ffffff;
+    margin-bottom: 20px;
 }
 
 /* Modal Content/Box */
@@ -134,236 +138,236 @@ input{
 }
 
 .errors ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .success {
-  background: #80cca0;
-  padding: 5px;
+    background: #80cca0;
+    padding: 5px;
 }
 
 
 .intro-form{
-  background: #fff;
-  min-height: 30px;
-  overflow: auto;
-  font-size: 28px;
+    background: #fff;
+    min-height: 30px;
+    overflow: auto;
+    font-size: 28px;
 
 }
 .intro-form .main-menu{
-  float: left;
-  margin-left: 0em;
+    float: left;
+    margin-left: 0em;
 }
 ul{
-  list-style: none;
+    list-style: none;
 }
 .intro-form .main-menu li{
-  position: center;
-  float: left;
+    position: center;
+    float: left;
 }
 .intro-form a {
-  cursor: crosshair;
-  display: block;
-  padding: 40px;
-  line-height: 30px;
-  color: #191919;
-  text-decoration: none;
+    cursor: crosshair;
+    display: block;
+    padding: 40px;
+    line-height: 30px;
+    color: #191919;
+    text-decoration: none;
 }
 /*
 .intro-form .main-menu a:hover{
-  background-color: #ffff90;
-  color: thistle;
+background-color: #ffff90;
+color: thistle;
 } */
 
 svg #titletext path{
-  fill: thistle !important;
-  stroke: #000 !important;
-  stroke-dasharray: 640;
-  animation:at 3000ms;
+    fill: thistle !important;
+    stroke: #000 !important;
+    stroke-dasharray: 640;
+    animation:at 3000ms;
 }
 
 #select {
-  max-width: 500px;
+    max-width: 500px;
 }
 
 svg {
-  display: block;
-  margin: auto;
+    display: block;
+    margin: auto;
 }
 
 #zoom{
-  position: relative;
-  margin-left: 5%;
-  width: 100%;
-  height: 100%;
+    position: relative;
+    margin-left: 5%;
+    width: 100%;
+    height: 100%;
 }
 
 #loading{
-  transform: translate(350px,-200px);
-  position: relative;
-  top: 500px;
-  left: 250px;
+    transform: translate(350px,-200px);
+    position: relative;
+    top: 500px;
+    left: 250px;
 }
 
 #innerspin{
-  background: no-repeat;
-  transform-origin:50% 49%;
-  animation:cw 2000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+    background: no-repeat;
+    transform-origin:50% 49%;
+    animation:cw 2000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 #outerspin{
-  background: no-repeat;
+    background: no-repeat;
 }
 
 @keyframes at {
-  0%{
-    stroke-dashoffset: 640;
-  }
-  30%{
-    stroke-dashoffset: 320;
-  }
-  100%{
-    stroke-dashoffset: 0;
-  }
+    0%{
+        stroke-dashoffset: 640;
+    }
+    30%{
+        stroke-dashoffset: 320;
+    }
+    100%{
+        stroke-dashoffset: 0;
+    }
 }
 
 @keyframes cw {
-  from{transform:rotate(0deg);}
-  to{transform: rotate(360deg);}
+    from{transform:rotate(0deg);}
+    to{transform: rotate(360deg);}
 }
 @keyframes ccw {
-  from{transform:rotate(0deg);}
-  to{transform: rotate(360deg);}
+    from{transform:rotate(0deg);}
+    to{transform: rotate(360deg);}
 }
 
 .container input {
-  position: relative;
-  margin: 0;
-  box-sizing: border-box;
-  outline: none;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 5px;
-  height: 50px;
+    position: relative;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    height: 50px;
 }
 
 #login .container input{
-  margin:15px 0px;
+    margin:15px 0px;
 }
 #add .container input{
-  margin:15px 0px;
+    margin:15px 0px;
 }
 
 .input-requirements {
-  min-width: 200px;
+    min-width: 200px;
 }
 .input-requirements li.invalid {
-	color: #500800;
+    color: #500800;
 }
 .input-requirements li.valid {
-	color: #037e36;
+    color: #037e36;
 }
 
 input[type="text"],
 {
-  background-color: rgb(250,250,250);
-  border-radius: 3px;
-  border-width: 1px;
-  border-style: solid;
-  border-color:  rgb(200, 200, 200);
+    background-color: rgb(250,250,250);
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color:  rgb(200, 200, 200);
 }
 
 input:focus .register-form,
 textarea:focus .register-form {
-  background-color:rgb(250,250,250);
-  border-color:  rgb(255, 0, 0);
+    background-color:rgb(250,250,250);
+    border-color:  rgb(255, 0, 0);
 }
 
 input:not([type="submit"]):valid {
-  -moz-transition: all .2s ease-in;
-  -o-transition: all .2s ease-in;
-  -webkit-transition: all .2s ease-in;
-  transition: all .2s ease-in;
-  border-color: #04a547;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    border-color: #04a547;
 }
 
 
 input:not([type="submit"]) + .input-requirements {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 1s ease-out;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 1s ease-out;
 }
 
 input:not([type="submit"]):hover + .input-requirements,
 input:not([type="submit"]):focus + .input-requirements,
 input:not([type="submit"]):active + .input-requirements {
-  max-height: 1400px; /*height to ease down onto */
-  transition: max-height 1s ease-in;
+    max-height: 1400px; /*height to ease down onto */
+    transition: max-height 1s ease-in;
 }
 
 button {
-  position: relative;
-  vertical-align: top;
-  width: 100%;
-  height: 60px;
-  margin: 10px 0px;
-  font-size: 22px;
-  color: white;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  background: #219d218a;
-  border: 0;
-  border-bottom: 2px solid #219d218a;
-  cursor: pointer;
-  -webkit-box-shadow: inset 0 -2px #219d218a;
-  box-shadow: inset 0 -2px #219d218a;
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+    height: 60px;
+    margin: 10px 0px;
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    background: #219d218a;
+    border: 0;
+    border-bottom: 2px solid #219d218a;
+    cursor: pointer;
+    -webkit-box-shadow: inset 0 -2px #219d218a;
+    box-shadow: inset 0 -2px #219d218a;
 }
 .button:active {
-  position: relative;
-  /* transform: translateY(4px); */
-  outline: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+    position: relative;
+    /* transform: translateY(4px); */
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 #loginpic{
-  max-width: 100px;
-  max-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 datalist {
-  border: 1px white solid;
-  display: block;
+    border: 1px white solid;
+    display: block;
 }
 
 /*--------------- Polyfill Script----------------*/
 .datalist-polyfill {
-	list-style: none;
-	display: none;
-	background: white;
-	box-shadow: 0 2px 2px #999;
-	position: absolute;
-	left: 0;
-	top: 0;
-	margin: 0;
-	padding: 0;
-	max-height: 300px;
-	overflow-y: auto;
+    list-style: none;
+    display: none;
+    background: white;
+    box-shadow: 0 2px 2px #999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .datalist-polyfill:empty {
-  display: none !important;
+    display: none !important;
 }
 
 .datalist-polyfill > li {
-  padding: 3px;
-  font: 13px "Lucida Grande", Sans-Serif;
+    padding: 3px;
+    font: 13px "Lucida Grande", Sans-Serif;
 }
 
 .datalist-polyfill__active {
-  background: #3875d7;
-  color: white;
+    background: #3875d7;
+    color: white;
 }
 /* ---------------------------------------- */

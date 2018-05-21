@@ -248,6 +248,11 @@ function scraper(url_param, id, domain){
                             currency = "€ cents";
                         }
                         //save the price as a number
+                        if(price.length>5){
+                            var prices = price.split(".");
+                            var pricey = prices[0] + "." + prices[1].slice(0, 2);
+                            price = pricey;
+                        }
                         price_num = Number(price);
                     });
 
