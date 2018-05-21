@@ -170,12 +170,12 @@ router.post('/login', function(req, res, next) {
       return next(err);
     }
     if(!user){
-      fail = 1;
+      fail = 0;
       return res.redirect('/');
     }
     req.logIn(user, function(err) {
       // console.log("logging in");
-      fail = 0;
+      fail = 1;
       if(err){
         console.error(err);
         return next(err);
