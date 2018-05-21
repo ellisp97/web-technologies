@@ -1,4 +1,4 @@
-var login_failure = document.getElementById('failure-script').getAttribute('floppy');
+var login_failure = document.getElementById('failure-script').getAttribute('data-floppy');
 
 console.log("Login Failire ::",login_failure);
 

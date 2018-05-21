@@ -17,6 +17,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "express-validator": "^5.1.2",
+    "handlebars-validate": "^0.1.0",
     "http-errors": "~1.6.2",
     "https": "^1.0.0",
     "jquery-editable-select": "^2.2.5",

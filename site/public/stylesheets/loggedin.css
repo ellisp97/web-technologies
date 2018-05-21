@@ -117,8 +117,8 @@ transition:       .8s ease;
 }
 
 .active .carousel-element.current {
-top:              -.75em; 
-position:         relative; 
+top:              -.75em;
+position:         relative;
 display:          block;
 opacity:          1;
 transform:        scale(1);
@@ -226,6 +226,22 @@ background-color: #3e8e41;
   position: relative;
   width: inherit;
   border: none;
+}
+
+.table-row-active{
+    display:block;
+}
+
+.table-row-active .table-name{
+    font-size: 1em;
+}
+
+.table-row-active .table-price{
+    font-size: 0.7em;
+}
+
+.table-row-inactive{
+    display:none;
 }
 .datalist-form input{
   position: relative;

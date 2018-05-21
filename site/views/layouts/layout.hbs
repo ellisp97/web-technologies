@@ -1,139 +1,110 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Price Tracker</title>
-        <link rel="stylesheet" href ="/stylesheets/404.css">
-        <link rel="stylesheet" href ="/stylesheets/profile.css">
-        <link rel="stylesheet" href ="/stylesheets/style.css">
-        <link rel="stylesheet" href ="/stylesheets/loggedin.css">
-        <script src="/javascripts/loadcolor.js" ></script>
-        <script src="/javascripts/carousel.js" ></script>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="msapplication-TileColor" content="#ffffff"/>
+    <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png"/>
+    <meta name="theme-color" content="#ffffff"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {{!-- favicon for all platforms --}}
-        <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="images/favicon/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-        <link rel="manifest" href="images/favicon/manifest.json">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
+    <title>Price Tracker</title>
 
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
-    {{!-- ressizing window --}}        
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    </head>
-     <body >{{!--onload="random_col()" --}}
-        <div class="intro-form">
-            {{#if isAuthenticated}}
-                <ul class="main-menu">
-                    <li><a href="/profile"><i class="fa fa-user"></i>Profile</a></li>
-                    <li><a href="/login"> <i class="fas fa-home"></i>Home</a></li>
-                    <li><a onclick="document.getElementById('add').style.display='block'"> <i class="fa fa-shopping-bag"></i>Add</a></li>
-                    <li><a href="/logout"> <i class="fas fa-sign-out-alt"></i>Logout</a></li>
-                </ul>
-            {{else}}
-                <ul class="main-menu">
-                    <li><a onclick="document.getElementById('login').style.display='block'"> <i class="fas fa-sign-in-alt"></i>Login</a></li>
-                    <li><a onclick="document.getElementById('register').style.display='block'"> <i class="fa fa-user"></i>Register</a></li>
-                </ul>
-            
-            {{/if}}
+    <link rel="stylesheet" href ="/stylesheets/404.css"/>
+    <link rel="stylesheet" href ="/stylesheets/profile.css"/>
+    <link rel="stylesheet" href ="/stylesheets/style.css"/>
+    <link rel="stylesheet" href ="/stylesheets/loggedin.css"/>
+
+    {{!-- favicon for all platforms --}}
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/manifest.json">
+
+    <script src="/javascripts/loadcolor.js" defer="defer"></script>
+    <script src="/javascripts/check.js" defer="defer"></script>
+    <script src="/javascripts/checklink.js" defer="defer"></script>
+    <script defer="defer" src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+    <script data-urlcode='{{{URLcode}}}' id='fail-script' src='/javascripts/failadd.js' defer="defer"></script>
+</head>
+<body >{{!--onload="random_col()" --}}
+    <div class="intro-form">
+        {{#if isAuthenticated}}
+        <ul class="main-menu">
+            <li><a href="/profile"><i class="fa fa-user"></i>Profile</a></li>
+            <li><a href="/login"> <i class="fas fa-home"></i>Home</a></li>
+            <li><a onclick="document.getElementById('add').style.display='block'"> <i class="fa fa-shopping-bag"></i>Add</a></li>
+            <li><a href="/logout"> <i class="fa fa-sign-out"></i>Logout</a></li>
+        </ul>
+        {{else}}
+        <ul class="main-menu">
+            <li><a onclick="document.getElementById('login').style.display='block'"> <i class="fa fa-user"></i>Login</a></li>
+            <li><a onclick="document.getElementById('register').style.display='block'"> <i class="fa fa-user"></i>Register</a></li>
+        </ul>
+
+        {{/if}}
+    </div>
+
+
+    <form action="/login" method="post">
+        <div id="login" class="modal">
+            <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">×</span>
+            <div class="modal-content animate">
+                <div class="container">
+                    <div class="modal-header">
+                        <img src="images/logo.png" id="loginpic" />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" id="username" name="username" placeholder="username" />
+                        <input type="password" id="password" name="password" placeholder="password" />
+                    </div>
+                    <div class="loginbutt">
+                        <button type="submit">Login</button>
+                        <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
+    </form>
 
 
-        <form action="/login" method="post">
-            <div id="login" class="modal">
-                <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">×</span>
-                <div class="modal-content animate">
-                    <div class="container">
-                        <div class="modal-header">
-                            <img src="images/logo.png" id="loginpic" />
-                        </div>
-                        <div class="form-input">
-                            <input type="text" id="username" name="username" placeholder="username" />
-                            <input type="password" id="password" name="password" placeholder="password" />
-                        </div>
-                        <div class="loginbutt">
-                            <button type="submit">Login</button>
-                            <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
-                        </div>
+    <form action="/login" method="post">
+        <div id="login" class="modal">
+            <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">×</span>
+            <div class="modal-content animate">
+                <div class="container">
+                    <div class="modal-header">
+                        <img src="images/logo.svg" alt="loginpic" />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" id="username" name="username" placeholder="username" />
+                        <input type="password" id="password" name="password" placeholder="password" />
+                    </div>
+                    <div class="loginbutt">
+                        <button type="submit">Login</button>
+                        <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 
-        <form action="/sumbit" method="post">
-            <div id="register" class="modal">
-                <span onclick="document.getElementById('register').style.display='none'" class="close" title="Close Modal">×</span>
-                <div class="modal-content animate">
-                    <div class="container">
-                        <div class="register-form">
-                            <div class="modal-header">
-                                <h1>Register User</h1>
-                            </div>
-                            <label for="name">
-                                <input type="text" id="name" name = "name" placeholder="Enter Name" minlength="3" required>
-                                <ul class="input-requirements">
-                                    <li>At least 3 characters long</li>
-                                    <li>Must only contain letters and numbers (no special characters)</li>
-                                </ul>
-                            </label>
-                            <label for="username">
-                                <input type="text" id="usernameR" name = "usernameR" placeholder="Enter Username" minlength="3" required>
-                                <ul class="input-requirements">
-                                    <li>At least 3 characters long</li>
-                                    <li>Must only contain letters and numbers (no special characters)</li>
-                                </ul>
-                            </label>
-                            <label for="email">
-                                <input type="text" id="email" name = "email" placeholder="Enter Email" minlength="3" required>
-                                <ul class="input-requirements">
-                                    <li>At least 3 characters long</li>
-                                    <li>Must be a valid email</li>
-                                </ul>
-                            </label>
-                            <label for="password">
-                                <input type="password" id="passwordR" name="passwordR" placeholder="Enter Password" maxlength="100" minlength="8" required>
-                                <ul class="input-requirements">
-                                    <li>Between 8 and 100 characters </li>
-                                    <li>Contain at least 1 number</li>
-                                    <li>Contains at least 1 lowercase letter</li>
-                                    <li>Contains at least 1 uppercase letter</li>
-                                    <li>Contains a special character (!$%@)</li>
-                                </ul>
-                            </label>
-                            <label for="password_repeat">
-                                <input type="password" id="password_repeat" name="password_repeat" placeholder="Confirm Password" maxlength="100" minlength="8" required>
-                            </label>
-                        </div>
-
-                        <div class="loginbutt">
-                            <button type="submit" value="Submit">Register</button>
-                            <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <script src="/javascripts/check.js"></script>
-
-        <form action="/add" method="post">
-            <div id="add" class="modal">
-            <span onclick="document.getElementById('add').style.display='none'"
-            class="close" title="Close Modal">×</span>
-                <div class="modal-content animate">
-                    <div class="container">
+    <form action="/submit" method="post">
+        <div id="register" class="modal">
+            <span onclick="document.getElementById('register').style.display='none'" class="close" title="Close Modal">×</span>
+            <div class="modal-content animate">
+                <div class="container">
+                    <div class="register-form">
                         <div class="modal-header">
                             <h1>List a product</h1>
                         </div>
@@ -144,36 +115,94 @@
                                     <li>Link must be more than 6 characters</li>
                                     <li>Valid URL is Needed</li>
                                 </ul>
-                            </label>                            
+                            </label>
                         </div>
+                        <label for="name">
+                            <input type="text" id="name" name = "name" placeholder="Enter Name" minlength="3" required/>
+                            <ul class="input-requirements">
+                                <li>At least 3 characters long</li>
+                                <li>Must only contain letters and numbers (no special characters)</li>
+                            </ul>
+                        </label>
+                        <label for="usernameR">
+                            <input type="text" id="usernameR" name = "usernameR" placeholder="Enter Username" minlength="3" required/>
+                            <ul class="input-requirements">
+                                <li>At least 3 characters long</li>
+                                <li>Must only contain letters and numbers (no special characters)</li>
+                            </ul>
+                        </label>
+                        <label for="email">
+                            <input type="text" id="email" name = "email" placeholder="Enter Email" minlength="3" required/>
+                            <ul class="input-requirements">
+                                <li>At least 3 characters long</li>
+                                <li>Must be a valid email</li>
+                            </ul>
+                        </label>
+                        <label for="passwordR">
+                            <input type="password" id="passwordR" name="passwordR" placeholder="Enter Password" maxlength="100" minlength="8" required/>
+                            <ul class="input-requirements">
+                                <li>Between 8 and 100 characters </li>
+                                <li>Contain at least 1 number</li>
+                                <li>Contains at least 1 lowercase letter</li>
+                                <li>Contains at least 1 uppercase letter</li>
+                                <li>Contains a special character (!$%@)</li>
+                            </ul>
+                        </label>
+                        <label for="password_repeat">
+                            <input type="password" id="password_repeat" name="password_repeat" placeholder="Confirm Password" maxlength="100" minlength="8" required/>
+                        </label>
+                    </div>
 
-                        <button type="submit" id="add_id">Add</button>
-                        <button type="button"onclick="document.getElementById('add').style.display='none'"
-                        class="cancelbutt">Cancel</button>
+                    <div class="loginbutt">
+                        <button type="submit" value="Submit">Register</button>
+                        <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbutt">Cancel</button>
                     </div>
                 </div>
             </div>
-        </form>
-        <script src="/javascripts/checklink.js"></script>
+        </div>
+    </form>
 
-        <div id="failadd" class="modal">
-        <span onclick="document.getElementById('add').style.display='none'"
-        class="close" title="Close Modal">×</span>
+    <form action="/add" method="post">
+        <div id="add" class="modal">
+            <span onclick="document.getElementById('add').style.display='none'"
+            class="close" title="Close Modal">×</span>
             <div class="modal-content animate">
                 <div class="container">
                     <div class="modal-header">
                         <h1>check a product</h1>
                     </div>
-                    <button type="button" onclick="document.getElementById('failadd').style.display='none'" class="cancelbutt">Try Again</button>
-                    <h1 id="error-message"></h1>
-                    <button type="button" onclick="document.getElementById('failadd').style.display='none',document.getElementById('add').style.display='none'" class="cancelbutt">Close</button>
+                    <div class="add-form">
+                        <label for="prod_link">
+                            <input type="text" id="prod_link" name="prod_link" placeholder="Enter Product Link" minlength="6" required>
+                            <ul class="input-requirements">
+                                <li>Link must be more than 6 characters</li>
+                                <li>Valid URL is Needed</li>
+                            </ul>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="add_id">Add</button>
+                    <button type="button" onclick="document.getElementById('add').style.display='none'"
+                    class="cancelbutt">Cancel</button>
                 </div>
             </div>
         </div>
+    </form>
 
-        <script URLcode='{{{URLcode}}}' defer="defer" id='fail-script' src='/javascripts/failadd.js'></script>
-
-
-        {{{ body }}}
-    </body>
+    <div id="failadd" class="modal">
+        <span onclick="document.getElementById('add').style.display='none'"
+        class="close" title="Close Modal">×</span>
+        <div class="modal-content animate">
+            <div class="container">
+                <div class="modal-header">
+                    <h1>check a product</h1>
+                </div>
+                <button type="button" onclick="document.getElementById('failadd').style.display='none'" class="cancelbutt">Try Again</button>
+                <h1 id="error-message"></h1>
+                <button type="button" onclick="document.getElementById('failadd').style.display='none',document.getElementById('add').style.display='none'" class="cancelbutt">Close</button>
+            </div>
+        </div>
+    </div>
+    {{{ body }}}
+</body>
 </html>

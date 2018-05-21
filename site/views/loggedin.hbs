@@ -12,60 +12,36 @@
 </form>
 
 <div id="productinfo">
-    <form action="/fill_carousel" method="post" class ="datalist-form">{{!-- <form action="/fill_carousel" class ="datalist-form" method="post"> --}}
-        <div id="select">
-            <input type="text" list="browsers" name="browsers">
-            <datalist id="browsers">
-                <!--[if lte IE 9]><select data-datalist="browsers"><![endif]-->
-                <option value="Internet Explorer">
-                <option value="Firefox">
-                <option value="Chrome">
-                <option value="Opera">
-                <option value="Safari">
-                <!--[if lte IE 9]></select><![endif]-->
-            </datalist>
-        </div>
-    {{!-- <script src="/javascripts/loggedin.js"></script> --}}
-    
+    <div class="carousel-text">
+    </div>
+</div>
 
-
-        <div class="carousel-text">
-            <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque modi quibusdam esse hic sunt beatae omnis. Necessitatibus perspiciatis facere ducimus inventore nemo similique est pariatur. Quibusdam voluptatem aspernatur corporis veritatis.</h3>
-            <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque modi quibusdam esse hic sunt beatae omnis. Necessitatibus perspiciatis facere ducimus inventore nemo similique est pariatur. Quibusdam voluptatem aspernatur corporis veritatis.</h3>
-        </div>
-        <div class="carousel-text">
-            <label>You have entered:
-                <output onforminput="this.value=browsers.value"
-            </label>
-        </div>
-    </form>
+<div class="dropdown">
+    <select id="carousel-select">
+        <option value="hide"> Select a Product  </option>
+    </select>
 </div>
 
 
 <div class="carousel-container active">
-  <div class="buttons">
-    <button class="prev">
-      ◀ <span class="offscreen">Previous</span>
-    </button>
-    <button class="next">
-      <span class="offscreen">Next</span> ▶
-    </button>
-  </div>
-  <div class="carousel-content">
-    <div class="carousel-element"><img src="images\chillies.jpg" alt="chillies" /></div>
-    <div class="carousel-element"><img src="images\ecuador dog.jpg" alt="a dog" /></div>
-    <div class="carousel-element"><img src="images\gradient flower.jpg" alt="a flower with a nice gradient" /></div>
-    <div class="carousel-element"><img src="images\elephant.jpg" alt="an elephant" /></div>
-  </div>
-
-  <div class="anchor-buttons">
-    <button id="carousel-1">1</button>
-    <button href="#slide-2" id="carousel-2">2</button>
-    <button href="#slide-3" id="carousel-3">3</button>
-    <button href="#slide-4" id="carousel-4">4</button>
-  </div>
+    <div class="buttons">
+        <button class="prev">
+            ◀ <span class="offscreen">Previous</span>
+        </button>
+        <button class="next">
+            <span class="offscreen">Next</span> ▶
+        </button>
+    </div>
+    <div class="carousel-content" id="carousel_content_container">
+        <div class="carousel-element"><img src="images\chillies.jpg" alt="chillies" /></div>
+        <div class="carousel-element"><img src="images\ecuador dog.jpg" alt="a dog" /></div>
+        <div class="carousel-element"><img src="images\gradient flower.jpg" alt="a flower with a nice gradient" /></div>
+        <div class="carousel-element"><img src="images\elephant.jpg" alt="an elephant" /></div>
+    </div>
 </div>
 
 {{!-- Script for Polyfill to allow IE9 and Safari to Work --}}
-<script scr="https://github.com/Fyrd/purejs-datalist-polyfill/blob/master/datalist.polyfill.min.js"
+<script src="https://github.com/Fyrd/purejs-datalist-polyfill/blob/master/datalist.polyfill.min.js"></script>
 
+<script src="/javascripts/carousel.js" defer="defer"></script>
+<script src="/javascripts/loggedin.js" id="logged-in-script" data-urls='{{{image_rows}}}' defer="defer"></script>

@@ -65,22 +65,22 @@ input{
 /* Animation */
 @-webkit-keyframes modalbox {
   0% {
-    top: -250px; 
+    top: -250px;
     opacity: 0;
   }
   100% {
-    top: 0; 
+    top: 0;
     opacity: 1;
   }
 }
 
 @keyframes modalbox {
   0% {
-    top: -250px; 
+    top: -250px;
     opacity: 0;
   }
   100% {
-    top: 0; 
+    top: 0;
     opacity: 1;
   }
 }
@@ -164,14 +164,14 @@ ul{
   float: left;
 }
 .intro-form a {
-  cursor: crosshair; 
+  cursor: crosshair;
   display: block;
   padding: 40px;
   line-height: 30px;
   color: #191919;
   text-decoration: none;
 }
-/* 
+/*
 .intro-form .main-menu a:hover{
   background-color: #ffff90;
   color: thistle;
@@ -294,7 +294,7 @@ input:not([type="submit"]):valid {
 input:not([type="submit"]) + .input-requirements {
   overflow: hidden;
   max-height: 0;
-  transition: max-height 1s ease-out;  
+  transition: max-height 1s ease-out;
 }
 
 input:not([type="submit"]):hover + .input-requirements,
@@ -335,6 +335,7 @@ button {
 
 datalist {
   border: 1px white solid;
+  display: block;
 }
 
 /*--------------- Polyfill Script----------------*/

@@ -7,6 +7,7 @@ var logger = require('morgan');
 var hbs = require('express-handlebars');
 const sqlite3 = require('sqlite3').verbose();
 var expressValidator = require('express-validator');
+// var handlebarsValidation = require('handlebars-validate');
 
 var request = require('request');
 var promise = require('promise');
