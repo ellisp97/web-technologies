@@ -1,5 +1,5 @@
 
-var failure = document.getElementById('fail-script').getAttribute('URLcode');
+var failure = document.getElementById('fail-script').getAttribute('data-urlcode');
 if(failure==0){
     console.log('product already exists');
 

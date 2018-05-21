@@ -1,4 +1,4 @@
-var login_failure = document.getElementById('failure-script').getAttribute('floppy');
+var login_failure = document.getElementById('failure-script').getAttribute('data-floppy');
 
 if(login_failure=='true'){
     var fail_modal = document.getElementById('faillogin');

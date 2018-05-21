@@ -195,7 +195,7 @@ function scraper(url_param, id, domain){
                         currency = "$ cents"
                     }
                     title = json.name;
-                    image_url = json.media.images[0].url;
+                    image_url = "http://" + json.media.images[0].url;
                     console.log(image_url);
                 }//handle all other sites normally
                 else {
@@ -319,7 +319,7 @@ module.exports = {
             console.log('start of price scraping');
             let domain_id = find_domain_and_id(url);
             console.log("got domain and id");
-            console.log(domain_id);
+            console.log(exitCode);
             if(domain_id){
                 id = domain_id[0];
                 let domain = domain_id[1];
@@ -358,3 +358,5 @@ module.exports = {
     }
 };
 //main(url);
+
+//only two cahracters after first .

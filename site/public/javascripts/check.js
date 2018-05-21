@@ -36,8 +36,8 @@ realTimeValidation.prototype = {
 					requirementElement.classList.add('valid');
 				}
 
-			} 
-		} 
+			}
+		}
 	},
 	checkInput: function() {
 
@@ -51,7 +51,7 @@ realTimeValidation.prototype = {
 			this.inputNode.setCustomValidity(message);
 		}
 	},
-	registerListener: function() { 
+	registerListener: function() {
 
 		var realTimeValidation = this;
 
@@ -91,7 +91,7 @@ var usernameValidityChecks = [
 			return input.value.length < 3;
 		},
 		invalidityMessage: 'This input needs to be at least 3 characters',
-		element: document.querySelector('label[for="username"] .input-requirements li:nth-child(1)')
+		element: document.querySelector('label[for="usernameR"] .input-requirements li:nth-child(1)')
 	},
 	{
 		isInvalid: function(input) {
@@ -99,7 +99,7 @@ var usernameValidityChecks = [
 			return illegalCharacters ? true : false;
 		},
 		invalidityMessage: 'Only letters and numbers are allowed',
-		element: document.querySelector('label[for="username"] .input-requirements li:nth-child(2)')
+		element: document.querySelector('label[for="usernameR"] .input-requirements li:nth-child(2)')
 	}
 ];
 
@@ -128,35 +128,35 @@ var passwordValidityChecks = [
 			return input.value.length < 8 | input.value.length > 100;
 		},
 		invalidityMessage: 'This input needs to be between 8 and 100 characters',
-		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(1)')
+		element: document.querySelector('label[for="passwordR"] .input-requirements li:nth-child(1)')
 	},
 	{
 		isInvalid: function(input) {
 			return !input.value.match(/[0-9]/g);
 		},
 		invalidityMessage: 'At least 1 number is required',
-		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(2)')
+		element: document.querySelector('label[for="passwordR"] .input-requirements li:nth-child(2)')
 	},
 	{
 		isInvalid: function(input) {
 			return !input.value.match(/[a-z]/g);
 		},
 		invalidityMessage: 'At least 1 lowercase letter is required',
-		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(3)')
+		element: document.querySelector('label[for="passwordR"] .input-requirements li:nth-child(3)')
 	},
 	{
 		isInvalid: function(input) {
 			return !input.value.match(/[A-Z]/g);
 		},
 		invalidityMessage: 'At least 1 uppercase letter is required',
-		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(4)')
+		element: document.querySelector('label[for="passwordR"] .input-requirements li:nth-child(4)')
 	},
 	{
 		isInvalid: function(input) {
 			return !input.value.match(/[\!\@\#\$\%\^\&\*]/g);
 		},
 		invalidityMessage: 'You need one of the required special characters',
-		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(5)')
+		element: document.querySelector('label[for="passwordR"] .input-requirements li:nth-child(5)')
 	}
 ];
 
@@ -205,7 +205,7 @@ confirmPasswordInput.realTimeValidation.validityChecks = confirmPasswordValidity
 var inputs = document.querySelectorAll('input:not([type="submit"])');
 
 
-var submit = document.querySelector('input[type="submit"');
+var submit = document.querySelector('input[type="submit"]');
 var form = document.getElementById('register');
 
 function validate() {

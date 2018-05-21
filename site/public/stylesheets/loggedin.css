@@ -11,7 +11,7 @@
     margin: 10px 10px;
     padding: 2px 0;
 }
-  
+
 .sell-form input{
     padding: 10px 0;
     text-align: center;
@@ -114,8 +114,8 @@
 }
 
 .active .carousel-element.current {
-  top:              -.75em; 
-  position:         relative; 
+  top:              -.75em;
+  position:         relative;
   display:          block;
   opacity:          1;
   transform:        scale(1);
@@ -207,4 +207,20 @@
   position: relative;
   width: inherit;
   border: none;
+}
+
+.table-row-active{
+    display:block;
+}
+
+.table-row-active .table-name{
+    font-size: 1em;
+}
+
+.table-row-active .table-price{
+    font-size: 0.7em;
+}
+
+.table-row-inactive{
+    display:none;
 }
